@@ -762,6 +762,7 @@ More information about this technique here: https://book.hacktricks.xyz/pentesti
 
 
 **XSS in dynamic created PDF**
+
 If a web page is creating a PDF using user controlled input, you can try to trick the bot that is creating the PDF into executing arbitrary JS code.
 So, if the PDF creator bot finds some kind of HTML tags, it is going to interpret them, and you can abuse this behaviour to cause a Server XSS.
 
@@ -770,6 +771,7 @@ https://book.hacktricks.xyz/pentesting-web/xss-cross-site-scripting/server-side-
 If you cannot inject HTML tags it could be worth it to try to inject PDF data:
 
 https://book.hacktricks.xyz/pentesting-web/xss-cross-site-scripting/pdf-injection
+
 
 **XSS uploading files (svg)**
 
