@@ -62,7 +62,7 @@ def handleResponse(req, interesting):
     table.add(req)
 
 ```
-## Tubo Intruder - HTTP2 single-packet attack (Several endpoints)
+## Turbo Intruder - HTTP2 single-packet attack (Several endpoints)
 In case you need to send a request to 1 endpoint and then multiple to other endpoints to trigger the RCE, you can change the race-single-packet-attack.py script with something like:
 ```python
 def queueRequests(target, wordlists):
