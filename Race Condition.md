@@ -216,8 +216,12 @@ One such example is when high-resolution timestamps are used instead of cryptogr
 
 Consider a password reset token that is only randomized using a timestamp. In this case, it might be possible to trigger two password resets for two different users, which both use the same token. All you need to do is time the requests so that they generate the same timestamp.
 
-![info]
-To confirm for example the previous situation you could just ask for 2 reset password tokens at the same time (using single packet attack) and check if they are the same.
+
+
+> ⚠️ NOTE
+> 
+> To confirm for example the previous situation you could just ask for 2 reset password tokens at the same time (using single packet attack) and check if they are the same.
+
 
 ## Hidden substates case studies
 ### Confirm other emails
