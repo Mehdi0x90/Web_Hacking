@@ -320,6 +320,12 @@ Example of a PDF attachment using HTML
 4. cat `attachment.bin`
 
 
+# SSRF at a glance
+[SSRF (Server-Side Request Forgery ).pdf](https://github.com/Mehdi0x90/Web_Hacking/files/12438160/SSRF.Server-Side.Request.Forgery.pdf)
+
+
+
+
 # Tools
 
 * https://github.com/swisskyrepo/SSRFmap
