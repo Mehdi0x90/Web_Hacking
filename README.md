@@ -8,10 +8,11 @@ Here I will try to collect all the payloads needed for **bug hunting** and **web
 * [NoSQL Injection](https://github.com/Mehdi0x90/Web_Hacking/blob/main/NoSQL%20Injection.md)
 * [Open Redirect](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Open%20Redirect.md)
 * [Race Condition](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Race%20Condition.md)
+* [Recon](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Recon.md)
 * [SSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/SSRF.md)
 * [XSS](https://github.com/Mehdi0x90/Web_Hacking/blob/main/XSS.md)
 
 
 
 
-***will always be updated...***
+***Will always be updated...***
