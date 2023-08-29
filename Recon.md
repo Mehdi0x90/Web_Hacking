@@ -103,6 +103,242 @@ Search inside the web pages strings that could be shared across different webs i
 org:"Tesla, Inc."
 ssl:"Tesla Motors"
 
+# Basic Shodan Filters
+### city:
+Find devices in a particular city.
+`city:"Bangalore"`
+
+### country:
+Find devices in a particular country.
+`country:"IN"`
+
+### geo:
+Find devices by giving geographical coordinates.
+`geo:"56.913055,118.250862"`
+
+### Location
+`country:us`
+`country:ru country:de city:chicago`
+
+### hostname:
+Find devices matching the hostname.
+`server: "gws" hostname:"google"`
+`hostname:example.com -hostname:subdomain.example.com`
+`hostname:example.com,example.org`
+
+### net:
+Find devices based on an IP address or /x CIDR.
+`net:210.214.0.0/16`
+
+### Organization
+`org:microsoft`
+`org:"United States Department"`
+
+### Autonomous System Number (ASN)
+`asn:ASxxxx`
+
+### os:
+Find devices based on operating system.
+`os:"windows 7"`
+
+### port:
+Find devices based on open ports.
+`proftpd port:21`
+
+### before/after:
+Find devices before or after between a given time.
+`apache after:22/02/2009 before:14/3/2010`
+
+### SSL/TLS Certificates
+Self signed certificates
+`ssl.cert.issuer.cn:example.com ssl.cert.subject.cn:example.com`
+
+Expired certificates
+`ssl.cert.expired:true`
+
+`ssl.cert.subject.cn:example.com`
+
+### Device Type
+`device:firewall`
+`device:router`
+`device:wap`
+`device:webcam`
+`device:media`
+`device:"broadband router"`
+`device:pbx`
+`device:printer`
+`device:switch`
+`device:storage`
+`device:specialized`
+`device:phone`
+`device:"voip"`
+`device:"voip phone"`
+`device:"voip adaptor"`
+`device:"load balancer"`
+`device:"print server"`
+`device:terminal`
+`device:remote`
+`device:telecom`
+`device:power`
+`device:proxy`
+`device:pda`
+`device:bridge`
+
+### Operating System
+`os:"windows 7"`
+`os:"windows server 2012"`
+`os:"linux 3.x"`
+
+### Product
+`product:apache`
+`product:nginx`
+`product:android`
+`product:chromecast`
+
+### Customer Premises Equipment (CPE)
+`cpe:apple`
+`cpe:microsoft`
+`cpe:nginx`
+`cpe:cisco`
+
+### Server
+`server: nginx`
+`server: apache`
+`server: microsoft`
+`server: cisco-ios`
+
+### ssh fingerprints
+`dc:14:de:8e:d7:c1:15:43:23:82:25:81:d2:59:e8:c0`
+
+# Web
+
+### Pulse Secure
+`http.html:/dana-na`
+### PEM Certificates
+`http.title:"Index of /" http.html:".pem"`
+
+# Databases
+### MySQL 
+`"product:MySQL"`
+
+### MongoDB 
+`"product:MongoDB"`
+`mongodb port:27017`
+
+### Fully open MongoDBs
+`"MongoDB Server Information { "metrics":"`
+`"Set-Cookie: mongo-express=" "200 OK"`
+
+### Kibana dashboards without authentication
+`kibana content-legth:217`
+
+### elastic 
+`port:9200 json`
+`port:"9200" all:elastic`
+
+### Memcached 
+`"product:Memcached"`
+
+### CouchDB 
+`"product:CouchDB"`
+`port:"5984"+Server: "CouchDB/2.1.0"`
+
+### PostgreSQL 
+`"port:5432 PostgreSQL"`
+
+### Riak 
+`"port:8087 Riak"`
+
+### Redis 
+`"product:Redis"`
+
+### Cassandra 
+`"product:Cassandra"`
+
+### Telcos Running Cisco Lawful Intercept Wiretaps
+
+`"Cisco IOS" "ADVIPSERVICESK9_LI-M"`
+
+# Network Infrastructure
+
+### CobaltStrike Servers
+`product:"cobalt strike team server"`
+`ssl.cert.serial:146473198` - default certificate serial number
+`ssl.jarm:07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1`
+
+### Hacked routers:
+Routers which got compromised </br>
+`hacked-router-help-sos`
+
+### Redis open instances
+`product:"Redis key-value store"`
+
+### Citrix:
+Find Citrix Gateway.<br/>
+`title:"citrix gateway"`
+
+### Weave Scope Dashboards
+
+Command-line access inside Kubernetes pods and Docker containers, and real-time visualization/monitoring of the entire infrastructure.
+
+`title:"Weave Scope" http.favicon.hash:567176827`
+
+### MongoDB
+
+Older versions were insecure by default. Very scary.
+
+`"MongoDB Server Information" port:27017 -authentication`
+
+### Mongo Express Web GUI
+
+Like the infamous phpMyAdmin but for MongoDB.
+
+`"Set-Cookie: mongo-express=" "200 OK"`
+
+### Jenkins CI
+
+`"X-Jenkins" "Set-Cookie: JSESSIONID" http.title:"Dashboard"`
+
+### Jenkins:
+Jenkins Unrestricted Dashboard
+`x-jenkins 200`
+
+### Docker APIs
+
+`"Docker Containers:" port:2375`
+
+### Docker Private Registries
+
+`"Docker-Distribution-Api-Version: registry" "200 OK" -gitlab`
+
+### Already Logged-In as root via Telnet
+
+`"root@" port:23 -login -password -name -Session`
+
+### Telnet Access:
+NO password required for telnet access. </br>
+`port:23 console gateway`
+
+### Etherium Miners
+
+`"ETH - Total speed"`
+
+### Apache Directory Listings
+
+Substitute .pem with any extension or a filename like phpinfo.php.
+
+`http.title:"Index of /" http.html:".pem"`
+
+### Misconfigured WordPress
+
+Exposed wp-config.php files containing database credentials.
+
+`http.html:"* The wp-config.php creation script uses this file"`
+
+### Too Many Minecraft Servers
+
+`"Minecraft Server" "protocol 340" port:25565`
+
 ```
 
 ### Assetfinder
