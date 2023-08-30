@@ -527,17 +527,15 @@ with open(PASS_LIST, "r") as f:
 
 ```
 
-## Tools
-* https://github.com/0xInfection/XSRFProbe
-* https://github.com/merttasci/csrf-poc-generator
-
 
 ## CSRF map
 ![csrf](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/ae6145d7-73cf-4881-9919-2ebe1a53f2b3)
 
 
 
-
+## Tools
+* https://github.com/0xInfection/XSRFProbe
+* https://github.com/merttasci/csrf-poc-generator
 
 
 
