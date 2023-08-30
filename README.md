@@ -3,6 +3,7 @@ Here I will try to collect all the payloads needed for **bug hunting** and **web
 
 ## Table of Contents
 * [API Key Leak](https://github.com/Mehdi0x90/Web_Hacking/blob/main/API%20Key%20Leak.md)
+* [CSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CSRF.md)
 * [File Upload](https://github.com/Mehdi0x90/Web_Hacking/blob/main/File%20Upload.md)
 * [LoggerPlusPlus](https://github.com/Mehdi0x90/Web_Hacking/blob/main/LoggerPlusPlus.md)
 * [NoSQL Injection](https://github.com/Mehdi0x90/Web_Hacking/blob/main/NoSQL%20Injection.md)
