@@ -2,6 +2,7 @@
 Here I will try to collect all the payloads needed for **bug hunting** and **web vulnerability testing**.
 
 ## Table of Contents
+* [2FA/OTP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/2FA_OTP_Bypass.md)
 * [API Key Leak](https://github.com/Mehdi0x90/Web_Hacking/blob/main/API%20Key%20Leak.md)
 * [CSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CSRF.md)
 * [File Upload](https://github.com/Mehdi0x90/Web_Hacking/blob/main/File%20Upload.md)
