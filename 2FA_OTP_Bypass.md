@@ -38,13 +38,13 @@ There is a rate limit but when you "resend the code" the same code is sent and t
 * ### Client side rate limit bypass
 **Using similar endpoints**
 
-If you are attacking the /api/v3/sign-up endpoint try to perform bruteforce to /Sing-up, /SignUp, /singup...
+If you are attacking the `/api/v3/sign-up` endpoint try to perform bruteforce to `/Sing-up`, `/SignUp`, `/singup`...
 
-Also try appending to the original endpoint bytes like %00, %0d%0a, %0d, %0a, %09, %0C, %20
+Also try appending to the original endpoint bytes like `%00`, `%0d%0a`, `%0d`, `%0a`, `%09`, `%0C`, `%20`
 
 **Blank chars in code/params**
 
-Try adding some blank byte like %00, %0d%0a, %0d, %0a, %09, %0C, %20 to the code and/or params. For example code=1234%0a or if you are requesting a code for an email and you only have 5 tries, use the 5 tries for example@email.com, then for example@email.com%0a, then for example@email.com%0a%0a, and continue...
+Try adding some blank byte like `%00`, `%0d%0a`, `%0d`, `%0a`, `%09`, `%0C`, `%20` to the code and/or params. For example `code=1234%0a` or if you are requesting a code for an email and you only have 5 tries, use the 5 tries for `example@email.com`, then for `example@email.com%0a`, then for `example@email.com%0a%0a`, and continue...
 
 **Changing IP origin using headers**
 ```html
@@ -70,7 +70,7 @@ Try changing the user-agent, the cookies... anything that could be able to ident
 
 **Adding extra params to the path**
 
-If the limit in in the path /resetpwd, try BFing that path, and once the rate limit is reached try /resetpwd?someparam=1
+If the limit in in the path `/resetpwd`, try to perform that path, and once the rate limit is reached try `/resetpwd?someparam=1`
 
 **Login in your account before each attempt**
 Maybe if you login into your account before each attempt (or each set of X tries), the rate limit is restarted. If you are attacking a login functionality, you can do this in burp using a Pitchfork attack in setting your credentials every X tries (and marking follow redirects).
@@ -88,19 +88,19 @@ You won't be able to bypass the 2FA but you will be able to waste the company's 
 If you can generate a new OTP infinite times, the OTP is simple enough (4 numbers), and you can try up to 4 or 5 tokens per generated OTP, you can just try the same 4 or 5 tokens every time and generate OTPs until it matches the ones you are using.
 
 ## Race Condition
-Check the section about 2FA bypass of the following [page](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Race%20Condition.md)
+Check the section about 2FA bypass of the following [page](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Race%20Condition.md).
 
 ## Remember me functionality
 * ### Guessable cookie
-If the "remember me" functionality uses a new cookie with a guessable code, try to guess it.
+If the `"remember me"` functionality uses a new cookie with a guessable code, try to guess it.
 
 * ### IP address
-If the "remember me" functionality is attached to your IP address, you can try to figure out the IP address of the victim and impersonate it using the X-Forwarded-For header.
+If the `"remember me"` functionality is attached to your IP address, you can try to figure out the IP address of the victim and impersonate it using the `X-Forwarded-For` header.
 
 ## Older versions
 * ### Subdomains
 * ### APIs
-If you find that the 2FA is using an API located under a /v*/ directory (like "/v3/"), this probably means that there are older API endpoints that could be vulnerable to some kind of 2FA bypass.
+If you find that the 2FA is using an API located under a `/v*/` directory (like `"/v3/"`), this probably means that there are older API endpoints that could be vulnerable to some kind of 2FA bypass.
 
 ## Previous sessions
 When the 2FA is enabled, previous sessions created should be ended. This is because when a client has his account compromised he could want to protect it by activating the 2FA, but if the previous sessions aren't ended, this won't protect him.
@@ -111,7 +111,7 @@ Backup codes are generated immediately after 2FA is enabled and are available on
 ## Information Disclosure
 If you notice some confidential information appear on the 2FA page that you didn't know previously (like the phone number), then this can be considered an information disclosure vulnerability.
 
-## Password-Reset == disable 2FA
+## Password Reset == disable 2FA
 1. Create an Account and Turn On 2FA.
 2. Logout from that account.
 3. Now, Go to forget Password-Reset page.
