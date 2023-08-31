@@ -1,4 +1,4 @@
-# Web Hacking
+# Web Hacking (Bug Bounty Tricks)
 These are my **bug bounty** notes that I have gathered from various sources.
 
 ## Table of Contents
