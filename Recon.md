@@ -24,6 +24,28 @@ nuclei -l js.txt -t ~/nuclei-templates/exposures/ -o js_exposures_results.txt
 
 ```
 
+* [Hakrawler](https://github.com/hakluke/hakrawler)
+
+web crawler for gathering URLs and JavaScript file locations
+```bash
+# Normal Install
+go install github.com/hakluke/hakrawler@latest
+
+# Single URL
+echo https://google.com | hakrawler
+
+# Multiple URLs
+cat urls.txt | hakrawler
+
+# Include subdomains
+echo https://google.com | hakrawler -subs
+
+# Get all subdomains of google, find the ones that respond to http(s), crawl them all
+echo google.com | haktrails subdomains | httpx | hakrawler
+
+```
+
+
 ### ASNs
 
 ```bash
@@ -65,7 +87,7 @@ Did you know that we can find related domains and sub domains to our target by l
 
 Simply said, favihash will allow us to discover domains that have the same favicon icon hash as our target.
 
-* https://github.com/m4ll0k/Bug-Bounty-Toolz/blob/master/favihash.py
+* [favihash](https://github.com/m4ll0k/Bug-Bounty-Toolz/blob/master/favihash.py)
 
 ```bash
 cat my_targets.txt | xargs -I %% bash -c 'echo "http://%%/favicon.ico"' > targets.txt
@@ -348,8 +370,11 @@ Exposed wp-config.php files containing database credentials.
 # Install
 go get -u github.com/tomnomnom/assetfinder
 
-# Usage
-assetfinder [--subs-only] <domain>
+# Usage (find only the subdomains associated)
+assetfinder --subs-only domain.com
+
+# Find both subdomains and domains associated
+assetfinder domain.com
 
 ```
 
@@ -387,11 +412,6 @@ amass enum -d tesla.com | grep tesla.com # To just list subdomains
 ./subfinder-linux-amd64 -d tesla.com [-silent]
 
 ```
-* [assetfinder](https://github.com/tomnomnom/assetfinder)
-```bash
-assetfinder --subs-only <domain>
-
-```
 
 * [crt.sh](https://crt.sh/)
 ```bash
@@ -407,8 +427,13 @@ crt tesla.com
 * [massdns](https://github.com/blechschmidt/massdns)
 ```bash
 sed 's/$/.domain.com/' subdomains.txt > bf-subdomains.txt
-./massdns -r resolvers.txt -w /tmp/results.txt bf-subdomains.txt
+massdns -r resolvers.txt -w /tmp/results.txt bf-subdomains.txt
 grep -E "tesla.com. [0-9]+ IN A .+" /tmp/results.txt
+
+
+# running assetfinder tool for subdomains and massDNS tool for resolving
+assetfinder domain.com –subs-only | massdns -r resolvers.txt -o S -w resolved.txt
+
 
 ```
 * [gobuster](https://github.com/OJ/gobuster)
@@ -423,6 +448,9 @@ shuffledns is a wrapper around massdns, written in go, that allows you to enumer
 ```bash
 shuffledns -d example.com -list example-subdomains.txt -r resolvers.txt
 
+# subdomains found passively by subfinder and resolves them with shuffledns returning only the unique and valid subdomains
+subfinder -d example.com | shuffledns -d example.com -r resolvers.txt
+
 ```
 
 * [puredns](https://github.com/d3mondev/puredns)
@@ -435,6 +463,10 @@ puredns bruteforce all.txt domain.com
 * [dnsgen](https://github.com/ProjectAnte/dnsgen)
 ```bash
 cat subdomains.txt | dnsgen -
+
+# Combination with massdns
+cat domains.txt | dnsgen - | massdns -r /path/to/resolvers.txt -t A -o J --flush 2>/dev/null
+
 
 ```
 ### VHosts / Virtual Hosts
