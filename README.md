@@ -1,5 +1,5 @@
 # Web Hacking
-Here I will try to collect all the payloads needed for **bug hunting** and **web vulnerability testing**.
+These are my **bug bounty** notes that I have gathered from various sources.
 
 ## Table of Contents
 * [2FA/OTP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/2FA_OTP_Bypass.md)
