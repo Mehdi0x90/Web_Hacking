@@ -1,6 +1,6 @@
 # Captcha Bypass
 * Do not send the parameter related to the captcha
-  * Change from POST to GET or other HTTP Verbs
+  * Change from `POST` to `GET` or other HTTP Verbs
   * Change to JSON or from JSON
 * Send the captcha parameter empty
 * Check if the value of the captcha is **in the source code** of the page
