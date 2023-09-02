@@ -13,6 +13,7 @@ These are my **bug bounty** notes that I have gathered from various sources.
 * [Open Redirect](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Open%20Redirect.md)
 * [Race Condition](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Race%20Condition.md)
 * [Recon](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Recon.md)
+* [Reset Password Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Reset%20Password%20Bypass.md)
 * [SSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/SSRF.md)
 * [XSS](https://github.com/Mehdi0x90/Web_Hacking/blob/main/XSS.md)
 
