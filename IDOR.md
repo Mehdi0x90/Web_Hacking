@@ -53,7 +53,7 @@ GET /showImage?img=img00011
 
 **5. Blind IDORs**
 
-They might lead the application to leak information elsewhere instead: in export files, emails and maybe even text alerts.
+Information may be exposed in other places: in **export files**, **emails**, and perhaps even **text alerts**.
 
 **6. Change the request method**
 
