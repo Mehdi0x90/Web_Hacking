@@ -7,6 +7,7 @@ These are my **bug bounty** notes that I have gathered from various sources.
 * [CSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CSRF.md)
 * [Captcha Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Captcha%20Bypass.md)
 * [File Upload](https://github.com/Mehdi0x90/Web_Hacking/blob/main/File%20Upload.md)
+* [IDOR](https://github.com/Mehdi0x90/Web_Hacking/blob/main/IDOR.md)
 * [LoggerPlusPlus](https://github.com/Mehdi0x90/Web_Hacking/blob/main/LoggerPlusPlus.md)
 * [NoSQL Injection](https://github.com/Mehdi0x90/Web_Hacking/blob/main/NoSQL%20Injection.md)
 * [Open Redirect](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Open%20Redirect.md)
