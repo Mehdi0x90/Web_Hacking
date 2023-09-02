@@ -430,11 +430,19 @@ amass enum -d tesla.com | grep tesla.com # To just list subdomains
 * [subfinder](https://github.com/projectdiscovery/subfinder)
 ```bash
 # Subfinder, use -silent to only have subdomains in the output
-./subfinder-linux-amd64 -d tesla.com [-silent]
+subfinder -d tesla.com [-silent]
 
 ```
 
 * [crt.sh](https://crt.sh/)
+
+The crt.sh website allows users to search for certificates associated with specific domain names or subdomains. It provides detailed information about each certificate, including the common name and subject alternative names (SANs) that list additional domain names or subdomains covered by the certificate.
+
+```bash
+curl -s https://crt.sh/\?q\=\target.com\&output\=json | jq -r '.[].name_value' | grep -Po '(\w+\.\w+\.\w+)$'
+
+```
+OR
 ```bash
 # Get Domains from crt free API
 crt(){
@@ -442,18 +450,20 @@ crt(){
   | grep -oE "[\.a-zA-Z0-9-]+\.$1" \
   | sort -u
 }
-crt tesla.com
+crt target.com
 
 ```
+
+
 * [massdns](https://github.com/blechschmidt/massdns)
 ```bash
 sed 's/$/.domain.com/' subdomains.txt > bf-subdomains.txt
 massdns -r resolvers.txt -w /tmp/results.txt bf-subdomains.txt
-grep -E "tesla.com. [0-9]+ IN A .+" /tmp/results.txt
+grep -E "target.com. [0-9]+ IN A .+" /tmp/results.txt
 
 
 # running assetfinder tool for subdomains and massDNS tool for resolving
-assetfinder domain.com –subs-only | massdns -r resolvers.txt -o S -w resolved.txt
+assetfinder target.com –subs-only | massdns -r resolvers.txt -o S -w resolved.txt
 
 
 ```
