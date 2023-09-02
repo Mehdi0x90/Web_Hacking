@@ -1,5 +1,26 @@
 # Recon
+## Find a new asset/subdomain on targets
+* [anew](https://github.com/tomnomnom/anew)
+```bash
+# asset monitor (manual)
+cat domains.txt | httpx -sc -cl -location -title | anew httpx.txt
 
+# asset monitor (automate)
+while true;
+    cat domains.txt | httpx -sc -cl -location -title | anew httpx.txt | notify;
+    sleep 3600;
+  done
+
+# subdomain monitor and send notify to your discord or telegram,... channel (manual)
+subfinder -silent -dL domains.txt -all | anew subdomains.txt | notify
+
+# subdomain monitor and send notify to your discord or telegram,... channel (automate)
+while true;
+    do subfinder -silent -dL domains.txt -all | anew subdomains.txt | notify;
+    sleep 3600;
+  done
+
+```
 
 
 ### Recon Subdomain & identify JS files
