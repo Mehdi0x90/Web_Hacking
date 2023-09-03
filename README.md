@@ -4,6 +4,7 @@ These are my **bug bounty** notes that I have gathered from various sources.
 ## Table of Contents
 * [2FA/OTP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/2FA_OTP_Bypass.md)
 * [API Key Leak](https://github.com/Mehdi0x90/Web_Hacking/blob/main/API%20Key%20Leak.md)
+* [CSP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CSP%20Bypass.md)
 * [CSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CSRF.md)
 * [Captcha Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Captcha%20Bypass.md)
 * [File Upload](https://github.com/Mehdi0x90/Web_Hacking/blob/main/File%20Upload.md)
