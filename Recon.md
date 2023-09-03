@@ -27,7 +27,7 @@ while true;
 Discover subdomains, identify JavaScript files (with HTTP response status 200), and save the results in separate files
 
 ```bash
-subfinder -d domain.com | httpx -mc 200 | tee subdomains.txt && cat subdomains.txt | waybackurls | httpx -mc 200 | grep .js | tee js.txt
+subfinder -d target.com | httpx -mc 200 | tee subdomains.txt && cat subdomains.txt | waybackurls | httpx -mc 200 | grep .js | tee js.txt
 
 ```
 
@@ -53,16 +53,16 @@ web crawler for gathering URLs and JavaScript file locations
 go install github.com/hakluke/hakrawler@latest
 
 # Single URL
-echo https://google.com | hakrawler
+echo https://target.com | hakrawler
 
 # Multiple URLs
 cat urls.txt | hakrawler
 
 # Include subdomains
-echo https://google.com | hakrawler -subs
+echo https://target.com | hakrawler -subs
 
 # Get all subdomains of google, find the ones that respond to http(s), crawl them all
-echo google.com | haktrails subdomains | httpx | hakrawler
+echo target.com | haktrails subdomains | httpx | hakrawler
 
 ```
 
@@ -404,7 +404,7 @@ assetfinder domain.com
 
 Let's try to get subdomains from the DNS records. We should also try for Zone Transfer (If vulnerable, you should report it).
 ```bash
-dnsrecon -a -d tesla.com
+dnsrecon -a -d target.com
 
 ```
 
@@ -412,25 +412,25 @@ dnsrecon -a -d tesla.com
 * [bbot](https://github.com/blacklanternsecurity/bbot)
 ```bash
 # subdomains
-bbot -t tesla.com -f subdomain-enum
+bbot -t target.com -f subdomain-enum
 
 # subdomains (passive only)
-bbot -t tesla.com -f subdomain-enum -rf passive
+bbot -t target.com -f subdomain-enum -rf passive
 
 # subdomains + port scan + web screenshots
-bbot -t tesla.com -f subdomain-enum -m naabu gowitness -n my_scan -o .
+bbot -t target.com -f subdomain-enum -m naabu gowitness -n my_scan -o .
 
 ```
 * [Amass](https://github.com/OWASP/Amass)
 ```bash
-amass enum [-active] [-ip] -d tesla.com
-amass enum -d tesla.com | grep tesla.com # To just list subdomains
+amass enum [-active] [-ip] -d target.com
+amass enum -d target.com | grep target.com  # To just list subdomains
 
 ```
 * [subfinder](https://github.com/projectdiscovery/subfinder)
 ```bash
 # Subfinder, use -silent to only have subdomains in the output
-subfinder -d tesla.com [-silent]
+subfinder -d target.com [-silent]
 
 ```
 
@@ -457,7 +457,8 @@ crt target.com
 
 * [massdns](https://github.com/blechschmidt/massdns)
 ```bash
-sed 's/$/.domain.com/' subdomains.txt > bf-subdomains.txt
+# For massdns you will need to pass as argument the file will all the possible well formed subdomains you want to bruteforce
+sed 's/$/.target.com/' subdomains.txt > bf-subdomains.txt
 massdns -r resolvers.txt -w /tmp/results.txt bf-subdomains.txt
 grep -E "target.com. [0-9]+ IN A .+" /tmp/results.txt
 
@@ -469,7 +470,8 @@ assetfinder target.com –subs-only | massdns -r resolvers.txt -o S -w resolved.
 ```
 * [gobuster](https://github.com/OJ/gobuster)
 ```bash
-gobuster dns -d mysite.com -t 50 -w subdomains.txt
+# bruteforcing dns
+gobuster dns -d target.com -t 50 -w subdomains.txt
 
 ```
 
@@ -477,16 +479,16 @@ gobuster dns -d mysite.com -t 50 -w subdomains.txt
 
 shuffledns is a wrapper around massdns, written in go, that allows you to enumerate valid subdomains using active bruteforce, as well as resolve subdomains with wildcard handling and easy input-output support.
 ```bash
-shuffledns -d example.com -list example-subdomains.txt -r resolvers.txt
+shuffledns -d target.com -list target-subdomains.txt -r resolvers.txt
 
 # subdomains found passively by subfinder and resolves them with shuffledns returning only the unique and valid subdomains
-subfinder -d example.com | shuffledns -d example.com -r resolvers.txt
+subfinder -d target.com | shuffledns -d target.com -r resolvers.txt
 
 ```
 
 * [puredns](https://github.com/d3mondev/puredns)
 ```bash
-puredns bruteforce all.txt domain.com
+puredns bruteforce all.txt target.com
 
 ```
 
@@ -496,7 +498,7 @@ puredns bruteforce all.txt domain.com
 cat subdomains.txt | dnsgen -
 
 # Combination with massdns
-cat domains.txt | dnsgen - | massdns -r /path/to/resolvers.txt -t A -o J --flush 2>/dev/null
+cat domains.txt | dnsgen - | massdns -r resolvers.txt -t A -o J --flush 2>/dev/null
 
 
 ```
@@ -506,24 +508,24 @@ cat domains.txt | dnsgen - | massdns -r /path/to/resolvers.txt -t A -o J --flush
 
 **Brute Force**
 ```bash
-ffuf -c -w /path/to/wordlist -u http://victim.com -H "Host: FUZZ.victim.com"
+ffuf -c -w /path/to/wordlist -u http://target.com -H "Host: FUZZ.target.com"
 
-gobuster vhost -u https://mysite.com -t 50 -w subdomains.txt
+gobuster vhost -u https://target.com -t 50 -w subdomains.txt
 
-wfuzz -c -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-20000.txt --hc 400,404,403 -H "Host: FUZZ.example.com" -u http://example.com -t 100
+wfuzz -c -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-20000.txt --hc 400,404,403 -H "Host: FUZZ.target.com" -u http://target.com -t 100
 
-#From https://github.com/allyshka/vhostbrute
+# From https://github.com/allyshka/vhostbrute
 vhostbrute.py --url="example.com" --remoteip="10.1.1.15" --base="www.example.com" --vhosts="vhosts_full.list"
 
-#https://github.com/codingo/VHostScan
+# From https://github.com/codingo/VHostScan
 VHostScan -t example.com
 
 ```
 
 ### CORS Brute Force
-Sometimes you will find pages that only return the header Access-Control-Allow-Origin when a valid domain/subdomain is set in the Origin header. In these scenarios, you can abuse this behaviour to discover new subdomains.
+Sometimes you will find pages that only return the header Access-Control-Allow-Origin when a valid domain/subdomain is set in the Origin header. In these scenarios, you can abuse this behaviour to discover new subdomains!
 ```bash
-ffuf -w subdomains-top1million-5000.txt -u http://10.10.10.208 -H 'Origin: http://FUZZ.crossfit.htb' -mr "Access-Control-Allow-Origin" -ignore-body
+ffuf -w subdomains-top1million-5000.txt -u http://10.20.30.40 -H 'Origin: http://FUZZ.target.com' -mr "Access-Control-Allow-Origin" -ignore-body
 
 ```
 
