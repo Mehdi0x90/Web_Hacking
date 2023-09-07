@@ -524,6 +524,7 @@ VHostScan -t example.com
 
 ### CORS Brute Force
 Sometimes you will find pages that only return the header Access-Control-Allow-Origin when a valid domain/subdomain is set in the Origin header. In these scenarios, you can abuse this behaviour to discover new subdomains!
+* [ffuf](https://github.com/ffuf/ffuf)
 ```bash
 ffuf -w subdomains-top1million-5000.txt -u http://10.20.30.40 -H 'Origin: http://FUZZ.target.com' -mr "Access-Control-Allow-Origin" -ignore-body
 
