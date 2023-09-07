@@ -1,6 +1,8 @@
 # Logger++ (BurpSuite Extension)
 Logger++ is a multithreaded logging extension for Burp Suite. This extension allows advanced filters to be defined to highlight interesting entries or filter logs to only those which match the filter.
 
+Special thanks to [Borna Nematzadeh](https://github.com/bnematzadeh/LoggerPlusPlus-API-Filters)
+
 -----
 **Detect API Endpoints**
 * REST/RPC
