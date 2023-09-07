@@ -1,9 +1,13 @@
 # Web Hacking + Bug Bounty Tricks
 ![5829442](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/5ffcc3e2-3cc0-4327-b5f9-00c58f524c6b)
 
-These are my **bug bounty** notes that I have gathered from various sources.
+These are my **bug bounty** notes that I have gathered from various sources. 
 
-***Will always be updated ...***
+You can also contribute.
+
+[![Twitter URL](https://img.shields.io/twitter/follow/mehdi0x90)](https://twitter.com/mehdi0x90)
+
+
 
 ## Table of Contents
 * [2FA/OTP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/2FA_OTP_Bypass.md)
@@ -22,3 +26,5 @@ These are my **bug bounty** notes that I have gathered from various sources.
 * [SSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/SSRF.md)
 * [XSS](https://github.com/Mehdi0x90/Web_Hacking/blob/main/XSS.md)
 
+
+***Will always be updated ...***
