@@ -12,6 +12,7 @@ You can also contribute.
 ## Table of Contents
 * [2FA/OTP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/2FA_OTP_Bypass.md)
 * [403 Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/403%20Bypass.md)
+* [429 Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/429%20Bypass.md)
 * [API Key Leak](https://github.com/Mehdi0x90/Web_Hacking/blob/main/API%20Key%20Leak.md)
 * [CSP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CSP%20Bypass.md)
 * [CSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CSRF.md)
