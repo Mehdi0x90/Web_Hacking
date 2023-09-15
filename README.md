@@ -1,7 +1,7 @@
 # Web Hacking + Bug Bounty Tricks
 ![5829442](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/5ffcc3e2-3cc0-4327-b5f9-00c58f524c6b)
 
-These are my **bug bounty** notes that I have gathered from various sources. 
+These are my **bug bounty / Pentest** notes that I have gathered from various sources. 
 
 You can also contribute.
 
@@ -19,7 +19,7 @@ You can also contribute.
 * [File Upload](https://github.com/Mehdi0x90/Web_Hacking/blob/main/File%20Upload.md)
 * [IDOR](https://github.com/Mehdi0x90/Web_Hacking/blob/main/IDOR.md)
 * [JWT Attacks](https://github.com/Mehdi0x90/Web_Hacking/blob/main/JWT.md)
-* [LoggerPlusPlus](https://github.com/Mehdi0x90/Web_Hacking/blob/main/LoggerPlusPlus.md)
+* [LoggerPlusPlus (Burp extension)](https://github.com/Mehdi0x90/Web_Hacking/blob/main/LoggerPlusPlus.md)
 * [NoSQL Injection](https://github.com/Mehdi0x90/Web_Hacking/blob/main/NoSQL%20Injection.md)
 * [Open Redirect](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Open%20Redirect.md)
 * [Race Condition](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Race%20Condition.md)
