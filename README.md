@@ -18,6 +18,7 @@ You can also contribute.
 * [Dom Clobbering](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Dom%20Clobbering.md)
 * [File Upload](https://github.com/Mehdi0x90/Web_Hacking/blob/main/File%20Upload.md)
 * [IDOR](https://github.com/Mehdi0x90/Web_Hacking/blob/main/IDOR.md)
+* [JWT Attacks](https://github.com/Mehdi0x90/Web_Hacking/blob/main/JWT.md)
 * [LoggerPlusPlus](https://github.com/Mehdi0x90/Web_Hacking/blob/main/LoggerPlusPlus.md)
 * [NoSQL Injection](https://github.com/Mehdi0x90/Web_Hacking/blob/main/NoSQL%20Injection.md)
 * [Open Redirect](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Open%20Redirect.md)
