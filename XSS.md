@@ -2,14 +2,14 @@
 **Web Content-Types to XSS**
 
 The following content types can execute XSS in all browsers:
-* text/html
-* application/xhtml+xml
-* application/xml
-* text/xml
-* image/svg+xml
-* text/plain (?? not in the list but I think I saw this in a CTF)
-* application/rss+xml (off)
-* application/atom+xml (off)
+* `text/html`
+* `application/xhtml+xml`
+* `application/xml`
+* `text/xml`
+* `image/svg+xml`
+* `text/plain` (?? not in the list but I think I saw this in a CTF)
+* `application/rss+xml` (off)
+* `application/atom+xml` (off)
 
 In other browsers other Content-Types can be used to execute arbitrary JS, check:
 
