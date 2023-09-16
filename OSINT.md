@@ -45,9 +45,11 @@ A curated list of awesome open source intelligence tools and resources. [Open-so
 
 ## E-mail Search / E-mail Check
 * [DeHashed](https://dehashed.com/) - DeHashed helps prevent ATO with our extensive data set & breach notification solution. Match employee and consumer logins against the world’s largest repository of aggregated publicly available assets leaked from third-party breaches. Secure passwords before criminals can abuse stolen information, and protect your enterprise
+* [leak lookup](https://leak-lookup.com/account/login)
 * [Holehe](https://github.com/megadose/holehe)
 * [Hunter](https://hunter.io/) - Hunter lets you find email addresses in seconds and connect with the people that matter for your business
 * [Snov.io](https://snov.io/email-finder) - Find email addresses on any website
+* [minelead](https://minelead.io/)
 
 
 ## Domain and IP Research
