@@ -1,4 +1,6 @@
-# Recon
+# Recon (Reconnaissance)
+Reconnaissance is the process of gathering information about a target system in order to identify potential vulnerabilities. It is an essential step in the bug bounty hunting process and can help to identify vulnerabilities that may not be apparent through other means.
+
 ## Find a new asset/subdomain on targets
 * [anew](https://github.com/tomnomnom/anew)
 ```bash
@@ -408,7 +410,7 @@ dnsrecon -a -d target.com
 
 ```
 
-### OSINT
+### [OSINT](https://github.com/Mehdi0x90/Web_Hacking/blob/main/OSINT.md)
 * [bbot](https://github.com/blacklanternsecurity/bbot)
 ```bash
 # subdomains
@@ -529,19 +531,6 @@ Sometimes you will find pages that only return the header Access-Control-Allow-O
 ffuf -w subdomains-top1million-5000.txt -u http://10.20.30.40 -H 'Origin: http://FUZZ.target.com' -mr "Access-Control-Allow-Origin" -ignore-body
 
 ```
-
-### Emails
-With the domains and subdomains inside the scope you basically have all what you need to start searching for emails. These are the APIs and tools that have worked the best for me to find emails of a company:
-
-* [hunter.io](https://hunter.io/)
-* [snov.io](https://app.snov.io/)
-* [minelead.io](https://minelead.io/)
-
-
-### Credential Leaks
-With the domains, subdomains, and emails you can start looking for credentials leaked in the past belonging to those emails:
-* [leak-lookup](https://leak-lookup.com/account/login)
-* [dehashed](https://www.dehashed.com/)
 
 
 
