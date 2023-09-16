@@ -31,6 +31,7 @@ You can also contribute.
 
 ## Recon & OSINT Techniques
 * [Recon](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Recon.md)
+* [OSINT](https://github.com/Mehdi0x90/Web_Hacking/blob/main/osint.md)
 
 ## Top Tools & Extensions
 * [LoggerPlusPlus (Burp extension)](https://github.com/Mehdi0x90/Web_Hacking/blob/main/LoggerPlusPlus.md)
