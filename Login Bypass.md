@@ -23,7 +23,7 @@ If you find a login page, here you can find some techniques to try to bypass it:
   * Brute-force using a bigger dictionary (Brute force)
 
 ## SQL Injection authentication bypass
-In the following page you can find a custom list to try to bypass login via SQL Injections:
+In the following you can find a custom list to try to bypass login via SQL Injections:
 ```sql
 admin
 password
