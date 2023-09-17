@@ -15,9 +15,10 @@ You can also contribute.
 * [File Upload](https://github.com/Mehdi0x90/Web_Hacking/blob/main/File%20Upload.md)
 * [IDOR](https://github.com/Mehdi0x90/Web_Hacking/blob/main/IDOR.md)
 * [JWT](https://github.com/Mehdi0x90/Web_Hacking/blob/main/JWT.md)
-* [NoSQL](https://github.com/Mehdi0x90/Web_Hacking/blob/main/NoSQL%20Injection.md)
+* [NoSQLi](https://github.com/Mehdi0x90/Web_Hacking/blob/main/NoSQL%20Injection.md)
 * [Open Redirect](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Open%20Redirect.md)
 * [Race Condition](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Race%20Condition.md)
+* [SQLi](https://github.com/Mehdi0x90/Web_Hacking/blob/main/SQL%20Injection.md)
 * [SSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/SSRF.md)
 * [XSS](https://github.com/Mehdi0x90/Web_Hacking/blob/main/XSS.md)
 
