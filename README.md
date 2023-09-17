@@ -27,8 +27,9 @@ You can also contribute.
 * [403 Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/403%20Bypass.md)
 * [429 Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/429%20Bypass.md)
 * [Captcha Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Captcha%20Bypass.md)
-* [Reset Password Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Reset%20Password%20Bypass.md)
 * [CSP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CSP%20Bypass.md)
+* [Login Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Login%20Bypass.md)
+* [Reset Password Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Reset%20Password%20Bypass.md)
 
 ## Recon & OSINT Techniques
 * [Recon](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Recon.md)
@@ -38,5 +39,5 @@ You can also contribute.
 * [LoggerPlusPlus (Burp extension)](https://github.com/Mehdi0x90/Web_Hacking/blob/main/LoggerPlusPlus.md)
 
 
-
-***Will always be updated ...***
+-----
+*All content of this repository will always be updated...*
