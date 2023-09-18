@@ -19,6 +19,7 @@ You can also contribute.
 * [NoSQLi](https://github.com/Mehdi0x90/Web_Hacking/blob/main/NoSQL%20Injection.md)
 * [Open Redirect](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Open%20Redirect.md)
 * [Race Condition](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Race%20Condition.md)
+* [Rate Limit Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Rate%20Limit%20Bypass.md)
 * [SQLi](https://github.com/Mehdi0x90/Web_Hacking/blob/main/SQL%20Injection.md)
 * [SSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/SSRF.md)
 * [XSS](https://github.com/Mehdi0x90/Web_Hacking/blob/main/XSS.md)
