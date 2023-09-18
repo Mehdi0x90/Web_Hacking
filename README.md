@@ -19,7 +19,6 @@ You can also contribute.
 * [NoSQLi](https://github.com/Mehdi0x90/Web_Hacking/blob/main/NoSQL%20Injection.md)
 * [Open Redirect](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Open%20Redirect.md)
 * [Race Condition](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Race%20Condition.md)
-* [Rate Limit Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Rate%20Limit%20Bypass.md)
 * [SQLi](https://github.com/Mehdi0x90/Web_Hacking/blob/main/SQL%20Injection.md)
 * [SSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/SSRF.md)
 * [XSS](https://github.com/Mehdi0x90/Web_Hacking/blob/main/XSS.md)
@@ -31,7 +30,9 @@ You can also contribute.
 * [Captcha Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Captcha%20Bypass.md)
 * [CSP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CSP%20Bypass.md)
 * [Login Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Login%20Bypass.md)
-* [Reset Password Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Reset%20Password%20Bypass.md)
+* [Rate Limit Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Rate%20Limit%20Bypass.md)
+* [Reset Password Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Reset%20Password%20Bypass.md) 
+
 
 ## Recon & OSINT Techniques
 * [Recon](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Recon.md)
