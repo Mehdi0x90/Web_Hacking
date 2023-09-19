@@ -22,6 +22,7 @@ You can also contribute.
 * [SQLi](https://github.com/Mehdi0x90/Web_Hacking/blob/main/SQL%20Injection.md)
 * [SSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/SSRF.md)
 * [XSS](https://github.com/Mehdi0x90/Web_Hacking/blob/main/XSS.md)
+* [XXE](https://github.com/Mehdi0x90/Web_Hacking/blob/main/XXE.md)
 
 ## Bypass Techniques
 * [2FA / OTP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/2FA_OTP_Bypass.md)
