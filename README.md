@@ -33,7 +33,8 @@ You can also contribute.
 * [CSP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CSP%20Bypass.md)
 * [Login Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Login%20Bypass.md)
 * [Rate Limit Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Rate%20Limit%20Bypass.md)
-* [Reset Password Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Reset%20Password%20Bypass.md) 
+* [Reset Password Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Reset%20Password%20Bypass.md)
+* [WAF Detect / Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/WAF%20Bypass.md)
 
 
 ## Recon & OSINT Techniques
