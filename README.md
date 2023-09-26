@@ -45,6 +45,10 @@ You can also contribute.
 * [Logger++ (Burp extension)](https://github.com/Mehdi0x90/Web_Hacking/blob/main/LoggerPlusPlus.md)
 * [param-miner (Burp extension)](https://github.com/PortSwigger/param-miner)
 
+## Mind Maps for Bug Hunters
+* [SSRF](https://github.com/Mehdi0x90/Web_Hacking/files/12723138/SSRF.pdf)
+* [XXE](https://github.com/Mehdi0x90/Web_Hacking/files/12723172/XXE.pdf)
+
 
 -----
 *All content of this repository will always be updated...*
