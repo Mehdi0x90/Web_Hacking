@@ -47,8 +47,8 @@ You can also contribute.
 
 ## Mind Maps for Bug Hunters
 * [SSRF](mindmaps-pdf/SSRF.pdf)
-* [XXE](https://github.com/Mehdi0x90/Web_Hacking/files/12723172/XXE.pdf)
-* [Prototype Pollution](https://github.com/Mehdi0x90/Web_Hacking/files/12738447/Prototype.Pollution.pdf)
+* [XXE](mindmaps-pdf/XXE.pdf)
+* [Prototype Pollution](mindmaps-pdf/Prototype Pollution.pdf)
 
 -----
 *All content of this repository will always be updated...*
