@@ -48,6 +48,7 @@ You can also contribute.
 ## Mind Maps for Bug Hunters
 * [SSRF](https://github.com/Mehdi0x90/Web_Hacking/files/12723138/SSRF.pdf)
 * [XXE](https://github.com/Mehdi0x90/Web_Hacking/files/12723172/XXE.pdf)
+* [Prototype Pollution](https://github.com/Mehdi0x90/Web_Hacking/files/12738447/Prototype.Pollution.pdf)
 
 
 -----
