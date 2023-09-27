@@ -48,7 +48,7 @@ You can also contribute.
 ## Mind Maps for Bug Hunters
 * [SSRF](mindmaps-pdf/SSRF.pdf)
 * [XXE](mindmaps-pdf/XXE.pdf)
-* [Prototype Pollution](mindmaps-pdf/Prototype Pollution.pdf)
+* [Prototype Pollution](mindmaps-pdf/Prototype%20Pollution.pdf)
 
 -----
 *All content of this repository will always be updated...*
