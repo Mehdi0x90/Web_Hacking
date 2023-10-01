@@ -46,9 +46,9 @@ You can also contribute.
 * [param-miner (Burp extension)](https://github.com/PortSwigger/param-miner)
 
 ## Mindmaps for Bug Hunters
-* [CORS](mindmaps-pdf/CORS.pdf)
-* [SSRF](mindmaps-pdf/SSRF.pdf)
 * [XXE](mindmaps-pdf/XXE.pdf)
+* [SSRF](mindmaps-pdf/SSRF.pdf)
+* [CORS](mindmaps-pdf/CORS.pdf)
 * [Prototype Pollution](mindmaps-pdf/Prototype%20Pollution.pdf)
 
 
