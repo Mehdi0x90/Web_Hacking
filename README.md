@@ -15,6 +15,7 @@ You can also contribute.
 * [DOM Clobbering](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Dom%20Clobbering.md)
 * [File Inclusion](https://github.com/Mehdi0x90/Web_Hacking/blob/main/File%20Inclusion.md)
 * [File Upload](https://github.com/Mehdi0x90/Web_Hacking/blob/main/File%20Upload.md)
+* [GraphQL](https://github.com/Mehdi0x90/Web_Hacking/blob/main/GraphQL.md)
 * [IDOR](https://github.com/Mehdi0x90/Web_Hacking/blob/main/IDOR.md)
 * [JWT](https://github.com/Mehdi0x90/Web_Hacking/blob/main/JWT.md)
 * [NoSQLi](https://github.com/Mehdi0x90/Web_Hacking/blob/main/NoSQL%20Injection.md)
