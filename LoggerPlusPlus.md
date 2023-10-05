@@ -1,5 +1,5 @@
 # Logger++ (BurpSuite Extension)
-Logger++ is a multithreaded logging extension for Burp Suite. This extension allows advanced filters to be defined to highlight interesting entries or filter logs to only those which match the filter.
+[Logger++](https://portswigger.net/bappstore/470b7057b86f41c396a97903377f3d81) is a multithreaded logging extension for Burp Suite. This extension allows advanced filters to be defined to highlight interesting entries or filter logs to only those which match the filter.
 
 Special thanks to [Borna Nematzadeh](https://github.com/bnematzadeh/LoggerPlusPlus-API-Filters)
 
