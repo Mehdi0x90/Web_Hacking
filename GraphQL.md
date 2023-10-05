@@ -154,7 +154,7 @@ It's interesting to know if the errors are going to be shown as they will contri
 
 ### Enumerate Database Schema via Introspection
 >
-> If introspection is enabled but the above query doesn't run, try removing the onOperation, onFragment, and onField directives from the query structure.
+> If introspection is enabled but the below query doesn't run, try removing the onOperation, onFragment, and onField directives from the query structure.
 
 ```graphql
   #Full introspection query
