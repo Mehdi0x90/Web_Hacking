@@ -434,6 +434,9 @@ amass enum -d target.com | grep target.com  # To just list subdomains
 # Subfinder, use -silent to only have subdomains in the output
 subfinder -d target.com [-silent]
 
+# Find subdomains by use all sources for enumeration
+subfinder -d target.com -cs -all | tee -a target.com
+cat target.com | cut -d "," -f 1 | httpx -title -wc -sc -cl -ct -web-server -asn -p 8000,8080,8443,443,80,8008,3000,5000,9090,900,7070,9200,15672,9000 -threads 75 -location > httpx.txt
 ```
 
 * [crt.sh](https://crt.sh/)
