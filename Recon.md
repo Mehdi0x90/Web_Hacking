@@ -535,18 +535,13 @@ ffuf -w subdomains-top1million-5000.txt -u http://10.20.30.40 -H 'Origin: http:/
 
 ```
 
+### Fuzz file and directories at scale
+How to fuzz a list of Web Servers using ffuf and leaky-paths wordlists. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+This one-liner creates an output file for each target.
+```bash
+for i in $(cat web-server.txt); do
+DOMAIN=$(echo $i | unfurl format %d);
+ffuf -u $1/FUZZ -w leaky-paths.txt -o ${DOMAIN}_ffuf.txt; done
+```
 
