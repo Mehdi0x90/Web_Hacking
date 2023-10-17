@@ -478,6 +478,9 @@ assetfinder target.com –subs-only | massdns -r resolvers.txt -o S -w resolved.
 # bruteforcing dns
 gobuster dns -d target.com -t 50 -w subdomains.txt
 
+# bruteforcing url and excluding status code (e.g. 302)
+gobuster dir -u target.com -w /usr/share/wordlists/dirbuster/directory-list-1.0.txt -b 302
+
 ```
 
 * [shuffledns](https://github.com/projectdiscovery/shuffledns)
