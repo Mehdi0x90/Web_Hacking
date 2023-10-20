@@ -48,6 +48,7 @@ nuclei -l js.txt -t ~/nuclei-templates/exposures/ -o js_exposures_results.txt
 ```
 
 * [wayback-machine-downloader](https://github.com/hartator/wayback-machine-downloader)
+
 Download an entire website from the Internet Archive Wayback Machine.
 ```bash
 # Only get all urls from wayback machine
