@@ -47,6 +47,16 @@ nuclei -l js.txt -t ~/nuclei-templates/exposures/ -o js_exposures_results.txt
 
 ```
 
+* [wayback-machine-downloader](https://github.com/hartator/wayback-machine-downloader)
+Download an entire website from the Internet Archive Wayback Machine.
+```bash
+# Only get all urls from wayback machine
+wayback_machine_downloader http://target.com -c 5 > all_urls.txt
+
+# Check status of urls and make new file
+cat all_urls.txt | httpx -mc 200 | tee live_urls.txt   
+```
+
 * [Hakrawler](https://github.com/hakluke/hakrawler)
 
 web crawler for gathering URLs and JavaScript file locations
