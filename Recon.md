@@ -36,8 +36,12 @@ subfinder -d target.com | httpx -mc 200 | tee subdomains.txt && cat subdomains.t
 for example you can grep JS file `js.txt`
 
 ```bash
-cat js.txt | grep -r -E “aws_access_key|aws_secret_key|api key|passwd|pwd|heroku|slack|firebase|swagger|aws_secret_key|aws key|password|ftp password|jdbc|db|sql|secret jet|config|admin|pwd|json|gcp|htaccess|.env|ssh key|.git|access key|secret token|oauth_token|oauth_token_secret”
+cat js.txt | grep -r -E "aws_access_key|aws_secret_key|api key|passwd|pwd|heroku|slack|firebase|swagger|aws_secret_key|aws key|password|ftp password|jdbc|db|sql|secret jet|config|admin|pwd|json|gcp|htaccess|.env|ssh key|.git|access key|secret token|oauth_token|oauth_token_secret"
 
+# Download all js urls and merge together and finally grep on:
+wget --no-check-certificate -i js.txt
+cat file1.js file2.js file3.js file4.js file5.js > all_js.js
+cat all_js.js | grep -r -E # Similar to the grep above...
 ```
 
 run a Nuclei command on the `js.txt` file with the exposures tag
