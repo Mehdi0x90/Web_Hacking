@@ -16,6 +16,7 @@ You can also contribute.
 * [File Inclusion](https://github.com/Mehdi0x90/Web_Hacking/blob/main/File%20Inclusion.md)
 * [File Upload](https://github.com/Mehdi0x90/Web_Hacking/blob/main/File%20Upload.md)
 * [GraphQL](https://github.com/Mehdi0x90/Web_Hacking/blob/main/GraphQL.md)
+* [Host Header Injection](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Host%20Header%20Injection.md)
 * [IDOR](https://github.com/Mehdi0x90/Web_Hacking/blob/main/IDOR.md)
 * [JWT](https://github.com/Mehdi0x90/Web_Hacking/blob/main/JWT.md)
 * [NoSQLi](https://github.com/Mehdi0x90/Web_Hacking/blob/main/NoSQL%20Injection.md)
