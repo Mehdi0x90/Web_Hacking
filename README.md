@@ -10,6 +10,7 @@ You can also contribute.
 
 ## List of Vulnerabilities
 * [API Key Leak](https://github.com/Mehdi0x90/Web_Hacking/blob/main/API%20Key%20Leak.md)
+* [CRLF Injection](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CRLF.md)
 * [CSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CSRF.md)
 * [Cache Poisoning / Deception](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Cache%20Deception.md)
 * [DOM Clobbering](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Dom%20Clobbering.md)
