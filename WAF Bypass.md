@@ -359,8 +359,8 @@ location = /admin/ {
 ## NodeJS
 ![nodejs](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/8bd4e562-49e4-426f-aa27-353e9288b9cc)
 
-* As Nginx includes the character \xa0 as part of the pathname, the ACL rule for the /admin URI will not be triggered. Consequently, Nginx will forward the HTTP message to the backend;
-* When the URI /admin\x0a is received by the Node.js server, the character \xa0 will be removed, allowing successful retrieval of the /admin endpoint.
+* As Nginx includes the character `\xa0` as part of the pathname, the ACL rule for the `/admin` URI will not be triggered. Consequently, Nginx will forward the HTTP message to the backend;
+* When the URI `/admin\x0a` is received by the Node.js server, the character `\xa0` will be removed, allowing successful retrieval of the `/admin` endpoint.
 
 
 | Nginx Version | Node.js Bypass Characters |
