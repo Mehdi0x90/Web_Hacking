@@ -386,7 +386,7 @@ Flask removes the characters `\x85`, `\xA0`, `\x1F`, `\x1E`, `\x1D`, `\x1C`, `\x
 
 
 ## Spring Boot
-Below, you will find a demonstration of how ACL protection can be circumvented by adding the character \x09 or  at the end of the pathname:
+Below, you will find a demonstration of how ACL protection can be circumvented by adding the character `\x09` or `\t` at the end of the pathname:
 
 ![spring](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/415e6a60-2be7-4af0-8513-e27cf8df2329)
 
@@ -394,7 +394,7 @@ Below, you will find a demonstration of how ACL protection can be circumvented b
 | --- | --- |
 | 1.22.0 | `;` |
 | 1.21.6 | `;` |
-| 1.20.2 | `\x09`, ; |
+| 1.20.2 | `\x09`, `;` |
 | 1.18.0 | `\x09`, `;` |
 | 1.16.1 | `\x09`, `;` |
 
@@ -429,7 +429,7 @@ location ~* ^/admin {
 ```
 
 ## Bypassing AWS WAF ACL With Line Folding
-It's possible to bypass AWS WAF protection in a HTTP header by using the following syntax where the AWS WAF won't understand X-Query header contains a sql injection payload while the node server behind will:
+It's possible to bypass AWS WAF protection in a HTTP header by using the following syntax where the AWS WAF won't understand `X-Query` header contains a **sql injection payload** while the node server behind will:
 
 ```html
 GET / HTTP/1.1\r\n
