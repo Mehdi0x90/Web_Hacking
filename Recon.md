@@ -2,6 +2,16 @@
 Reconnaissance is the process of gathering information about a target system in order to identify potential vulnerabilities. It is an essential step in the bug bounty hunting process and can help to identify vulnerabilities that may not be apparent through other means.
 
 ## Find a new asset/subdomain on targets
+* [katana](https://github.com/projectdiscovery/katana)
+```bash
+# import list of your domains in katana tool for crawling URLS
+cat domains.txt | katana | grep js | httpx -mc 200 | tee js.txt
+
+# Scanning by nuclie
+nuclei -l js.txt -t ~/nuclei-templates/exposures/ -o js_bugs.txt
+```
+
+
 * [anew](https://github.com/tomnomnom/anew)
 ```bash
 # asset monitor (manual)
