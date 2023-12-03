@@ -56,8 +56,8 @@ You can also contribute.
 * [Prototype Pollution](mindmaps-pdf/Prototype%20Pollution.pdf)
 
 ## Secure Coding
-* [Session Fixation](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Session%20Fixation.md)
 * [Password Reset](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Password%20Reset.md)
+* [Session Fixation](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Session%20Fixation.md)
 
 -----
 *All content of this repository will always be updated...*
