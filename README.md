@@ -57,7 +57,7 @@ You can also contribute.
 
 ## Secure Coding
 * [Session Fixation](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Session%20Fixation.md)
-* [Password Rest](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Password%20Reset.md)
+* [Password Reset](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Password%20Reset.md)
 
 -----
 *All content of this repository will always be updated...*
