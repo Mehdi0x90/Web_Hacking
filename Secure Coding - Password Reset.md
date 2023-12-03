@@ -40,8 +40,7 @@ res.send('Password updated successfully');
 });
 function validateToken(username, token) {
 // Logic to validate the token for the user
-// Check if the token is valid, belongs to the user, and has not
-expired
+// Check if the token is valid, belongs to the user, and has not expired
 // Return true if valid, false otherwise
 }
 ```
