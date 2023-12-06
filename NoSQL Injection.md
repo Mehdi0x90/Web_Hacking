@@ -343,21 +343,94 @@ for u in get_usernames():
 ```
 
 
+# A quick overview of mongoDB
+* Default port: `27017`, `27018`
+
+## Enumeration
+### Manual
+```python
+from pymongo import MongoClient
+client = MongoClient(host, port, username=username, password=password)
+client.server_info() #Basic info
+#If you have admin access you can obtain more info
+admin = client.admin
+admin_info = admin.command("serverStatus")
+cursor = client.list_databases()
+for db in cursor:
+    print(db)
+    print(client[db["name"]].list_collection_names())
+#If admin access, you could dump the database also
+```
+
+### Some MongoDB commnads:
+```sql
+show dbs
+use <db>
+show collections
+db.<collection>.find()  #Dump the collection
+db.<collection>.count() #Number of records of the collection
+db.current.find({"username":"admin"})  #Find in current db the username admin
+```
+
+### Automatic
+```bash
+#By default all the nmap mongo enumerate scripts are used
+nmap -sV --script "mongo* and default" -p 27017 <IP> 
+```
+
+### Shodan
+* All mongodb: `"mongodb server information"`
+* Search for full open mongodb servers: `"mongodb server information" -"partially enabled"`
+* Only partially enable auth: `"mongodb server information" "partially enabled"`
+
+### Login
+By default mongo does not require password.
+Admin is a common mongo database.
+
+```bash
+mongo <HOST>
+mongo <HOST>:<PORT>
+mongo <HOST>:<PORT>/<DB>
+mongo <database> -u <username> -p '<password>'
+```
+
+The nmap script: mongodb-brute will check if creds are needed.
+
+```bash
+nmap -n -sV --script mongodb-brute -p 27017 <ip>
+```
+
+### Brute force
+```bash
+nmap -sV --script mongodb-brute -n -p 27017 <IP>
+use auxiliary/scanner/mongodb/mongodb_login
+```
+
+Look inside /opt/bitnami/mongodb/mongodb.conf to know if credentials are needed:
+
+```bash
+grep "noauth.*true" /opt/bitnami/mongodb/mongodb.conf | grep -v "^#" #Not needed
+grep "auth.*true" /opt/bitnami/mongodb/mongodb.conf | grep -v "^#\|noauth" #Not needed
+```
+
+### Mongo Objectid Predict
+Mongo Object IDs are 12-byte hexadecimal strings:
+
+![mongo](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/739b1f21-8df4-4e61-939a-4fae3a9feae2)
+
+For example, here’s how we can dissect an actual Object ID returned by an application: 5f2459ac9fa6dc2500314019
+
+1. 5f2459ac: 1596217772 in decimal = Friday, 31 July 2020 17:49:32
+2. 9fa6dc: Machine Identifier
+3. 2500: Process ID
+4. 314019: An incremental counter
 
 
+Of the above elements, machine identifier will remain the same for as long as the database is running the same physical/virtual machine. Process ID will only change if the MongoDB process is restarted. Timestamp will be updated every second. The only challenge in guessing Object IDs by simply incrementing the counter and timestamp values, is the fact that Mongo DB generates Object IDs and assigns Object IDs at a system level.
+
+The tool https://github.com/andresriancho/mongo-objectid-predict, given a starting Object ID (you can create an account and get a starting ID), it sends back about 1000 probable Object IDs that could have possibly been assigned to the next objects, so you just need to bruteforce them.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+### Post
+If you are root you can modify the mongodb.conf file so no credentials are needed (noauth = true) and login without credentials.
 
