@@ -60,6 +60,7 @@ You can also contribute.
 * [2FA](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%202FA.md)
 * [Password Reset](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Password%20Reset.md)
 * [Session Fixation](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Session%20Fixation.md)
+* [Broken Object Level Authorization - API1:2023](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Broken%20Object%20Level%20Authorization.md)
 
 -----
 *All content of this repository will always be updated...*
