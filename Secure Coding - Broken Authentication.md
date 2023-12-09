@@ -71,9 +71,7 @@ IAuthenticationService authenticationService)
   [HttpPost]
   public IActionResult Login(LoginModel loginModel)
   {
-    if (_authenticationService.AuthenticateUser(loginModel.Username,
-
-loginModel.Password))
+    if (_authenticationService.AuthenticateUser(loginModel.Username,loginModel.Password))
 
     {
       // Generate and return authentication token
