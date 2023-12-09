@@ -62,6 +62,7 @@ You can also contribute.
 * [Session Fixation](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Session%20Fixation.md)
 * [Broken Object Level Authorization - API1:2023](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Broken%20Object%20Level%20Authorization.md)
 * [Broken Authentication - API2:2023](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Broken%20Authentication.md)
+* [Broken Object Property Level Authorization - API3:2023](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Broken%20Object%20Property%20Level%20Authorization.md)
 
 -----
 *All content of this repository will always be updated...*
