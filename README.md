@@ -63,6 +63,7 @@ You can also contribute.
 * [Broken Object Level Authorization](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Broken%20Object%20Level%20Authorization.md)
 * [Broken Authentication](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Broken%20Authentication.md)
 * [Broken Object Property Level Authorization](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Broken%20Object%20Property%20Level%20Authorization.md)
+* [Unrestricted Resource Consumption](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Unrestricted%20Resource%20Consumption.md)
 
 -----
 *All content of this repository will always be updated...*
