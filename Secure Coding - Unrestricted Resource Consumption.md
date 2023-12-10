@@ -84,7 +84,7 @@ public class ResourceController : ControllerBase
 
 ## General prevention suggestions:
 
-* Consuming resource limits for each API request, such as bandwidth limits, number of requests in a given time frame, and maximum number of SMS or phone calls.
+* Limit on the resources consumed by each API request, such as bandwidth limits, the number of requests in a given time frame, and the maximum number of SMS or phone calls.
 
 * Checking and validating API requests based on the allowed ceiling for resource consumption and applying the necessary restrictions.
 
