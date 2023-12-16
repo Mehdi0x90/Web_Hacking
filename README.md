@@ -66,6 +66,7 @@ You can also contribute.
 * [Unrestricted Resource Consumption](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Unrestricted%20Resource%20Consumption.md)
 * [Broken Function Level Authorization](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Broken%20Function%20Level%20Authorization.md)
 * [Unrestricted Access to Sensitive Business Flows](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Unrestricted%20Access%20to%20Sensitive%20Business%20Flows.md)
+* [Server Side Request Forgery](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Server%20Side%20Request%20Forgery.md)
 
 -----
 *All content of this repository will always be updated...*
