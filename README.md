@@ -68,6 +68,7 @@ You can also contribute.
 * [Unrestricted Access to Sensitive Business Flows](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Unrestricted%20Access%20to%20Sensitive%20Business%20Flows.md)
 * [Server Side Request Forgery](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Server%20Side%20Request%20Forgery.md)
 * [Security Misconfiguration](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Security%20Misconfiguration.md)
+* [Improper Inventory Management](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Improper%20Inventory%20Management.md)
 
 -----
 *All content of this repository will always be updated...*
