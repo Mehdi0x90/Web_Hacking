@@ -69,6 +69,7 @@ You can also contribute.
 * [Server Side Request Forgery](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Server%20Side%20Request%20Forgery.md)
 * [Security Misconfiguration](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Security%20Misconfiguration.md)
 * [Improper Inventory Management](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Improper%20Inventory%20Management.md)
+* [Unsafe Consumption of APIs](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Unsafe%20Consumption%20of%20APIs.md)
 
 -----
 *All content of this repository will always be updated...*
