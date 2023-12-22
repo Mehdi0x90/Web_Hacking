@@ -56,6 +56,9 @@ You can also contribute.
 * [CORS](mindmaps-pdf/CORS.pdf)
 * [Prototype Pollution](mindmaps-pdf/Prototype%20Pollution.pdf)
 
+## Red Team Attacks
+* [SMTP](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Red%20Team%20-%20SMTP.md)
+
 ## Secure Coding
 * [2FA](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%202FA.md)
 * [Password Reset](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Secure%20Coding%20-%20Password%20Reset.md)
