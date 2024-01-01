@@ -57,6 +57,7 @@ You can also contribute.
 * [Prototype Pollution](mindmaps-pdf/Prototype%20Pollution.pdf)
 
 ## Red Team Attacks
+* [Insecure Interfaces and APIs - For Cloud](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Insecure%20Interfaces%20and%20APIs.md)
 * [SMTP](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Red%20Team%20-%20SMTP.md)
 
 ## Secure Coding
