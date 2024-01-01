@@ -58,6 +58,7 @@ You can also contribute.
 
 ## Red Team Attacks
 * [Insecure Interfaces and APIs - For Cloud](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Insecure%20Interfaces%20and%20APIs.md)
+* [Privilege escalation EC2](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Privilege%20escalation%20EC2.md)
 * [SMTP](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Red%20Team%20-%20SMTP.md)
 
 ## Secure Coding
