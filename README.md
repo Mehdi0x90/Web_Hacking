@@ -29,6 +29,7 @@ You can also contribute.
 * [XSS](https://github.com/Mehdi0x90/Web_Hacking/blob/main/XSS.md)
 * [XXE](https://github.com/Mehdi0x90/Web_Hacking/blob/main/XXE.md)
 
+
 ## Bypass Techniques
 * [2FA / OTP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/2FA_OTP_Bypass.md)
 * [403 Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/403%20Bypass.md)
@@ -44,6 +45,10 @@ You can also contribute.
 ## Recon & OSINT Techniques
 * [Recon](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Recon.md)
 * [OSINT](https://github.com/Mehdi0x90/Web_Hacking/blob/main/OSINT.md)
+
+## Cloud
+* [General](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Cloud-General.md)
+
 
 ## Top Tools & Extensions
 * [inql](https://github.com/doyensec/inql) - Burp extension for advanced GraphQL testing
