@@ -48,6 +48,8 @@ You can also contribute.
 
 ## Cloud
 * [General](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Cloud-General.md)
+* [Info Gathering](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Cloud%20-%20Info%20Gathering.md)
+* [AWS](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Cloud%20-%20AWS.md)
 
 
 ## Top Tools & Extensions
