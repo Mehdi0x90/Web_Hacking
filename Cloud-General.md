@@ -124,7 +124,7 @@ clouddetect -ip=151.101.1.68
   * mimikatz# `crypto::cng`
   * mimikatz# `crypto::certificates /systemstore:local_machine /store:my /export`
 
-## Phising
+## Phishing
 * Phishing is still the #1 method of compromise
 * Target Cloud engineers, Developers, DevOps, etc.
 * Two primary phishing techniques:
