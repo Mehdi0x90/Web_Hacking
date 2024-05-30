@@ -496,8 +496,12 @@ grep -E "target.com. [0-9]+ IN A .+" /tmp/results.txt
 # running assetfinder tool for subdomains and massDNS tool for resolving
 assetfinder target.com –subs-only | massdns -r resolvers.txt -o S -w resolved.txt
 
-
+# subdomain brute-forcing
+./scripts/subbrute.py lists/names.txt target.com | ./bin/massdns -r lists/resolvers.txt -t A -o S -w massout_brute
+# display only discovered subdomains and delete the dot from the end of each line
+cat massout_brute | awk '{print $1}' | sed 's/.$//' | sort -u
 ```
+
 * [gobuster](https://github.com/OJ/gobuster)
 ```bash
 # bruteforcing dns
