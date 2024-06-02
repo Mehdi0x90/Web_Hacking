@@ -1,5 +1,6 @@
 # Recon (Reconnaissance)
 Reconnaissance is the process of gathering information about a target system in order to identify potential vulnerabilities. It is an essential step in the bug bounty hunting process and can help to identify vulnerabilities that may not be apparent through other means.
+* [Getting Started with ProjectDiscovery in Linux and Windows](https://blog.projectdiscovery.io/getting-started-with-projectdiscovery-in-linux-and-windows/)
 
 ## Find a new asset/subdomain on targets
 * [katana](https://github.com/projectdiscovery/katana)
