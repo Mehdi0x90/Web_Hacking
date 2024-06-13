@@ -224,9 +224,20 @@ xmlns="http://www.w3.org/2000/svg">
 </svg>
 </code>
 ```
+
+## Automate discovery
+```bash
+# recommend method
+waybackurl target.com | grep =http | qsreplace -a  | while read domain; do python3 oralyzer.py -u $domain; done
+
+# alternative method
+waybackurl target.com | gf redirect | qsreplace -a  | while read domain; do python3 oralyzer.py -u $domain; done
+
+```
+
 ## Tools
 * Burp Suite Intruder / Repeater / Logger++ (Use this extension in Burp Suite for detect pattern)
-* https://github.com/r0075h3ll/Oralyzer
+* [Oralyzer](https://github.com/r0075h3ll/Oralyzer)
 
 
 
