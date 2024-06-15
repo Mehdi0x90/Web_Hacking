@@ -846,3 +846,28 @@ alert("XSS");
 
 ```
 
+## Automate XSS
+* [dalfox](https://github.com/hahwul/dalfox) - DalFox is a powerful open-source tool that focuses on automation, making it ideal for quickly scanning for XSS flaws and analyzing parameters
+```bash
+# use dalfox
+python3 paramspider.py -d https://target.com -s TRUE -e ttf,woff,eot,svg,css | deduplicate | sed '1,4d' | httpx -silent | dalfox pipe -S | cut -d " " -f2
+```
+
+* [XSSTRON](https://github.com/RenwaX23/XSSTRON) - Powerful Chromium Browser to find XSS Vulnerabilites automatically while browsing web, it can detect many case scenarios with support for POST requests too
+
+* [XSS-Radar](https://github.com/bugbountyforum/XSS-Radar) - XSS Radar is a tool that detects parameters and fuzzes them for cross-site scripting vulnerabilities
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
