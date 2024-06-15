@@ -849,7 +849,7 @@ alert("XSS");
 ## Automate XSS
 * [dalfox](https://github.com/hahwul/dalfox) - DalFox is a powerful open-source tool that focuses on automation, making it ideal for quickly scanning for XSS flaws and analyzing parameters
 ```bash
-# use dalfox
+# combined use of dalfox
 python3 paramspider.py -d https://target.com -s TRUE -e ttf,woff,eot,svg,css | deduplicate | sed '1,4d' | httpx -silent | dalfox pipe -S | cut -d " " -f2
 ```
 
