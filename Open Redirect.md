@@ -228,10 +228,10 @@ xmlns="http://www.w3.org/2000/svg">
 ## Automate discovery
 ```bash
 # recommend method
-waybackurl target.com | grep =http | qsreplace -a  | while read domain; do python3 oralyzer.py -u $domain; done
+waybackurls target.com | grep =http | qsreplace -a  | while read domain; do python3 oralyzer.py -u $domain; done
 
 # alternative method
-waybackurl target.com | gf redirect | qsreplace -a  | while read domain; do python3 oralyzer.py -u $domain; done
+waybackurls target.com | gf redirect | qsreplace -a  | while read domain; do python3 oralyzer.py -u $domain; done
 
 ```
 
