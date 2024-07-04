@@ -121,7 +121,7 @@ Access-Control-Max-Age: 240
 
 ## Automate CORS
 ```bash
-echo https://target.com | hakrawler | httpx -silent | CorsMe -header
+echo https://target.com | hakrawler | httpx -silent | CorsMe
 ```
 
 
