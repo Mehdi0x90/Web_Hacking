@@ -8,12 +8,19 @@ You can also contribute.
 [![Twitter URL](https://img.shields.io/twitter/follow/mehdi0x90)](https://twitter.com/mehdi0x90)
 
 
+
+## Recon & OSINT Techniques
+* [Recon](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Recon.md)
+* [OSINT](https://github.com/Mehdi0x90/Web_Hacking/blob/main/OSINT.md)
+
+
 ## List of Vulnerabilities
 * [API Key Leak](https://github.com/Mehdi0x90/Web_Hacking/blob/main/API%20Key%20Leak.md)
 * [CORS](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CORS%20-%20Misconfigurations%20%26%20Bypass.md)
 * [CRLF Injection](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CRLF.md)
 * [CSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CSRF.md)
 * [Cache Poisoning / Deception](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Cache%20Deception.md)
+* [Command Injection](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Command%20Injection.md)
 * [DOM Clobbering](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Dom%20Clobbering.md)
 * [File Inclusion](https://github.com/Mehdi0x90/Web_Hacking/blob/main/File%20Inclusion.md)
 * [File Upload](https://github.com/Mehdi0x90/Web_Hacking/blob/main/File%20Upload.md)
@@ -41,11 +48,6 @@ You can also contribute.
 * [Rate Limit Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Rate%20Limit%20Bypass.md)
 * [Reset Password Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Reset%20Password%20Bypass.md)
 * [WAF Detect / Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/WAF%20Bypass.md)
-
-
-## Recon & OSINT Techniques
-* [Recon](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Recon.md)
-* [OSINT](https://github.com/Mehdi0x90/Web_Hacking/blob/main/OSINT.md)
 
 
 ## Cloud / Docker
