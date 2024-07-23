@@ -410,7 +410,10 @@ cdk evaluate
 # PurplePanda https://github.com/carlospolop/PurplePanda
 ```
 
+### Red Hat OpenShift security guide
+* [OpenShift security guide ebook](https://github.com/user-attachments/files/16344036/cl-openshift-security-guide-ebook-us287757-202103.pdf)
 
+* [SIG Security](https://github.com/cncf/tag-security)
 
 
 
