@@ -93,6 +93,7 @@ _RequestVerificationToken=xxxdxxxaxxcxxx&_Username=user&_Password=test123
 * [Capsolver](https://www.capsolver.com/) automatic captcha solver offers the most affordable and quick captcha-solving solution. You may rapidly combine it with your program using its simple integration option to achieve the best results in a matter of seconds.
 
 * [AZcaptcha](https://azcaptcha.com/) is an automated online captcha solver API service which is highly accurate and superbly cheap OCR captcha solver solution.
+* [GPT4o Captcha Bypass](https://github.com/aydinnyunus/gpt4-captcha-bypass) This project is a CLI tool for testing various types of captchas including puzzle, text, complicated text, and reCAPTCHA using Python and Selenium. The tool also uses OpenAI GPT-4 to help solve the captchas.
 
 
 ## A secure Captcha should have the following features:
