@@ -577,4 +577,12 @@ for i in $(cat web-server.txt); do
 DOMAIN=$(echo $i | unfurl format %d);
 ffuf -u $1/FUZZ -w leaky-paths.txt -o ${DOMAIN}_ffuf.txt; done
 ```
+### Fuzz api routes
+```bash
+ffuf -u https://target.com/FUZZ -w <wordlist path> -mc 200,301,302 -o target_bruteforce_api_routes.txt
+```
+
+
+
+
 
