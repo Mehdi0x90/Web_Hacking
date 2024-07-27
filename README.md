@@ -39,6 +39,7 @@ You can also contribute.
 
 
 ## Bypass Techniques
+* [General Evasive Techniques](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Evasive%20Techniques.md)
 * [2FA / OTP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/2FA_OTP_Bypass.md)
 * [403 Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/403%20Bypass.md)
 * [429 Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/429%20Bypass.md)
