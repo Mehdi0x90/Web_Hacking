@@ -8,6 +8,9 @@ You can also contribute.
 [![Twitter URL](https://img.shields.io/twitter/follow/mehdi0x90)](https://twitter.com/mehdi0x90)
 
 
+## Golden Tips
+* [Writeups](https://github.com/Mehdi0x90/Web_Hacking/blob/main/writeups.md)
+
 
 ## Recon & OSINT Techniques
 * [Recon](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Recon.md)
