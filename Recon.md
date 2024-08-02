@@ -617,9 +617,10 @@ echo "URLs collected in $output_file"
 ```
 **Run the script:**
 
-1. Save the script in a file called `collect_urls.sh`
-2. Run the script: `chmod +x collect_urls.sh`
-3. Run the script by providing the input file path: `./collect_urls.sh target_sub.txt`
-4. Here `path_to_domains.txt` is the path to your text file that contains the list of all urls
+1. Make sure the waybackurls tool is installed. You can install it using go install: `go install github.com/tomnomnom/waybackurls@latest`
+2. Save the script in a file called `collect_urls.sh`
+3. Run the script: `chmod +x collect_urls.sh`
+4. Run the script by providing the input file path: `./collect_urls.sh target_sub.txt`
+5. Here `path_to_domains.txt` is the path to your text file that contains the list of all urls
 
 
