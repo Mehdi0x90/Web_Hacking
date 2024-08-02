@@ -581,8 +581,45 @@ ffuf -u $1/FUZZ -w leaky-paths.txt -o ${DOMAIN}_ffuf.txt; done
 ```bash
 ffuf -u https://target.com/FUZZ -w <wordlist path> -mc 200,301,302 -o target_bruteforce_api_routes.txt
 ```
+## Semi-automating the operation of receiving all urls
+```bash
+# Find All Subdomains
+subfinder -d target.com | httpx -silent | tee target_sub.txt
+```
+Now create and execute the following script as per the guide:
 
+```bash
+#!/bin/bash
 
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <file_with_domains>"
+    exit 1
+fi
 
+input_file="$1"
+
+if [ ! -f "$input_file" ]; then
+    echo "File not found: $input_file"
+    exit 1
+fi
+
+output_file="collected_urls.txt"
+
+> "$output_file"
+
+while IFS= read -r domain; do
+    echo "Processing $domain"
+    waybackurls "$domain" | tee -a "$output_file"
+done < "$input_file"
+
+echo "URLs collected in $output_file"
+
+```
+**Run the script:**
+
+1. Save the script in a file called `collect_urls.sh`
+2. Run the script: `chmod +x collect_urls.sh`
+3. Run the script by providing the input file path: `./collect_urls.sh target_sub.txt`
+4. Here `path_to_domains.txt` is the path to your text file that contains the list of all urls
 
 
