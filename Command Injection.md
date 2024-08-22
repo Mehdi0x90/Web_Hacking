@@ -240,7 +240,11 @@ Here are the top 25 parameters that could be vulnerable to code injection and si
 ```
 * Example
 ```bash
+# method 1
 cat target_all_url.txt | grep -E "?print=|?run=|?payload=|?module=|?exe=|?feature=|?req=|?function=|?read=|?step=|?process=|?load=|?option=|?arg=|?func=|?do=|?reg=|?code=|?jump=|?query=|?ping=|?execute=|?command=|?exec=|?cmd="
+
+# method 2
+grep -F -f command-injection-params.txt all-urls.txt
 ```
 ### Command Injection/Execution
 ```bash
