@@ -86,7 +86,15 @@ Token=28907420839252952&OrderId=51489803&TerminalNo=8521900539207&RRN=7438075480
 ```
 * Finally, the message of unsuccessful transaction is displayed to the user, but the **wallet is charged successfully**.
 
+## XSS on Chatbot
+1. Recon on wildcard target `*.target.com` by `subfinder` and `httpx`
+2. Find `https://support.target.com/robots.txt` and then open the `https://support.target.com/` and see a chatbot
+3. Send `<u>wearehackerone</u>`
+4. Then guess what, it take the HTML tag and **render** it into the box
+5. Send `<img src=1 href=1 onerror="javascript:alert(1)">`
 
+
+![chatbot-xss](https://github.com/user-attachments/assets/0f75b8a4-b890-41e0-b3e0-e17dc450c8cf)
 
 
 
