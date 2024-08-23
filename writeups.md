@@ -98,8 +98,15 @@ Token=28907420839252952&OrderId=51489803&TerminalNo=8521900539207&RRN=7438075480
 
 
 
+## Host Header Injection
+1. After approximately seven hours of continuous hunting, I discovered a subdomain with a URL containing the parameter `path=`
+2. My initial thought was to explore potential Server-Side Request Forgery (SSRF) or open redirect vulnerabilities. Despite trying several methods, I was unable to find anything significant.
+3. I noticed the presence of the `X-Forwarded-Host` header
+4. I initially tested this with apple.com, which resulted in a response redirecting to apple.com. The response header contained the value `Location: https://apple.com/en`. Not finding anything unusual, I carefully examined the response and decided to test further by changing the header value to `evil.com`.
+5. To my surprise, instead of blocking the request, the server redirected me to `evil.com`. This indicated a significant **host header injection** vulnerability that could be exploited
 
 
+![open-redirect](https://github.com/user-attachments/assets/8b4b6362-0b5d-4036-beea-51eff948f627)
 
 
 
