@@ -1,0 +1,137 @@
+%PDF-1.5
+%µ¶
+
+2 0 obj
+<<
+  /Type /Catalog
+  /Pages 4 0 R
+  /AcroForm 5 0 R
+>>
+endobj
+
+3 0 obj
+<<
+  /Producer (3.0.8 \(5.0.12\) )
+  /ModDate (D:20240124022206+01'00')
+>>
+endobj
+
+4 0 obj
+<<
+  /Type /Pages
+  /Count 1
+  /Kids [ 6 0 R ]
+>>
+endobj
+
+5 0 obj
+<<
+  /Fields [ 7 0 R 8 0 R 9 0 R ]
+>>
+endobj
+
+6 0 obj
+<<
+  /Type /Page
+  /Parent 4 0 R
+  /Resources 10 0 R
+  /Annots [ 7 0 R ]
+  /Contents [ ]
+  /MediaBox [ 0 0 612 792 ]
+>>
+endobj
+
+7 0 obj
+<<
+  /Type /Annot
+  /Subtype /Widget
+  /FT /Tx
+  /T (MyField)
+  /V (">'></div><details/open/ontoggle=confirm(document.cookie)></details>)
+  /Rect [ 100 200 150 250 ]
+  /AA 11 0 R
+>>
+endobj
+
+8 0 obj
+<<
+  /Type /Annot
+  /Subtype /Widget
+  /FT /Tx
+  /T (uname)
+  /Rect [ 400 400 500 429 ]
+  /V (test)
+>>
+endobj
+
+9 0 obj
+<<
+  /Type /Annot
+  /Subtype /Widget
+  /FT /Tx
+  /T (pass)
+  /Rect [ 400 440 500 469 ]
+  /V (test2)
+>>
+endobj
+
+10 0 obj
+<<
+  /Font 12 0 R
+>>
+endobj
+
+11 0 obj
+<<
+  /D 13 0 R
+>>
+endobj
+
+12 0 obj
+<<
+  /F1 14 0 R
+>>
+endobj
+
+13 0 obj
+<<
+  /Type /Action
+  /S /JavaScript
+  /JS ()
+>>
+endobj
+
+15 0 obj
+722
+endobj
+
+xref
+0 17
+0000000001 65536 f 
+0000000014 00001 f 
+0000000016 00000 n 
+0000000088 00000 n 
+0000000179 00000 n 
+0000000245 00000 n 
+0000000299 00000 n 
+0000000435 00000 n 
+0000000695 00000 n 
+0000000814 00000 n 
+0000000933 00000 n 
+0000000971 00000 n 
+0000001006 00000 n 
+0000001042 00000 n 
+0000000016 00012 f 
+0000001512 00000 n 
+0000001533 00001 f 
+
+trailer
+<<
+  /Size 17
+  /Info 3 0 R
+  /Root 2 0 R
+  /ID [ <1BD23AF7891A7C6149620DD94F5BD223> <1BD23AF7891A7C6149620DD94F5BD223> ]
+>>
+startxref
+1533
+%%EOF
