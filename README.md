@@ -48,6 +48,7 @@ You can also contribute.
 * [429 Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/429%20Bypass.md)
 * [Captcha Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Captcha%20Bypass.md)
 * [CSP Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/CSP%20Bypass.md)
+* [Email Verification Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/email%20verification%20bypass.md)
 * [Login Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Login%20Bypass.md)
 * [Rate Limit Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Rate%20Limit%20Bypass.md)
 * [Reset Password Bypass](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Reset%20Password%20Bypass.md)
