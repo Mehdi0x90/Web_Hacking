@@ -91,10 +91,36 @@ echo https://target.com | hakrawler -subs
 
 # Get all subdomains of google, find the ones that respond to http(s), crawl them all
 echo target.com | haktrails subdomains | httpx | hakrawler
+```
 
+## JS Recon
+Extracts links, images, cookies, forms, JS URLs, localStorage, Host, IP, and leaked credentials
+
+* [lazyegg](https://github.com/schooldropout1337/lazyegg)
+
+### Launch a Scan
+```bash
+python3 lazyegg.py http://target.com
+```
+### Find Hidden Files
+```bash
+python3 lazyegg.py http://target/js --js_scan --w wordlist.txt
+```
+### Scan a Single JavaScript File
+```bash
+python3 lazyegg.py http://target/js/auth.js
+```
+### Scan Multiple JavaScript Files
+```bash
+cat jsurls.txt | xargs -I{} bash -c 'echo -e "\ntarget : {}\n" && python3 lazyegg.py "{}" --js_urls --domains --ips --leaked_creds'
+```
+### Waybackurls - JS Recon for IP, Hostname & URL
+```bash
+waybackurls vulnweb.com | grep '\.js$' | awk -F '?' '{print $1}' | sort -u | xargs -I{} bash -c 'python3 lazyegg.py "{}" --js_urls --domains --ips' > jsurls.log && cat jsurls.log | grep '\.' | sort -u
 ```
 
 
+-----
 ### ASNs
 
 ```bash
@@ -111,7 +137,6 @@ dnsrecon -r <DNS Range> -n <IP_DNS>   #DNS reverse of all of the addresses
 dnsrecon -d facebook.com -r 157.240.221.35/24 #Using facebooks dns
 dnsrecon -r 157.240.221.35/24 -n 1.1.1.1 #Using cloudflares dns
 dnsrecon -r 157.240.221.35/24 -n 8.8.8.8 #Using google dns
-
 ```
 
 ### Reverse Whois (loop)
