@@ -1,6 +1,14 @@
 # Open Redirect
 Un-validated redirects and forwards are possible when a web application accepts untrusted input that could cause the web application to redirect the request to a URL contained within untrusted input. By modifying untrusted URL input to a malicious site, an attacker may successfully launch a phishing scam and steal user credentials.
 
+## Using the open url redirect
+Below are the most common things I will try with an open url redirect:
+
+* Leak tokens via mis-configured apps/login flows
+* Bypassing blacklists for SSRF/RCE
+* XSS via javascript:alert(0)
+
+
 ## HTTP Redirection Status Code
 HTTP Redirection status codes, those starting with 3, indicate that the client must take additional action to complete the request. Here are some of the most common ones:
 
