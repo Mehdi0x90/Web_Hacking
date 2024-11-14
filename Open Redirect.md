@@ -233,6 +233,20 @@ xmlns="http://www.w3.org/2000/svg">
 </code>
 ```
 
+**Bypassing Open Redirect in OAuth**
+```bash
+Failed Attempt:
+https://example.com@hacker.com
+
+Successful Attempt:
+https://hacker.com\@example.com
+
+Tip: Fuzz special ASCII characters at the edges of URLs to bypass restrictions.
+```
+![open](https://github.com/user-attachments/assets/d725af7f-d136-4b5b-a456-0b0d7e55456c)
+
+
+
 ## Automate discovery
 ```bash
 # recommend method
