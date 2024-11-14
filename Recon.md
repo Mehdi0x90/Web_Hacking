@@ -10,6 +10,9 @@ cat domains.txt | katana | grep js | httpx -mc 200 | tee js.txt
 
 # Scanning by nuclie
 nuclei -l js.txt -t ~/nuclei-templates/exposures/ -o js_bugs.txt
+
+# Extracting all urls from JavaScript files
+cat subdomain.txt | katana -silent -d 7 -jc -jsl -kf robotstxt sitemapxml | tee urls.txt
 ```
 
 
@@ -32,7 +35,6 @@ while true;
     do subfinder -silent -dL domains.txt -all | anew subdomains.txt | notify;
     sleep 3600;
   done
-
 ```
 
 
@@ -648,4 +650,12 @@ echo "URLs collected in $output_file"
 4. Run the script by providing the input file path: `./collect_urls.sh target_sub.txt`
 5. Here `path_to_domains.txt` is the path to your text file that contains the list of all urls
 
+## Directory Search
+An advanced web path brute-forcer
+
+* [dirsearch](https://github.com/maurosoria/dirsearch)
+
+```bash
+python3 dirsearch.py -u https://target.com -w wordlist/directories.txt -i 200,300-399,403 -e js,json,txt,log,html,rar,zip,gz,asp,aspx,config,conf,backup,back,bck,php --exclude-extensions ico,png,jpg,jpeg,gif,woff,woff2,svg -r -R 5
+```
 
