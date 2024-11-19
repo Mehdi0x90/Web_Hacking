@@ -34,7 +34,7 @@ AZURE_OPENAI_API_KEY /[a-f0-9]{32}$/
 ```
 
 ## Discover new target domains using Content Security Policy
-[csprecon](https://github.com/edoardottt/csprecon)
+* [csprecon](https://github.com/edoardottt/csprecon)
 ```bash
 # Install
 go install github.com/edoardottt/csprecon/cmd/csprecon@latest
