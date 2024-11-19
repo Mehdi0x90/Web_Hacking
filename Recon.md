@@ -2,6 +2,58 @@
 Reconnaissance is the process of gathering information about a target system in order to identify potential vulnerabilities. It is an essential step in the bug bounty hunting process and can help to identify vulnerabilities that may not be apparent through other means.
 * [Getting Started with ProjectDiscovery in Linux and Windows](https://blog.projectdiscovery.io/getting-started-with-projectdiscovery-in-linux-and-windows/)
 
+## A list of Google Dorks for Bug Bounty, Web Application Security, and Pentesting
+* [Google Dorks for Bug Bounty](https://taksec.github.io/google-dorks-bug-bounty/)
+* [Github Repo](https://github.com/TakSec/google-dorks-bug-bounty/)
+
+## Find GitHub Repositories for a Specific Keyword
+```bash
+curl -s "https://api.github.com/search/repositories?q=bug+bounty&sort=stars" | jq '.items[] | {name: .name, url: .html_url}'
+```
+
+## A list of 10 Github dorks to find secret and access tokens
+```bash
+"http://target.com" send_keys
+"http://target.com" password
+"http://target.com" api_key
+"http://target.com" apikey
+"http://target.com" jira_password
+"http://target.com" root_password
+"http://target.com" access_token
+"http://target.com" config
+"http://target.com" client_secret
+"http://target.com" user auth
+```
+## Search for leaked Api keys on Github
+```bash
+# Azure open AI
+AZURE_OPENAI_API_KEY /[a-f0-9]{32}$/
+
+# Jira token
+/ATATT3[a-zA-Z0-9_\-+=]{184,195}$/
+```
+
+## Discover new target domains using Content Security Policy
+[csprecon](https://github.com/edoardottt/csprecon)
+```bash
+# Install
+go install github.com/edoardottt/csprecon/cmd/csprecon@latest
+
+# Grab all possible results from single domain
+csprecon -u https://www.github.com
+echo https://www.github.com | csprecon
+
+# Grab all possible results from a list of domains (protocols needed!)
+csprecon -l targets.txt
+cat targets.txt | csprecon
+
+# Grab all possible results belonging to specific target(s) from a list of domains (protocols needed!)
+cat targets.txt | csprecon -d google.com
+
+# Grab all possible results from single CIDR
+csprecon -u 192.168.1.0/24 -cidr
+```
+
 ## Find a new asset/subdomain on targets
 * [katana](https://github.com/projectdiscovery/katana)
 ```bash
@@ -121,7 +173,29 @@ cat jsurls.txt | xargs -I{} bash -c 'echo -e "\ntarget : {}\n" && python3 lazyeg
 waybackurls vulnweb.com | grep '\.js$' | awk -F '?' '{print $1}' | sort -u | xargs -I{} bash -c 'python3 lazyegg.py "{}" --js_urls --domains --ips' > jsurls.log && cat jsurls.log | grep '\.' | sort -u
 ```
 
+## uro
+Using a URL list for security testing can be painful as there are a lot of URLs that have uninteresting/duplicate content; uro aims to solve that.
+* [uro](https://github.com/s0md3v/uro)
 
+  
+![uro](https://github.com/user-attachments/assets/efd94479-459f-4d8d-bbc4-5c51fb89da92)
+
+```bash
+# The recommended way to install uro is as follows:
+pipx install uro
+
+# Basic Usage
+cat urls.txt | uro
+
+# uro will ignore all other extensions except the ones provided
+uro -w php asp html
+
+# uro will ignore the given extensions
+uro -b jpg png js pdf
+
+# other example
+subfinder -d target.com -all  | waybackurls | gf sqli | uro | nuclei -t errorsqli.yaml -rl 50
+```
 -----
 ### ASNs
 
@@ -658,4 +732,5 @@ An advanced web path brute-forcer
 ```bash
 python3 dirsearch.py -u https://target.com -w wordlist/directories.txt -i 200,300-399,403 -e js,json,txt,log,html,rar,zip,gz,asp,aspx,config,conf,backup,back,bck,php --exclude-extensions ico,png,jpg,jpeg,gif,woff,woff2,svg -r -R 5
 ```
+
 
