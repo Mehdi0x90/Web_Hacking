@@ -203,7 +203,10 @@ subfinder -d target.com -all  | waybackurls | gf sqli | uro | nuclei -t errorsq
 #You can try "automate" this with amass, but it's not very recommended
 amass intel -org tesla
 amass intel -asn 8911,50313,394161
-
+```
+you can get the ASN info associated with a target using httpx:
+```bash
+echo target.com | httpx -asn -j | jq -r .asn
 ```
 
 ### Reverse DNS
