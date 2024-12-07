@@ -173,6 +173,30 @@ cat jsurls.txt | xargs -I{} bash -c 'echo -e "\ntarget : {}\n" && python3 lazyeg
 waybackurls vulnweb.com | grep '\.js$' | awk -F '?' '{print $1}' | sort -u | xargs -I{} bash -c 'python3 lazyegg.py "{}" --js_urls --domains --ips' > jsurls.log && cat jsurls.log | grep '\.' | sort -u
 ```
 
+* [jshunter](https://github.com/cc1a2b/jshunter)
+
+jshunter is a command-line tool designed for analyzing JavaScript files and extracting endpoints. This tool specializes in identifying sensitive data, such as API endpoints and potential security vulnerabilities, making it an essential resource for developers and security researchers.
+
+### Install
+```bash
+go install -v github.com/cc1a2b/jshunter@latest
+```
+### Usage Example
+```bash
+# method 1
+cat urls.txt | grep "\.js" | jshunter
+
+# method 2
+jshunter -u "https://target.com/javascript.js"
+
+# method 3
+jshunter -l jsurls.txt
+
+# mehtod 4 (This command will analyze the specified JavaScript file and output the results to the console.)
+jshunter -f javascript.js
+```
+
+
 ## uro
 Using a URL list for security testing can be painful as there are a lot of URLs that have uninteresting/duplicate content; uro aims to solve that.
 * [uro](https://github.com/s0md3v/uro)
