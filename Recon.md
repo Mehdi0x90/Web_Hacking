@@ -561,7 +561,37 @@ assetfinder domain.com
 Let's try to get subdomains from the DNS records. We should also try for Zone Transfer (If vulnerable, you should report it).
 ```bash
 dnsrecon -a -d target.com
+```
+* [dnsx](https://github.com/projectdiscovery/dnsx)
 
+### Install
+```bash
+go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest
+```
+### Usage
+```bash
+# DNS Resolving
+subfinder -silent -d target.com | dnsx -silent
+
+# Print A records for the given list of subdomains
+subfinder -silent -d target.com | dnsx -silent -a -resp
+
+# Extract subdomains from given ASN using PTR query
+echo AS17012 | dnsx -silent -resp-only -ptr 
+
+# DNS Bruteforce
+dnsx -silent -d target.com -w dns_worldlist.txt
+dnsx -silent -d domains.txt -w dns_worldlist.txt
+
+# Bruteforce targeted subdomain using single or multiple keyword input
+dnsx -silent -d domains.txt -w jira,grafana,jenkins
+
+# Values are accepted from stdin for all the input types (-list, -domain, -wordlist)
+cat domains.txt | dnsx -silent -w jira,grafana,jenkins -d -
+cat domains.txt | dnsx -silent -w dns_worldlist.txt -d - 
+
+# DNS Bruteforce with Placeholder based wordlist
+dnsx -d target.FUZZ -w tld.txt -resp
 ```
 
 ### [OSINT](https://github.com/Mehdi0x90/Web_Hacking/blob/main/OSINT.md)
