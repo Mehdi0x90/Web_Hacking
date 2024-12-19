@@ -10,6 +10,7 @@ You can also contribute.
 
 ## Golden Tips
 * [Writeups](https://github.com/Mehdi0x90/Web_Hacking/blob/main/writeups.md)
+* [Smart Hunting](https://github.com/Mehdi0x90/Web_Hacking/blob/main/smart%20hunting.md)
 
 
 ## Recon & OSINT Techniques
