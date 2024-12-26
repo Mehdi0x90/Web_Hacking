@@ -124,7 +124,17 @@ Download an entire website from the Internet Archive Wayback Machine.
 wayback_machine_downloader http://target.com -c 5 > all_urls.txt
 
 # Check status of urls and make new file
-cat all_urls.txt | httpx -mc 200 | tee live_urls.txt   
+cat all_urls.txt | httpx -mc 200 | tee live_urls.txt
+
+# Taking screenshots of the status of discovered pages/subdomains
+subfinder -d target.com -all -silent | httpx -screenshot
+cat live_urls.txt | httpx -screenshot
+httpx -screenshot -u target.com
+httpx -screenshot -u https://target.com/login
+httpx -screenshot -path fuzz_path.txt -u https://target.com
+
+# Transfer all captured screenshots to a directory
+find output/screenshot/* -type f -name "*.png" -print0 | xargs -0 mv -t all_screenshots/
 ```
 
 * [Hakrawler](https://github.com/hakluke/hakrawler)
