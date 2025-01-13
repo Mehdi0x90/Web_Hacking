@@ -302,6 +302,17 @@ def fav_hash(url):
     return fhash
 
 ```
+* [httpx](https://github.com/projectdiscovery/httpx)
+```bash
+# create favicon hash (mmh3)
+httpx -u target.com -favicon -fr -silent
+
+# shodan dork for search by favicon hash (shodan.io)
+http.favicon.hash:1936786007
+
+# One-Liner Command to find subdomains and list favicon hashes
+subfinder -d target.com -silent -all | httpx -silent -favicon -j | jq -r .favicon | grep -v null | sort -u
+```
 
 ### Copyright / Uniq string
 Search inside the web pages strings that could be shared across different webs in the same organisation. The copyright string could be a good example. Then search for that string in google, in other browsers or even in shodan: `shodan search http.html:"Copyright string"`
