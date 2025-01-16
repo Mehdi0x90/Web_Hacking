@@ -577,6 +577,49 @@ assetfinder domain.com
 ```
 
 ## Subdomains
+
+To generate a list of subdomains that includes letters (a-z, A-Z), numbers (0-9), and the allowed hyphen (-) character, you can use the following command in the Crunch tool:
+```bash
+crunch 1 63 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789- | grep -v '^-.*' | grep -v '.*-$' > filtered_subdomains.txt
+```
+
+You can use a simple Bash script to combine two lists, one containing domains and one containing subdomains. This script adds all subdomains to each domain in the domains list and creates a final list:
+```bash
+# List of subdomains (subdomains.txt):
+www
+mail
+test
+api
+
+# List of domains (domains.txt):
+example.com
+example.org
+test.com
+```
+**The following code does this:**
+```bash
+while read domain; do
+  while read subdomain; do
+    echo "$subdomain.$domain"
+  done < subdomains.txt
+done < domains.txt > combined_list.txt
+```
+**Output (combined_list.txt):**
+```bash
+www.example.com
+mail.example.com
+test.example.com
+api.example.com
+www.example.org
+mail.example.org
+test.example.org
+api.example.org
+www.test.com
+mail.test.com
+test.test.com
+api.test.com
+```
+
 ### DNS
 
 Let's try to get subdomains from the DNS records. We should also try for Zone Transfer (If vulnerable, you should report it).
