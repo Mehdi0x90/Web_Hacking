@@ -205,7 +205,14 @@ jshunter -l jsurls.txt
 # mehtod 4 (This command will analyze the specified JavaScript file and output the results to the console.)
 jshunter -f javascript.js
 ```
-
+### Automated JS Endpoint Extraction and Verification with HTTPX & GAU
+```bash
+echo "target.com" | gau --blacklist jpg,jpeg,gif,css,tif,tiff,png,ttf,woff,woff2,ico,pdf,svg \
+| grep -E "\.js($|\?.*)" \
+| httpx -er "(?:(https?|ftp|git|ssh|telnet|smtp|imap|pop3|ldap|sftp|smb|nfs|rtmp|rtsp|ws|wss|irc|news|gopher|rsync|data):\/\/|\/)[^\s\"'\*\(\){};\\\^\$\&<>/\\?#]+(?:\?[^\s\"'<>/\\?#]+)?(?:\/[^\s\"'<>/\\?#]+)*" \
+-json -mr "application/javascript|text/javascript" \
+| jq -r '.extracts[]' | tr -d '[],'
+```
 
 ## uro
 Using a URL list for security testing can be painful as there are a lot of URLs that have uninteresting/duplicate content; uro aims to solve that.
