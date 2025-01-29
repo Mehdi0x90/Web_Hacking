@@ -93,7 +93,7 @@ CloudFlare caches the resource when the `Cache-Control` header is set to `public
 4. Response is cached
 5. Attacker harvests **JWT Credentials**
 
-## Comprehensive Web Cache Deception Testing Checklist for Bug Bounty Hunters
+## Comprehensive Web Cache Deception Testing Checklist
 
 ### 1. Identifying Cacheable Endpoints
 
