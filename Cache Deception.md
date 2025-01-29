@@ -93,6 +93,138 @@ CloudFlare caches the resource when the `Cache-Control` header is set to `public
 4. Response is cached
 5. Attacker harvests **JWT Credentials**
 
+## Comprehensive Web Cache Deception Testing Checklist for Bug Bounty Hunters
+
+### 1. Identifying Cacheable Endpoints
+
+Example:
+
+* Access `/profile.php/nonexistent.css` and check if the response is cached.
+
+* Use response headers like `X-Cache: HIT` or `Age` to determine caching.
+
+### 2. Exploiting File Name Cache Rules
+
+Example:
+
+* Request `https://target.com/robots.txt` and check if the response is cached.
+
+* Modify the request to `https://target.com/profile/robots.txt` and see if the private page is exposed.
+
+### 3. Testing Static Directory Cache Rules
+
+Example:
+
+* Check `/static/` directories like `/assets/js/main.js` to determine caching behavior.
+
+* Try `/profile/assets/js/main.js` to see if private data gets cached.
+
+### 4. Detecting Normalization Discrepancies
+
+Example:
+
+* Send a request to `/aaa%2f%2e%2e%2findex.html`.
+
+  * If cached, the cache normalizes the path to `/index.html`.
+
+  * If not cached, the cache interprets it as `/profile%2f%2e%2e%2findex.html`.
+
+### 5. Exploiting Normalization Discrepancies
+
+Example:
+
+* If `/profile%2ehtml` is cached but `/profile.html` is private, an attacker may access sensitive content.
+
+### 6. Bypassing Cache-Control Headers
+
+Example:
+
+* Check if `Cache-Control: private` is ignored by the caching server.
+
+* Use headers like `Pragma: no-cache` and see if caching is bypassed.
+
+### 7. Testing Different HTTP Methods
+
+Example:
+
+* Try `HEAD`, `OPTIONS`, or `POST` instead of `GET` and check cache behavior.
+
+* If `HEAD` requests are cached but `GET` is not, sensitive data exposure might be possible.
+
+### 8. Query Parameter Manipulation
+
+Example:
+
+* Test `/dashboard?auth=true` and `/dashboard?auth=false` to check if authentication-sensitive data is cached.
+
+* Try adding `?nocache=randomvalue` to see if cache behavior changes.
+
+### 9. Detecting Cache Key Manipulation
+
+Example:
+
+* If `/user?id=123` is cached but `/user?id=456` returns the same cached response, user data leakage is possible.
+
+### 10. Testing Host Header Injection for Cache Poisoning
+
+Example:
+
+* Modify the `Host` header to `evil.com` and check if it is cached.
+
+* If `https://target.com/profile` is cached under `evil.com/profile`, an attacker can serve malicious content.
+
+### 11. Cache-Based Authentication Bypass
+
+Example:
+
+* Check if `/admin/dashboard` gets cached after an authenticated request.
+
+* Try accessing it without authentication and verify if the cached version is served.
+
+### 12. Testing for Cache Injection
+
+Example:
+
+* Inject `<script>alert(1)</script>` in URL parameters and check if it is cached and served persistently.
+
+* If JavaScript payloads persist, cache-based XSS may be possible.
+
+### 13. Exploiting CDN Behavior
+
+Example:
+
+* Use different CDN edge servers and test variations in caching rules.
+
+* Check if private data is cached on a specific region’s edge server but not others.
+
+### 14. Investigating Vary Header Manipulation
+
+Example:
+
+* Modify `Vary: User-Agent` and see if different user agents receive different cached content.
+
+* If `/profile` caches different responses for different `User-Agent`, information disclosure may occur.
+
+### 15. Testing Multi-Layered Caching Systems
+
+Example:
+
+* Identify if both a CDN (e.g., Cloudflare) and an origin server cache responses.
+
+* Test `/dashboard` via direct origin requests (bypassing CDN) and CDN responses separately.
+
+### Final Notes:
+
+* Use `curl -I -X GET <url>` to inspect headers quickly.
+
+* Leverage Burp Suite to automate cache detection with extensions like Param Miner.
+
+* Always check for `X-Cache`, `Age`, `ETag`, and `Vary` headers.
+
+
+
+
+
 ## Tools
 * [PortSwigger/param-miner](https://github.com/PortSwigger/param-miner)
 * [Web Cache Vulnerability Scanner](https://github.com/Hackmanit/Web-Cache-Vulnerability-Scanner)
