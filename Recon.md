@@ -65,6 +65,24 @@ nuclei -l js.txt -t ~/nuclei-templates/exposures/ -o js_bugs.txt
 
 # Extracting all urls from JavaScript files
 cat subdomain.txt | katana -silent -d 7 -jc -jsl -kf robotstxt sitemapxml | tee urls.txt
+
+# Crawling a Website
+katana -u "https://target.com"
+
+# Increasing Crawl Depth
+katana -u "https://target.com" -d 5
+
+# Filtering Output by Status Codes
+katana -u "https://target.com" | httpx -mc 200,403
+
+# Crawling Multiple URLs from a File
+katana -list urls.txt
+
+# Custom Headers (Useful for Authentication)
+katana -u "https://target.com" -H "Authorization: Bearer YOUR-TOKEN"
+
+# Combining Katana with Nuclei for Vulnerability Scanning
+katana -u "https://target.com" | nuclei -t cves/
 ```
 
 
@@ -157,6 +175,63 @@ echo https://target.com | hakrawler -subs
 echo target.com | haktrails subdomains | httpx | hakrawler
 ```
 
+### SubDomainizer - A tool to find subdomains and interesting things hidden inside, external Javascript files of page, folder, and Github
+**Installation Steps**
+1. Clone [SubDomainzer](https://github.com/nsonaniya2010/SubDomainizer/tree/master) from git:
+```bash
+git clone https://github.com/nsonaniya2010/SubDomainizer.git
+```
+2. Change the directory:
+```bash
+cd SubDomainizer
+```
+3. Install the requirements:
+```bash
+pip3 install -r requirements.txt
+```
+* Update to latest version
+```bash
+git pull
+```
+
+* To find subdomains, s3 buckets, and cloudfront URL's for given single URL
+```bash
+python3 SubDomainizer.py -u http://www.target.com
+```
+* To find subdomains from given list of URL (file given):
+```bash
+python3 SubDomainizer.py -l list.txt
+```
+* To save the results in (output.txt) file:
+```bash
+python3 SubDomainizer.py -u https://www.target.com -o output.txt
+```
+* To give cookies:
+```bash
+python3 SubDomainizer.py -u https://www.target.com -c "test=1; test=2"
+```
+* To scan via github:
+```bash
+python3 SubDomainizer.py -u https://www.target.com -o output.txt -gt <github_token> -g 
+```
+* No SSL Certificate Verification:
+```bash
+python3 SubDomainizer.py -u https://www.target.com -o output.txt -gt <github_token> -g  -k
+```
+* Folder Scanning:
+```bash
+python3 SubDomainizer.py -f /path/to/root/folder/having/files/and/folders/  -d target.com  -gt <github_token> -g  -k
+```
+* Subject Alternative Names:
+```bash
+python3 SubDomainizer.py -u https://www.target -san all
+```
+* Saving secrets to a file scan found in github:
+```bash
+python3 SubDomainizer.py -u https://www.target.com -o output.txt -gt <github_token> -g -gop filename_to_save
+```
+
+
 ## JS Recon
 Extracts links, images, cookies, forms, JS URLs, localStorage, Host, IP, and leaked credentials
 
@@ -213,6 +288,12 @@ echo "target.com" | gau --blacklist jpg,jpeg,gif,css,tif,tiff,png,ttf,woff,woff2
 -json -mr "application/javascript|text/javascript" \
 | jq -r '.extracts[]' | tr -d '[],'
 ```
+
+### A useful one-liner that extracts all API endpoints from AngularJS and Angular JavaScript files
+```bash
+curl -s URL | grep -Po "(\/)((?:[a-zA-Z\-_\:\.0-9\{\}]+))(\/)*((?:[a-zA-Z\-_\:\.0-9\{\}]+))(\/)((?:[a-zA-Z\-_\/\:\.0-9\{\}]+))" | sort -u
+```
+
 
 ## uro
 Using a URL list for security testing can be painful as there are a lot of URLs that have uninteresting/duplicate content; uro aims to solve that.
@@ -325,7 +406,11 @@ subfinder -d target.com -silent -all | httpx -silent -favicon -j | jq -r .favico
 Search inside the web pages strings that could be shared across different webs in the same organisation. The copyright string could be a good example. Then search for that string in google, in other browsers or even in shodan: `shodan search http.html:"Copyright string"`
 
 ### Shodan
-
+* CVEDB API - Fast Vulnerability Lookups
+```bash
+curl -k https://cvedb.shodan.io/cves | jq '.cves[] | {cveid: .cve_id, summary: .summary}'
+```
+* Shodan Dorks
 ```bash
 org:"Tesla, Inc."
 ssl:"Tesla Motors"
@@ -860,5 +945,308 @@ An advanced web path brute-forcer
 ```bash
 python3 dirsearch.py -u https://target.com -w wordlist/directories.txt -i 200,300-399,403 -e js,json,txt,log,html,rar,zip,gz,asp,aspx,config,conf,backup,back,bck,php --exclude-extensions ico,png,jpg,jpeg,gif,woff,woff2,svg -r -R 5
 ```
+## Important paths and files
+### Top 25 JavaScript Path Files used to store sensitive information in Web Application
+```text
+01. /js/config.js
+02. /js/credentials.js
+03. /js/secrets.js
+04. /js/keys.js
+05. /js/password.js
+06. /js/api_keys.js
+07. /js/auth_tokens.js
+08. /js/access_tokens.js
+09. /js/sessions.js
+10. /js/authorization.js 
+11. /js/encryption.js
+12. /js/certificates.js
+13. /js/ssl_keys.js
+14. /js/passphrases.js 
+15. /js/policies.js
+16. /js/permissions.js 
+17. /js/privileges.js
+18. /js/hashes.js
+19. /js/salts.js
+20. /js/nonces.js
+21. /js/signatures.js
+22. /js/digests.js
+23. /js/tokens.js
+24. /js/cookies.js
+25. /js/topsecr3tdonotlook.js
+```
 
+### Sensitive Files by Fuzzing Key .git Paths
+```text
+/.git
+/.gitkeep
+/.git-rewrite
+/.gitreview
+/.git/HEAD
+/.gitconfig
+/.git/index
+/.git/logs
+/.svnignore
+/.gitattributes
+/.gitmodules
+/.svn/entries
+```
+### Configuration and position-sensitive files
+```text
+config.php  
+config.json  
+config.yaml  
+config.yml  
+config.ini  
+config.xml  
+config.db  
+configuration.php  
+database.yml  
+database.json  
+database.ini  
+database.xml  
+local.config  
+web.config  
+application.properties  
+application.yml  
+connections.ini  
+credentials.json  
+settings.py  
+settings.xml  
+app.config  
+firebase.json  
+aws-credentials
+```
+### Important environment files and variables
+```text
+.env  
+.env.local  
+.env.dev  
+.env.production  
+.env.staging  
+.env.testing  
+.env.example  
+.env.backup  
+.env.bak  
+.env.old  
+.env~  
+.env.default  
+/opt/app/.env  
+/home/user/.env
+```
+### Backup files and old versions
+```text
+index.php.bak  
+config.old  
+config.bak  
+database.sql.gz  
+database_backup.sql  
+database_dump.sql  
+database_export.sql  
+wp-config.php~  
+.htpasswd.bak  
+.htpasswd.old  
+.htaccess.bak  
+.htaccess.old  
+admin.bak  
+backup.zip  
+backup.tar.gz  
+backup.sql  
+backup_old.sql  
+old_version.zip  
+old_config.php
+```
+### Log and debug files
+```text
+debug.log  
+error.log  
+access.log  
+server.log  
+php_errors.log  
+trace.log  
+system.log  
+log.txt  
+logs/debug.log  
+logs/error.log  
+logs/system.log  
+logs/app.log
+```
+### Private key files and API keys
+```text
+id_rsa  
+id_rsa.pub  
+id_dsa  
+id_ecdsa  
+id_ed25519  
+.ssh/id_rsa  
+.ssh/id_rsa.pub  
+.ssh/authorized_keys  
+secrets.json  
+apikey.txt  
+google-cloud.json  
+aws-credentials  
+jwt_private.pem  
+jwt_public.pem  
+private.key  
+public.key
+```
 
+### Miscellaneous files worth testing
+```text
+composer.lock  
+composer.json  
+package.json  
+package-lock.json  
+.bash_history  
+.bashrc  
+.zshrc  
+.gitignore  
+.gitconfig  
+.gitattributes  
+.idea/workspace.xml  
+.vscode/settings.json  
+.vscode/launch.json  
+.vscode/tasks.json  
+Dockerfile  
+docker-compose.yml  
+nginx.conf  
+apache2.conf  
+httpd.conf  
+php.ini  
+robots.txt  
+sitemap.xml  
+sitemap_index.xml  
+crossdomain.xml  
+security.txt  
+CORS
+```
+### Authentication and session endpoints
+```text
+/login  
+/login.php  
+/login.html  
+/signin  
+/signin.php  
+/signin.html  
+/auth  
+/authenticate  
+/oauth  
+/oauth/token  
+/oauth/authorize  
+/oauth/access_token  
+/oauth/callback  
+/jwt/login  
+/api/login  
+/api/auth  
+/session  
+/session/new  
+/session/create  
+/session/token  
+/logout  
+/logout.php  
+/logout.html  
+/logout.do  
+/logout.action  
+/revoke  
+/revoke-token  
+/password-reset  
+/reset-password  
+/forgot-password  
+/change-password  
+/password/change
+```
+
+### User and profile endpoints
+```text
+/user  
+/users  
+/users/list  
+/users/all  
+/users/me  
+/user/profile  
+/user/settings  
+/user/update  
+/user/edit  
+/user/change-email  
+/account  
+/accounts  
+/accounts/me  
+/profile  
+/my-profile  
+/dashboard
+```
+
+### Management and admin endpoints
+```text
+/admin  
+/admin.php  
+/admin.html  
+/admin/login  
+/admin/dashboard  
+/admin/config  
+/admin/settings  
+/admin/users  
+/admin/manage  
+/admin/console  
+/admin/panel  
+/adminer  
+/admin_area  
+/admin_control  
+/admin_portal  
+/backend  
+/backend/login  
+/backend/admin  
+/root  
+/root/admin  
+/system_admin  
+/cms_admin
+```
+
+### Popular and common API endpoints
+```text
+/api  
+/api/v1  
+/api/v2  
+/api/v3  
+/api/auth  
+/api/users  
+/api/admin  
+/api/login  
+/api/token  
+/api/keys  
+/api/settings  
+/api/config  
+/api/data  
+/api/stats  
+/api/health  
+/api/info  
+/api/status  
+/api/debug  
+/api/internal  
+/api/private  
+/api/external
+```
+### Debug, Monitoring, and DevOps Endpoints
+```text
+/debug  
+/debug.php  
+/debug.log  
+/debug_info  
+/health  
+/healthz  
+/version  
+/api/version  
+/api/debug  
+/status  
+/api/status  
+/stats  
+/api/stats  
+/env  
+/system_info  
+/server-status  
+/nginx_status  
+/phpinfo  
+/actuator  
+/actuator/health  
+/actuator/env  
+/actuator/info
+```
