@@ -54,7 +54,7 @@ cat targets.txt | csprecon -d google.com
 csprecon -u 192.168.1.0/24 -cidr
 ```
 
-## Find a new asset/subdomain on targets
+## Find a new asset/subdomain/url on targets
 * [katana](https://github.com/projectdiscovery/katana)
 ```bash
 # import list of your domains in katana tool for crawling URLS
@@ -132,6 +132,51 @@ run a Nuclei command on the `js.txt` file with the exposures tag
 ```bash
 nuclei -l js.txt -t ~/nuclei-templates/exposures/ -o js_exposures_results.txt
 
+```
+* [waybackurls](https://github.com/tomnomnom/waybackurls)
+
+Accept line-delimited domains on stdin, fetch known URLs from the Wayback Machine for *.domain and output them on stdout.
+```bash
+# Install
+go install github.com/tomnomnom/waybackurls@latest
+
+# Usage example
+cat domains.txt | waybackurls > urls
+```
+* [GoSpider](https://github.com/jaeles-project/gospider) - Fast web spider written in Go
+```bash
+# GO install
+GO111MODULE=on go install github.com/jaeles-project/gospider@latest
+
+# Quite output
+gospider -q -s "https://target.com/"
+
+# Run with single site
+gospider -s "https://target.com/" -o output -c 10 -d 1
+
+# Run with site list
+gospider -S sites.txt -o output -c 10 -d 1
+
+# Blacklist url/file extension
+# P/s: gospider blacklisted .(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|ico) as default
+gospider -s "https://target.com/" -o output -c 10 -d 1 --blacklist ".(woff|pdf)"
+
+# Also get URLs from 3rd party (Archive.org, CommonCrawl.org, VirusTotal.com, AlienVault.com) and include subdomains
+gospider -s "https://target.com/" -o output -c 10 -d 1 --other-source --include-subs
+```
+* [GAU](https://github.com/lc/gau)
+
+getallurls (gau) fetches known URLs from AlienVault's Open Threat Exchange, the Wayback Machine, Common Crawl, and URLScan for any given domain. Inspired by Tomnomnom's waybackurls.
+```bash
+# Installation
+$ go install github.com/lc/gau/v2/cmd/gau@latest
+
+# Examples
+printf target.com | gau
+cat target.txt | gau --threads 5
+gau target.com google.com
+gau --o target-urls.txt target.com
+gau --blacklist png,jpg,gif target.com
 ```
 
 * [wayback-machine-downloader](https://github.com/hartator/wayback-machine-downloader)
