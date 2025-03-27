@@ -1021,7 +1021,7 @@ python3 dirsearch.py -u https://target.com -w wordlist/directories.txt -i 200,30
 ```
 grep command:
 ```bash
-grep -Eo '/js/(config|credentials|secrets|keys|password|api_keys|auth_tokens|access_tokens|sessions|authorization|encryption|certificates|ssl_keys|passphrases|policies|permissions|privileges|hashes|salts|nonces|signatures|digests|tokens|cookies|topsecr3tdonotlook)\.js' your_urls_file.txt
+grep -E '/js/(config|credentials|secrets|keys|password|api_keys|auth_tokens|access_tokens|sessions|authorization|encryption|certificates|ssl_keys|passphrases|policies|permissions|privileges|hashes|salts|nonces|signatures|digests|tokens|cookies|topsecr3tdonotlook)\.js' your_urls_file.txt
 ```
 
 ### Sensitive Files by Fuzzing Key .git Paths
@@ -1041,7 +1041,7 @@ grep -Eo '/js/(config|credentials|secrets|keys|password|api_keys|auth_tokens|acc
 ```
 grep command:
 ```bash
-grep -Eo '/(\.git|\.gitkeep|\.git-rewrite|\.gitreview|\.git/HEAD|\.gitconfig|\.git/index|\.git/logs|\.svnignore|\.gitattributes|\.gitmodules|\.svn/entries)' your_urls_file.txt
+grep -E '/(\.git|\.gitkeep|\.git-rewrite|\.gitreview|\.git/HEAD|\.gitconfig|\.git/index|\.git/logs|\.svnignore|\.gitattributes|\.gitmodules|\.svn/entries)' your_urls_file.txt
 ```
 
 ### Configuration and position-sensitive files
@@ -1072,7 +1072,7 @@ aws-credentials
 ```
 grep command:
 ```bash
-grep -Eo '\b(config\.php|config\.json|config\.yaml|config\.yml|config\.ini|config\.xml|config\.db|configuration\.php|database\.yml|database\.json|database\.ini|database\.xml|local\.config|web\.config|application\.properties|application\.yml|connections\.ini|credentials\.json|settings\.py|settings\.xml|app\.config|firebase\.json|aws-credentials)\b' your_urls_file.txt
+grep -E '\b(config\.php|config\.json|config\.yaml|config\.yml|config\.ini|config\.xml|config\.db|configuration\.php|database\.yml|database\.json|database\.ini|database\.xml|local\.config|web\.config|application\.properties|application\.yml|connections\.ini|credentials\.json|settings\.py|settings\.xml|app\.config|firebase\.json|aws-credentials)\b' your_urls_file.txt
 ```
 
 ### Important environment files and variables
@@ -1094,7 +1094,7 @@ grep -Eo '\b(config\.php|config\.json|config\.yaml|config\.yml|config\.ini|confi
 ```
 grep command:
 ```bash
-grep -Eo '\b(\.env|\.env\.local|\.env\.dev|\.env\.production|\.env\.staging|\.env\.testing|\.env\.example|\.env\.backup|\.env\.bak|\.env\.old|\.env~|\.env\.default|/opt/app/\.env|/home/user/\.env)\b' your_urls_file.txt
+grep -E '\b(\.env|\.env\.local|\.env\.dev|\.env\.production|\.env\.staging|\.env\.testing|\.env\.example|\.env\.backup|\.env\.bak|\.env\.old|\.env~|\.env\.default|/opt/app/\.env|/home/user/\.env)\b' your_urls_file.txt
 ```
 
 
@@ -1122,7 +1122,7 @@ old_config.php
 ```
 grep command:
 ```bash
-grep -Eo '\b(index\.php\.bak|config\.old|config\.bak|database\.sql\.gz|database_backup\.sql|database_dump\.sql|database_export\.sql|wp-config\.php~|\.htpasswd\.bak|\.htpasswd\.old|\.htaccess\.bak|\.htaccess\.old|admin\.bak|backup\.zip|backup\.tar\.gz|backup\.sql|backup_old\.sql|old_version\.zip|old_config\.php)\b' your_urls_file.txt
+grep -E '\b(index\.php\.bak|config\.old|config\.bak|database\.sql\.gz|database_backup\.sql|database_dump\.sql|database_export\.sql|wp-config\.php~|\.htpasswd\.bak|\.htpasswd\.old|\.htaccess\.bak|\.htaccess\.old|admin\.bak|backup\.zip|backup\.tar\.gz|backup\.sql|backup_old\.sql|old_version\.zip|old_config\.php)\b' your_urls_file.txt
 ```
 
 ### Log and debug files
@@ -1142,7 +1142,7 @@ logs/app.log
 ```
 grep command:
 ```bash
-grep -Eo '\b(debug\.log|error\.log|access\.log|server\.log|php_errors\.log|trace\.log|system\.log|log\.txt|logs\/debug\.log|logs\/error\.log|logs\/system\.log|logs\/app\.log)\b' your_urls_file.txt
+grep -E '\b(debug\.log|error\.log|access\.log|server\.log|php_errors\.log|trace\.log|system\.log|log\.txt|logs\/debug\.log|logs\/error\.log|logs\/system\.log|logs\/app\.log)\b' your_urls_file.txt
 ```
 
 ### Private key files and API keys
@@ -1166,7 +1166,7 @@ public.key
 ```
 grep command:
 ```bash
-grep -Eo '\b(id_rsa|id_rsa\.pub|id_dsa|id_ecdsa|id_ed25519|\.ssh\/id_rsa|\.ssh\/id_rsa\.pub|\.ssh\/authorized_keys|secrets\.json|apikey\.txt|google-cloud\.json|aws-credentials|jwt_private\.pem|jwt_public\.pem|private\.key|public\.key)\b' your_urls_file.txt
+grep -E '\b(id_rsa|id_rsa\.pub|id_dsa|id_ecdsa|id_ed25519|\.ssh\/id_rsa|\.ssh\/id_rsa\.pub|\.ssh\/authorized_keys|secrets\.json|apikey\.txt|google-cloud\.json|aws-credentials|jwt_private\.pem|jwt_public\.pem|private\.key|public\.key)\b' your_urls_file.txt
 ```
 
 ### Miscellaneous files worth testing
@@ -1200,7 +1200,7 @@ CORS
 ```
 grep command:
 ```bash
-grep -Eo '\b(composer\.lock|composer\.json|package\.json|package-lock\.json|\.bash_history|\.bashrc|\.zshrc|\.gitignore|\.gitconfig|\.gitattributes|\.idea\/workspace\.xml|\.vscode\/settings\.json|\.vscode\/launch\.json|\.vscode\/tasks\.json|Dockerfile|docker-compose\.yml|nginx\.conf|apache2\.conf|httpd\.conf|php\.ini|robots\.txt|sitemap\.xml|sitemap_index\.xml|crossdomain\.xml|security\.txt|CORS)\b' your_urls_file.txt
+grep -E '\b(composer\.lock|composer\.json|package\.json|package-lock\.json|\.bash_history|\.bashrc|\.zshrc|\.gitignore|\.gitconfig|\.gitattributes|\.idea\/workspace\.xml|\.vscode\/settings\.json|\.vscode\/launch\.json|\.vscode\/tasks\.json|Dockerfile|docker-compose\.yml|nginx\.conf|apache2\.conf|httpd\.conf|php\.ini|robots\.txt|sitemap\.xml|sitemap_index\.xml|crossdomain\.xml|security\.txt|CORS)\b' your_urls_file.txt
 ```
 
 ### Authentication and session endpoints
@@ -1240,7 +1240,7 @@ grep -Eo '\b(composer\.lock|composer\.json|package\.json|package-lock\.json|\.ba
 ```
 grep command:
 ```bash
-grep -Eo '\b(\/login|\/login\.php|\/login\.html|\/signin|\/signin\.php|\/signin\.html|\/auth|\/authenticate|\/oauth|\/oauth\/token|\/oauth\/authorize|\/oauth\/access_token|\/oauth\/callback|\/jwt\/login|\/api\/login|\/api\/auth|\/session|\/session\/new|\/session\/create|\/session\/token|\/logout|\/logout\.php|\/logout\.html|\/logout\.do|\/logout\.action|\/revoke|\/revoke-token|\/password-reset|\/reset-password|\/forgot-password|\/change-password|\/password\/change)\b' your_urls_file.txt
+grep -E '\b(\/login|\/login\.php|\/login\.html|\/signin|\/signin\.php|\/signin\.html|\/auth|\/authenticate|\/oauth|\/oauth\/token|\/oauth\/authorize|\/oauth\/access_token|\/oauth\/callback|\/jwt\/login|\/api\/login|\/api\/auth|\/session|\/session\/new|\/session\/create|\/session\/token|\/logout|\/logout\.php|\/logout\.html|\/logout\.do|\/logout\.action|\/revoke|\/revoke-token|\/password-reset|\/reset-password|\/forgot-password|\/change-password|\/password\/change)\b' your_urls_file.txt
 ```
 
 ### User and profile endpoints
@@ -1264,7 +1264,7 @@ grep -Eo '\b(\/login|\/login\.php|\/login\.html|\/signin|\/signin\.php|\/signin\
 ```
 grep command:
 ```bash
-grep -Eo '\b(\/user|\/users|\/users\/list|\/users\/all|\/users\/me|\/user\/profile|\/user\/settings|\/user\/update|\/user\/edit|\/user\/change-email|\/account|\/accounts|\/accounts\/me|\/profile|\/my-profile|\/dashboard)\b' your_urls_file.txt
+grep -E '\b(\/user|\/users|\/users\/list|\/users\/all|\/users\/me|\/user\/profile|\/user\/settings|\/user\/update|\/user\/edit|\/user\/change-email|\/account|\/accounts|\/accounts\/me|\/profile|\/my-profile|\/dashboard)\b' your_urls_file.txt
 ```
 
 ### Management and admin endpoints
@@ -1294,7 +1294,7 @@ grep -Eo '\b(\/user|\/users|\/users\/list|\/users\/all|\/users\/me|\/user\/profi
 ```
 grep command:
 ```bash
-grep -Eo '\b(\/admin|\/admin\.php|\/admin\.html|\/admin\/login|\/admin\/dashboard|\/admin\/config|\/admin\/settings|\/admin\/users|\/admin\/manage|\/admin\/console|\/admin\/panel|\/adminer|\/admin_area|\/admin_control|\/admin_portal|\/backend|\/backend\/login|\/backend\/admin|\/root|\/root\/admin|\/system_admin|\/cms_admin)\b' your_urls_file.txt
+grep -E '\b(\/admin|\/admin\.php|\/admin\.html|\/admin\/login|\/admin\/dashboard|\/admin\/config|\/admin\/settings|\/admin\/users|\/admin\/manage|\/admin\/console|\/admin\/panel|\/adminer|\/admin_area|\/admin_control|\/admin_portal|\/backend|\/backend\/login|\/backend\/admin|\/root|\/root\/admin|\/system_admin|\/cms_admin)\b' your_urls_file.txt
 ```
 
 ### Popular and common API endpoints
@@ -1323,7 +1323,7 @@ grep -Eo '\b(\/admin|\/admin\.php|\/admin\.html|\/admin\/login|\/admin\/dashboar
 ```
 grep command:
 ```bash
-grep -Eo '\b(\/api|\/api\/v1|\/api\/v2|\/api\/v3|\/api\/auth|\/api\/users|\/api\/admin|\/api\/login|\/api\/token|\/api\/keys|\/api\/settings|\/api\/config|\/api\/data|\/api\/stats|\/api\/health|\/api\/info|\/api\/status|\/api\/debug|\/api\/internal|\/api\/private|\/api\/external)\b' your_urls_file.txt
+grep -E '\b(\/api|\/api\/v1|\/api\/v2|\/api\/v3|\/api\/auth|\/api\/users|\/api\/admin|\/api\/login|\/api\/token|\/api\/keys|\/api\/settings|\/api\/config|\/api\/data|\/api\/stats|\/api\/health|\/api\/info|\/api\/status|\/api\/debug|\/api\/internal|\/api\/private|\/api\/external)\b' your_urls_file.txt
 ```
 
 ### Debug, Monitoring, and DevOps Endpoints
@@ -1353,5 +1353,5 @@ grep -Eo '\b(\/api|\/api\/v1|\/api\/v2|\/api\/v3|\/api\/auth|\/api\/users|\/api\
 ```
 grep command:
 ```bash
-grep -Eo '\b(\/debug|\/debug\.php|\/debug\.log|\/debug_info|\/health|\/healthz|\/version|\/api\/version|\/api\/debug|\/status|\/api\/status|\/stats|\/api\/stats|\/env|\/system_info|\/server-status|\/nginx_status|\/phpinfo|\/actuator|\/actuator\/health|\/actuator\/env|\/actuator\/info)\b' your_urls_file.txt
+grep -E '\b(\/debug|\/debug\.php|\/debug\.log|\/debug_info|\/health|\/healthz|\/version|\/api\/version|\/api\/debug|\/status|\/api\/status|\/stats|\/api\/stats|\/env|\/system_info|\/server-status|\/nginx_status|\/phpinfo|\/actuator|\/actuator\/health|\/actuator\/env|\/actuator\/info)\b' your_urls_file.txt
 ```
