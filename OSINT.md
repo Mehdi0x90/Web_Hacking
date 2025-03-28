@@ -33,6 +33,9 @@ A curated list of awesome open source intelligence tools and resources. [Open-so
 * [OpenBuckets](https://openbuckets.io/) - Find public/misconfigured buckets across every cloud provider(AWS, GCP, DO, IBM, Linode, Alibaba)
 * [Netlas.io](https://app.netlas.io/)
 * [Carrot2](https://search.carrot2.org/) - Organizes your search results into topics
+* [Airport Lounge List](https://airportloungelist.com/airports) - Airport Lounge List is a platform dedicated to helping you get the most value out of your credit card and travel points
+* [Plonk It](https://www.plonkit.net/guide) - You can use Plonk It to analyze geographic data and determine location from photos
+* [geospy](https://github.com/atiilla/geospy) - Python tool using Graylark's AI-powered geo-location service to uncover the location where photos were taken
 
 
 ## Username Check
@@ -63,7 +66,8 @@ A curated list of awesome open source intelligence tools and resources. [Open-so
 * [wigle](https://wigle.net/)
 * [urlDNA](https://urldna.io/)
 
-
+## OSINT Challenges
+* [Limitless OSINT](http://limitless-osint.com/challenges) - Test your OSINT skills with our progressive intelligence gathering challenges
 
 
 
