@@ -918,13 +918,19 @@ vhostbrute.py --url="example.com" --remoteip="10.1.1.15" --base="www.example.com
 VHostScan -t example.com
 
 ```
+**Sorting subdomains into different files based on status code, server type, and vhosts**
+```bash
+cat domains.txt | httpx -server -vhost -sc > httpx-output.txt
+
+# Now, use the following awk script to categorize the results
+awk '{gsub(/\x1b\[[0-9;]*m/, ""); status=$2; gsub(/[\[\]]/, "", status); server=$3; gsub(/[\[\]]/, "", server); safe_server=server; gsub(/[^a-zA-Z0-9_-]/, "_", safe_server); main_server=server; sub(/\/.*/, "", main_server); gsub(/[^a-zA-Z0-9_-]/, "_", main_server); vhost=$4; gsub(/[\[\]]/, "", vhost); if (server=="") print > "server-not-specified.txt"; else {print > (safe_server ".txt"); print > (main_server ".txt");} if (vhost=="vhost") print > "vhost.txt";}' httpx-output.txt
+```
 
 ### CORS Brute Force
 Sometimes you will find pages that only return the header Access-Control-Allow-Origin when a valid domain/subdomain is set in the Origin header. In these scenarios, you can abuse this behaviour to discover new subdomains!
 * [ffuf](https://github.com/ffuf/ffuf)
 ```bash
 ffuf -w subdomains-top1million-5000.txt -u http://10.20.30.40 -H 'Origin: http://FUZZ.target.com' -mr "Access-Control-Allow-Origin" -ignore-body
-
 ```
 
 ### Fuzz file and directories at scale
