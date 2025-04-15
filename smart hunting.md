@@ -35,6 +35,16 @@ subject: <?php system($_GET['c']);?>
 
 **Tip:** Add `-t 50` to ffuf for speed, or `-fc 404` to skip dead ends. Test responsibly!
 
+- [ ] Discovering a business logic flow bug:
+      
+      Exploiting steps
+      
+        1. Register a new account and take note of the username you used
+        2. Verify and activate the account
+        3. Delete the account
+        4. Now, try registering again using the same username (observe what happens)
+      
+  **Tip:** If the server still `blocks` or `reserved` the **username** after the account is deleted, congratulations! you've just uncovered a business logic flow bug ;)
 
 ### Blind XSS
 - [ ] Blind XSS Payload in `User-Agent` header
