@@ -881,6 +881,9 @@ shuffledns -d target.com -list target-subdomains.txt -r resolvers.txt
 # subdomains found passively by subfinder and resolves them with shuffledns returning only the unique and valid subdomains
 subfinder -d target.com | shuffledns -d target.com -r resolvers.txt
 
+# bruteforcing subdomains
+shuffledns -d target.com -w wordlist.txt -r resolvers.txt -mode bruteforce -m massdns/bin/massdns
+
 ```
 
 * [puredns](https://github.com/d3mondev/puredns)
