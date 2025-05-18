@@ -936,6 +936,19 @@ Sometimes you will find pages that only return the header Access-Control-Allow-O
 ffuf -w subdomains-top1million-5000.txt -u http://10.20.30.40 -H 'Origin: http://FUZZ.target.com' -mr "Access-Control-Allow-Origin" -ignore-body
 ```
 
+### FUZZ Hidden parameters
+Hidden parameters discovery suite (X8)
+
+* [X8](https://github.com/Sh1Yo/x8)
+
+```bash
+# Single url
+x8 -u https://target.com -w param.txt -c 7 -X GET POST
+
+# Multiple urls
+x8 -u urls.txt -w param.txt -c 7 -X GET POST
+```
+
 ### Fuzz file and directories at scale
 How to fuzz a list of Web Servers using ffuf and leaky-paths wordlists. 
 
