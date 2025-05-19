@@ -2,14 +2,6 @@
 Reconnaissance is the process of gathering information about a target system in order to identify potential vulnerabilities. It is an essential step in the bug bounty hunting process and can help to identify vulnerabilities that may not be apparent through other means.
 * [Getting Started with ProjectDiscovery in Linux and Windows](https://blog.projectdiscovery.io/getting-started-with-projectdiscovery-in-linux-and-windows/)
 
-Topics:
-* [Finding Subdomain](https://github.com/Mehdi0x90/Web_Hacking/edit/main/Recon.md#finding-subdomain)
-* [Dorking](https://github.com/Mehdi0x90/Web_Hacking/edit/main/Recon.md#dorking)
-* [Endpoint / URL Fuzzing](https://github.com/Mehdi0x90/Web_Hacking/edit/main/Recon.md#endpoint--url-fuzzing)
-* [JS Recon](https://github.com/Mehdi0x90/Web_Hacking/edit/main/Recon.md#js-recon)
-* [Fuzzing anythings!](https://github.com/Mehdi0x90/Web_Hacking/edit/main/Recon.md#fuzzing-anythings)
-
-
 # Finding Subdomain
 
 * [assetfinder](https://github.com/tomnomnom/assetfinder)
