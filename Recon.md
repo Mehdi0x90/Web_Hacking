@@ -2,6 +2,14 @@
 Reconnaissance is the process of gathering information about a target system in order to identify potential vulnerabilities. It is an essential step in the bug bounty hunting process and can help to identify vulnerabilities that may not be apparent through other means.
 * [Getting Started with ProjectDiscovery in Linux and Windows](https://blog.projectdiscovery.io/getting-started-with-projectdiscovery-in-linux-and-windows/)
 
+Table of Contents
+=================
+* [Finding Subdomain](#finding-subdomain)
+* [Dorking](#dorking)
+* [Endpoint / URL Fuzzing](#endpoint--url-fuzzing)
+* [JS Recon](#js-recon)
+* [Fuzzing anythings!](#fuzzing-anythings)
+
 # Finding Subdomain
 
 * [assetfinder](https://github.com/tomnomnom/assetfinder)
@@ -193,12 +201,14 @@ api.test.com
 ```
 
 * [DNSRecon](https://github.com/darkoperator/dnsrecon)
+
 Let's try to get subdomains from the DNS records. We should also try for Zone Transfer (If vulnerable, you should report it).
 ```bash
 dnsrecon -a -d target.com
 ```
 
 * [dnsx](https://github.com/projectdiscovery/dnsx)
+
 Install
 ```bash
 go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest
@@ -631,6 +641,7 @@ katana -u "https://target.com" | nuclei -t cves/
 ```
 
 * [waybackurls](https://github.com/tomnomnom/waybackurls)
+
 Accept line-delimited domains on stdin, fetch known URLs from the Wayback Machine for *.domain and output them on stdout.
 ```bash
 # Install
@@ -663,6 +674,7 @@ gospider -s "https://target.com/" -o output -c 10 -d 1 --other-source --include-
 ```
 
 * [GAU](https://github.com/lc/gau)
+
 getallurls (gau) fetches known URLs from AlienVault's Open Threat Exchange, the Wayback Machine, Common Crawl, and URLScan for any given domain. Inspired by Tomnomnom's waybackurls.
 ```bash
 # Installation
@@ -677,6 +689,7 @@ gau --blacklist png,jpg,gif target.com
 ```
 
 * [wayback-machine-downloader](https://github.com/hartator/wayback-machine-downloader)
+
 Download an entire website from the Internet Archive Wayback Machine.
 ```bash
 # Only get all urls from wayback machine
@@ -697,6 +710,7 @@ find output/screenshot/* -type f -name "*.png" -print0 | xargs -0 mv -t all_scre
 ```
 
 * [Hakrawler](https://github.com/hakluke/hakrawler)
+
 web crawler for gathering URLs and JavaScript file locations
 ```bash
 # Normal Install
@@ -802,6 +816,7 @@ while true;
 
 ## uro
 Using a URL list for security testing can be painful as there are a lot of URLs that have uninteresting/duplicate content; uro aims to solve that.
+
 * [uro](https://github.com/s0md3v/uro)
 
 ![uro](https://github.com/user-attachments/assets/efd94479-459f-4d8d-bbc4-5c51fb89da92)
@@ -1328,6 +1343,7 @@ awk '{gsub(/\x1b\[[0-9;]*m/, ""); status=$2; gsub(/[\[\]]/, "", status); server=
 
 ## CORS Fuzzing
 Sometimes you will find pages that only return the header Access-Control-Allow-Origin when a valid domain/subdomain is set in the Origin header. In these scenarios, you can abuse this behaviour to discover new subdomains!
+
 * [ffuf](https://github.com/ffuf/ffuf)
 ```bash
 ffuf -w subdomains-top1million-5000.txt -u http://10.20.30.40 -H 'Origin: http://FUZZ.target.com' -mr "Access-Control-Allow-Origin" -ignore-body
