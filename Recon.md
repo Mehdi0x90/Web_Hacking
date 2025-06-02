@@ -663,9 +663,9 @@ gospider -q -s "https://target.com/"
 gospider -s "https://target.com/" -o output -c 10 -d 1
 
 # Run with site list
-gospider -S sites.txt -o output -c 10 -d 1
+gospider -S subs.txt -o output -c 10 -d 7
 # OR
-gospider -S sites.txt -o output -c 10 -d 7 | tee gospider-urls.txt
+gospider -S subs.txt -c 10 -d 7 | tee gospider-urls.txt
 cat gospider-urls.txt | grep -oP 'https?://\S+' | sort -u | anew urls.txt
 
 # Blacklist url/file extension
