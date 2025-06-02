@@ -664,6 +664,9 @@ gospider -s "https://target.com/" -o output -c 10 -d 1
 
 # Run with site list
 gospider -S sites.txt -o output -c 10 -d 1
+# OR
+gospider -S sites.txt -o output -c 10 -d 7 | tee gospider-urls.txt
+cat gospider-urls.txt | grep -oP 'https?://\S+' | sort -u | anew urls.txt
 
 # Blacklist url/file extension
 # P/s: gospider blacklisted .(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|ico) as default
@@ -671,6 +674,8 @@ gospider -s "https://target.com/" -o output -c 10 -d 1 --blacklist ".(woff|pdf)"
 
 # Also get URLs from 3rd party (Archive.org, CommonCrawl.org, VirusTotal.com, AlienVault.com) and include subdomains
 gospider -s "https://target.com/" -o output -c 10 -d 1 --other-source --include-subs
+
+
 ```
 
 * [GAU](https://github.com/lc/gau)
