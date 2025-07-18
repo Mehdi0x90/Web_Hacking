@@ -925,6 +925,10 @@ settings.xml
 app.config  
 firebase.json  
 aws-credentials
+Release_backup.zip
+Release-final.zip
+Release(1).zip
+.Release.zip 
 ```
 
 grep command:
