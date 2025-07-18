@@ -52,8 +52,10 @@ Using "//" to bypass "//" blacklisted keyword (Browsers see // as //)
 Using "%E3%80%82" to bypass "." blacklisted character
 ```html
 /?redir=google。com
+
 //google%E3%80%82com
 
+https://target.com/auth/sso/init/user@target.com?callback=https://google.com%E3%80%82target.com
 ```
 Using null byte "%00" to bypass blacklist filter
 ```html
