@@ -651,6 +651,29 @@ go install github.com/tomnomnom/waybackurls@latest
 cat domains.txt | waybackurls > urls
 ```
 
+* [waymore](https://github.com/xnl-h4ck3r/waymore)
+
+The idea behind waymore is to find even more links from the Wayback Machine than other existing tools.
+```bash
+# Install
+pip install waymore
+# OR
+pip install git+https://github.com/xnl-h4ck3r/waymore.git -v
+
+# Usage example
+# Just get the URLs from all sources for target.com
+waymore -i target.com -mode U 
+
+# You can pipe waymore to other tools. Any errors are sent to stderr and any links found are sent to stdout
+waymore -i target.com -mode U | unfurl keys | sort -u
+
+# You can also pass the input through stdin instead of -i
+cat subs.txt | waymore
+
+# Sometimes you may just want to check how many request, and how long waymore is likely to take if you ran it for a particular domain
+waymore -i target.com --check-only
+```
+
 * [GoSpider](https://github.com/jaeles-project/gospider) - Fast web spider written in Go
 ```bash
 # GO install
