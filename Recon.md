@@ -128,9 +128,14 @@ cat subdomains.txt | dnsgen -
 
 # Combination with massdns
 cat domains.txt | dnsgen - | massdns -r resolvers.txt -t A -o J --flush 2>/dev/null
-
-
 ```
+
+* Use bash for combine domain and wordlist for fuzzing subdomain
+```bash
+while read -r w; do echo "api.$w.target.com"; done < wordlist.txt > final-subdomain.txt
+cat final-subdomain.txt | massdns -r resolvers.txt -t A -o L -w result.txt
+```
+
 
 ## Discover new target domains using Content Security Policy
 * [csprecon](https://github.com/edoardottt/csprecon)
