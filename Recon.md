@@ -702,8 +702,6 @@ gospider -s "https://target.com/" -o output -c 10 -d 1 --blacklist ".(woff|pdf)"
 
 # Also get URLs from 3rd party (Archive.org, CommonCrawl.org, VirusTotal.com, AlienVault.com) and include subdomains
 gospider -s "https://target.com/" -o output -c 10 -d 1 --other-source --include-subs
-
-
 ```
 
 * [GAU](https://github.com/lc/gau)
@@ -761,6 +759,20 @@ echo https://target.com | hakrawler -subs
 # Get all subdomains of google, find the ones that respond to http(s), crawl them all
 echo target.com | haktrails subdomains | httpx | hakrawler
 ```
+
+* [fuzzuli](https://github.com/musana/fuzzuli) - fuzzuli is a url fuzzing tool that aims to find critical backup files by creating a dynamic wordlist based on the domain.
+```bash
+# Installation
+go install -v github.com/musana/fuzzuli@latest
+
+# specifying extension, input file, etc.
+fuzzuli -f domains.txt -w 32 -ex .rar,.zip -p
+
+# fuzzuli is using 7 different methods for creating wordlists
+# all methods
+echo https://target.com | fuzzuli -mt all
+```
+
 
 ## Find subdomains and interesting things hidden inside, external Javascript files of page, folder, and Github
 **Installation Steps**
