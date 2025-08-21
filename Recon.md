@@ -873,6 +873,11 @@ subfinder -d target.com -all  | waybackurls | gf sqli | uro | nuclei -t errorsq
 
 
 ## Important Paths and Files
+* One liner for finding files
+```bash
+subfinder -d target.com -silent -all | while read host; do for path in /config.js /config.json /app/config.js /settings.json /database.json /firebase.json /.env /.env.production /api_keys.json /credentials.json /secrets.json /google-services.json /package.json /package-lock.json /composer.json /pom.xml /docker-compose.yml /manifest.json /service-worker.js; do echo "$host$path"; done; done | httpx -mc 200
+```
+
 * Top JavaScript Path Files used to store sensitive information in Web Application
 ```text
 /js/config.js
