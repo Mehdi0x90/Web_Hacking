@@ -55,6 +55,7 @@ A curated list of awesome open source intelligence tools and resources. [Open-so
 * [Hunter](https://hunter.io/) - Hunter lets you find email addresses in seconds and connect with the people that matter for your business
 * [Snov.io](https://snov.io/email-finder) - Find email addresses on any website
 * [minelead](https://minelead.io/)
+* [Hudson Rock](https://www.hudsonrock.com/threat-intelligence-cybercrime-tools) - Check if a specific email address was compromised in a global Infostealer malware attack
 
 
 ## Domain and IP Research
