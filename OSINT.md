@@ -39,6 +39,7 @@ A curated list of awesome open source intelligence tools and resources. [Open-so
 
 
 ## Username Check
+* [Phantom Finder (iOS)](https://apps.apple.com/gb/app/phantom-finder-username-search/id6736408372) - Mobile reverse username search with direct profile links
 * [IDCrawl](https://www.idcrawl.com/username) - Search for a username in popular social networks
 * [NexFil](https://github.com/thewhiteh4t/nexfil) - checks username from almost all social network sites
 * [Sherlock ](https://github.com/sherlock-project/sherlock) - Search for a username in multiple platforms/websites
