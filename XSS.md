@@ -966,14 +966,60 @@ cat urls.txt | dalfox pipe -b yourdomain.xss
 * [KNOXSS Community Edition by Brute Logic](https://addons.mozilla.org/en-US/firefox/user/12642480/) - This tool it will scan every URL you visit from reflected XSS , if its vulnerable it will pop up an alert(1) box ( make sure to turn the extension ON ) to make sure it scanning .
 
 
+### Fuzzing HTTP URLs
+* Example 1
+```javascript
+a=document.createElement('a');
+log=[];
+for(let i=0;i<=0x10ffff;i++){
+   a.href = `${String.fromCodePoint(i)}https://target.com`;
+   if(a.hostname === 'target.com'){
+   log.push(i);
+   }
+}
+console.log(log)
+//0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32
+```
 
+* Example 2
+```javascript
+a=document.createElement('a');
+log=[];
+for(let i=0;i<=0x10ffff;i++){
+   a.href = `/${String.fromCodePoint(i)}/target.com`;
+   if(a.hostname === 'target.com'){
+      log.push(i);
+   }
+}
+input.value=log //9,10,13,47,92
+```
 
+### Fuzzing HTML
+* Fuzzing HTML comments
+```javascript
+let log=[];
+let div = document.createElement('div');
+for(let i=0;i<=0x10ffff;i++){
+   div.innerHTML=`<!----${String.fromCodePoint(i)}><span></span>-->`;
+if(div.querySelector('span')){
+log.push(i);
+}
+}
+console.log(log) //33,45,62
+```
 
-
-
-
-
-
+* Fuzzing HTML comments after the hyphen
+```javascript
+let log=[];
+let div = document.createElement('div');
+for(let i=0;i<=0x10ffff;i++){
+   div.innerHTML=`<!-${String.fromCodePoint(i)}- ><span></span>-->`;
+   if(!div.querySelector('span')){
+      log.push(i);
+   }
+}
+console.lgo(log) //45
+```
 
 
 
