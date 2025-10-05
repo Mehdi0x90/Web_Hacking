@@ -773,6 +773,138 @@ fuzzuli -f domains.txt -w 32 -ex .rar,.zip -p
 echo https://target.com | fuzzuli -mt all
 ```
 
+* ### Professionally reviewed and optimized version of JavaScript extractor
+It’s clean, efficient, and produces only URLs (absolute or path-based) in a `.txt` file for download.
+### Features
+* Collects URLs from:
+  * Anchors (<a href>)
+  * Script sources (<script src>)
+  * Inline scripts
+  * Full HTML content
+* Normalizes relative paths to absolute URLs
+* Removes duplicates
+* Exports results as a .txt file (one URL per line)
+* Displays total count and preview in the console
+
+Just copy the below code to browser console when browse the your target!
+```javascript
+(() => {
+  // Utility function to create a unique array
+  const uniq = arr => Array.from(new Set(arr));
+
+  // Regex patterns for URL and path-like strings
+  const absUrlRe = /https?:\/\/[^\s'"\)\]\<\>]{5,}/gi;
+  const pathLikeRe = /\/[A-Za-z0-9_\-\/:\{\}\.\%\?=&,#]{2,}/g;
+
+  // Collect all anchors in the document
+  const anchors = Array.from(document.querySelectorAll('a[href]'))
+    .map(a => a.getAttribute('href'))
+    .filter(Boolean)
+    .map(href => {
+      try {
+        return new URL(href, location.href).href;
+      } catch {
+        return href;
+      }
+    });
+
+  // Collect all external script sources
+  const scriptSrcs = Array.from(document.querySelectorAll('script[src]'))
+    .map(s => s.getAttribute('src'))
+    .filter(Boolean)
+    .map(src => {
+      try {
+        return new URL(src, location.href).href;
+      } catch {
+        return src;
+      }
+    });
+
+  // Collect all inline script contents
+  const inlineScripts = Array.from(document.querySelectorAll('script:not([src])'))
+    .map(s => s.textContent || '');
+
+  // Include full HTML content for link detection
+  const html = document.documentElement.innerHTML || '';
+
+  const found = [];
+
+  /**
+   * Scans a given text for URLs or path-like strings and adds them to 'found'
+   * @param {string} text - Text content to search in
+   */
+  const scanText = (text) => {
+    if (!text) return;
+
+    let match;
+
+    // Extract absolute URLs
+    while ((match = absUrlRe.exec(text)) !== null) {
+      found.push(match[0]);
+    }
+
+    // Extract path-like strings (e.g., /api/user, /v1/data)
+    while ((match = pathLikeRe.exec(text)) !== null) {
+      const val = match[0];
+      if (val.startsWith('/')) {
+        try {
+          found.push(new URL(val, location.origin).href);
+        } catch {
+          found.push(val);
+        }
+      } else {
+        try {
+          found.push(new URL(val, location.href).href);
+        } catch {
+          found.push(val);
+        }
+      }
+    }
+  };
+
+  // Scan anchors and external script URLs
+  anchors.forEach(scanText);
+  scriptSrcs.forEach(scanText);
+
+  // Scan inline scripts and full HTML
+  inlineScripts.forEach(scanText);
+  scanText(html);
+
+  // Normalize, deduplicate, and clean up results
+  const normalized = uniq(
+    found.map(x => (typeof x === 'string' ? x.trim() : String(x)).replace(/\s+/g, ''))
+  ).filter(Boolean);
+
+  // Display summary
+  if (normalized.length === 0) {
+    console.warn('No URLs found. (External resources may be protected by CORS or obfuscated.)');
+  } else {
+    console.log(`✅ Extracted ${normalized.length} unique URLs`);
+    console.table(normalized.slice(0, 20));
+  }
+
+  // Export results as a downloadable text file
+  const txt = normalized.join('\n');
+  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `extracted_urls_${location.hostname}_${Date.now()}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+
+  // Return results to the console as an array for reference
+  return normalized;
+})();
+```
+
+
+
+
+
+
 
 ## Find subdomains and interesting things hidden inside, external Javascript files of page, folder, and Github
 **Installation Steps**
