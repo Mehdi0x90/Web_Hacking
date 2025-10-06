@@ -789,14 +789,16 @@ It’s clean, efficient, and produces only URLs (absolute or path-based) in a `.
 Just copy the below code to browser console when browse the your target!
 ```javascript
 (() => {
-  // Utility function to create a unique array
-  const uniq = arr => Array.from(new Set(arr));
+  // Utility: return unique array elements after trimming
+  const uniq = arr => Array.from(new Set(arr.map(x => x.trim())));
 
-  // Regex patterns for URL and path-like strings
+  // Regex patterns for absolute URLs and path-like routes
   const absUrlRe = /https?:\/\/[^\s'"\)\]\<\>]{5,}/gi;
   const pathLikeRe = /\/[A-Za-z0-9_\-\/:\{\}\.\%\?=&,#]{2,}/g;
 
-  // Collect all anchors in the document
+  const found = [];
+
+  // Collect all anchors (hrefs)
   const anchors = Array.from(document.querySelectorAll('a[href]'))
     .map(a => a.getAttribute('href'))
     .filter(Boolean)
@@ -808,7 +810,7 @@ Just copy the below code to browser console when browse the your target!
       }
     });
 
-  // Collect all external script sources
+  // Collect all external script src attributes
   const scriptSrcs = Array.from(document.querySelectorAll('script[src]'))
     .map(s => s.getAttribute('src'))
     .filter(Boolean)
@@ -820,30 +822,27 @@ Just copy the below code to browser console when browse the your target!
       }
     });
 
-  // Collect all inline script contents
+  // Collect inline script text
   const inlineScripts = Array.from(document.querySelectorAll('script:not([src])'))
     .map(s => s.textContent || '');
 
-  // Include full HTML content for link detection
+  // Full HTML of the current document
   const html = document.documentElement.innerHTML || '';
 
-  const found = [];
-
   /**
-   * Scans a given text for URLs or path-like strings and adds them to 'found'
-   * @param {string} text - Text content to search in
+   * Scan a text for URLs and path-like strings.
+   * @param {string} text - Content to be scanned
    */
   const scanText = (text) => {
     if (!text) return;
-
     let match;
 
-    // Extract absolute URLs
+    // Match absolute URLs
     while ((match = absUrlRe.exec(text)) !== null) {
       found.push(match[0]);
     }
 
-    // Extract path-like strings (e.g., /api/user, /v1/data)
+    // Match relative and path-like URLs
     while ((match = pathLikeRe.exec(text)) !== null) {
       const val = match[0];
       if (val.startsWith('/')) {
@@ -862,29 +861,30 @@ Just copy the below code to browser console when browse the your target!
     }
   };
 
-  // Scan anchors and external script URLs
+  // Run scanning on all collected sources
   anchors.forEach(scanText);
   scriptSrcs.forEach(scanText);
-
-  // Scan inline scripts and full HTML
   inlineScripts.forEach(scanText);
   scanText(html);
 
-  // Normalize, deduplicate, and clean up results
-  const normalized = uniq(
-    found.map(x => (typeof x === 'string' ? x.trim() : String(x)).replace(/\s+/g, ''))
-  ).filter(Boolean);
+  // Deduplicate and normalize
+  const normalized = uniq(found)
+    .map(u => u.replace(/\s+/g, ''))
+    .filter(Boolean);
 
-  // Display summary
-  if (normalized.length === 0) {
-    console.warn('No URLs found. (External resources may be protected by CORS or obfuscated.)');
+  // Remove duplicates again after normalization
+  const uniqueUrls = Array.from(new Set(normalized));
+
+  // Log result summary
+  if (uniqueUrls.length === 0) {
+    console.warn('No URLs found. (External resources might be blocked by CORS or minified.)');
   } else {
-    console.log(`✅ Extracted ${normalized.length} unique URLs`);
-    console.table(normalized.slice(0, 20));
+    console.log(`✅ Found ${uniqueUrls.length} unique URLs`);
+    console.table(uniqueUrls.slice(0, 20));
   }
 
-  // Export results as a downloadable text file
-  const txt = normalized.join('\n');
+  // Export all URLs as .txt
+  const txt = uniqueUrls.join('\n');
   const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -895,15 +895,10 @@ Just copy the below code to browser console when browse the your target!
   a.remove();
   URL.revokeObjectURL(url);
 
-  // Return results to the console as an array for reference
-  return normalized;
+  // Return results to console
+  return uniqueUrls;
 })();
 ```
-
-
-
-
-
 
 
 ## Find subdomains and interesting things hidden inside, external Javascript files of page, folder, and Github
