@@ -644,6 +644,12 @@ katana -u "https://target.com" -H "Authorization: Bearer YOUR-TOKEN"
 # Combining Katana with Nuclei for Vulnerability Scanning
 katana -u "https://target.com" | nuclei -t cves/
 ```
+* [Archive - Search the history of over 946 billion web pages on the Internet](https://github.com/internetarchive/wayback/tree/master/wayback-cdx-server)
+```bash
+# Wayback CDX Server API
+# Get all urls on target
+curl "https://web.archive.org/cdx/search/cdx?url=*.target.com/*&fl=original&collapse=urlkey" > all_urls.txt
+```
 
 * [waybackurls](https://github.com/tomnomnom/waybackurls)
 
@@ -786,7 +792,9 @@ It’s clean, efficient, and produces only URLs (absolute or path-based) in a `.
 * Exports results as a .txt file (one URL per line)
 * Displays total count and preview in the console
 
-Just copy the below code to browser console when browse the your target!
+Just copy the below code to `browser console` when browse the your target!
+
+Method 1:
 ```javascript
 (() => {
   // Utility: return unique array elements after trimming
@@ -897,6 +905,51 @@ Just copy the below code to browser console when browse the your target!
 
   // Return results to console
   return uniqueUrls;
+})();
+```
+
+Method 2:
+```javascript
+javascript:(function(){
+    const regex = /(?<=(["'`]))\/[a-zA-Z0-9_\-\/\.\~\?\=\&\%\#\:\;\,\@\+]+(?=(["'`]))/g;
+    const scripts = Array.from(document.getElementsByTagName('script')).map(s => s.src).filter(Boolean);
+    const results = new Set();
+
+    try {
+        for (const m of document.documentElement.outerHTML.matchAll(regex)) results.add(m[0]);
+    } catch(e){ /*ignore*/ }
+
+    const fetchPromises = scripts.map(src =>
+        fetch(src).then(r => r.text()).then(text => {
+            for (const m of text.matchAll(regex)) results.add(m[0]);
+        }).catch(err => console.log('fetch error:', src, err))
+    );
+
+    Promise.all(fetchPromises).then(() => {
+        const normalized = new Set();
+        for (let p of results) {
+            try {
+                p = decodeURIComponent(p);
+            } catch(e) { /* if decode fails, keep original */ }
+
+            p = p.replace(/\/{2,}/g, '/');
+            if (p.length > 1) p = p.replace(/\/+$/g, '');
+
+            normalized.add(p);
+        }
+
+        const arr = Array.from(normalized).sort();
+        const blob = new Blob([arr.join('\n')], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'paths.txt';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(link.href), 5000);
+    }).catch(err => {
+        console.log('error:', err);
+    });
 })();
 ```
 
