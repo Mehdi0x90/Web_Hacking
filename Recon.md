@@ -163,7 +163,11 @@ csprecon -u 192.168.1.0/24 -cidr
 
 To generate a list of subdomains that includes letters (a-z, A-Z), numbers (0-9), and the allowed hyphen (-) character, you can use the following command in the Crunch tool:
 ```bash
+# Subdomain
 crunch 1 63 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789- | grep -v '^-.*' | grep -v '.*-$' > filtered_subdomains.txt
+
+# Params
+crunch 1 3 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_. > param_1_3.txt
 ```
 
 You can use a simple Bash script to combine two lists, one containing domains and one containing subdomains. This script adds all subdomains to each domain in the domains list and creates a final list:
