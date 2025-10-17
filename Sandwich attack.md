@@ -1,4 +1,4 @@
-# Sandwich attack
+# Sandwich Attack
 The "Sandwich Attack" is a specific type of attack that exploits the predictability of UUID v1 generation in web applications, particularly in features like password resets. UUID v1 is generated based on time, clock sequence, and the node's MAC address, which can make it somewhat predictable if an attacker can obtain some of these UUIDs generated close in time.
 
 ## Basic Information
