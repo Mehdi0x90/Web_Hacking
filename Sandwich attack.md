@@ -26,23 +26,23 @@ UUIDs are designed to be unique and hard to guess. They are structured in a spec
 
 Imagine a web application that uses UUID v1 for generating password reset links. Here’s how an attacker might exploit this to gain unauthorized access:
 
-1.Initial Setup:
+1. Initial Setup:
 * The attacker has control over two email accounts: `attacker1@acme.com` and `attacker2@acme.com`.
 * The target's email account is `victim@acme.com`.
 
-2.Execution:
+2. Execution:
 * The attacker triggers a password reset for their first account (`attacker1@acme.com`) and receives a password reset link with a UUID, say `99874128-7592-11e9-8201-bb2f15014a14`.
 * Immediately after, the attacker triggers a password reset for the victim's account (`victim@acme.com`) and then quickly for the second attacker-controlled account (`attacker2@acme.com`).
 * The attacker receives a reset link for the second account with a UUID, say `998796b4-7592-11e9-8201-bb2f15014a14`.
 
-3.Analysis:
+3. Analysis:
 * The attacker now has two UUIDs generated close in time (`99874128` and `998796b4`). Given the sequential nature of time-based UUIDs, the UUID for the victim's account will likely fall between these two values.
 
-4.Brute Force Attack:
+4. Brute Force Attack:
 * The attacker uses a tool to generate UUIDs between these two values and tests each generated UUID by attempting to access the password reset link (e.g., `https://www.acme.com/reset/<generated-UUID>`).
 * If the web application does not adequately rate limit or block such attempts, the attacker can quickly test all possible UUIDs in the range.
 
-5.Access Gained:
+5. Access Gained:
 * Once the correct UUID for the victim's password reset link is discovered, the attacker can reset the victim's password and gain unauthorized access to their account.
 
 -----
