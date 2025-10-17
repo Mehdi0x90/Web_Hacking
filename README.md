@@ -38,7 +38,7 @@ You can also contribute.
 * [Reverse Tab Nabbing](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Reverse%20Tab%20Nabbing.md)
 * [SQLi](https://github.com/Mehdi0x90/Web_Hacking/blob/main/SQL%20Injection.md)
 * [SSRF](https://github.com/Mehdi0x90/Web_Hacking/blob/main/SSRF.md)
-* [Sandwich attack](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Sandwich%20attack.md)
+* [Sandwich Attack](https://github.com/Mehdi0x90/Web_Hacking/blob/main/Sandwich%20attack.md)
 * [XSS](https://github.com/Mehdi0x90/Web_Hacking/blob/main/XSS.md)
 * [XXE](https://github.com/Mehdi0x90/Web_Hacking/blob/main/XXE.md)
 
