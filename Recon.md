@@ -796,9 +796,11 @@ It’s clean, efficient, and produces only URLs (absolute or path-based) in a `.
 * Exports results as a .txt file (one URL per line)
 * Displays total count and preview in the console
 
-Just copy the below code to `browser console` when browse the your target!
+> [!NOTE]
+> Just copy the below code to `browser console` when browse the your target!
+> 
 
-Method 1:
+**Method 1:**
 ```javascript
 (() => {
   // Utility: return unique array elements after trimming
@@ -912,7 +914,12 @@ Method 1:
 })();
 ```
 
-Method 2:
+**Method 2:**
+
+
+<img width="356" height="193" alt="Screenshot From 2025-10-22 10-15-27" src="https://github.com/user-attachments/assets/7413359d-bee0-4b58-864c-995a5e3fee45" />
+
+Create a bookmark in your browser and then copy and save this code in the url box. Now open your target site and then click on the bookmark you created.
 ```javascript
 javascript:(function(){
     const regex = /(?<=(["'`]))\/[a-zA-Z0-9_\-\/\.\~\?\=\&\%\#\:\;\,\@\+]+(?=(["'`]))/g;
