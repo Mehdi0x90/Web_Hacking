@@ -727,6 +727,7 @@ cat target.txt | gau --threads 5
 gau target.com google.com
 gau --o target-urls.txt target.com
 gau --blacklist png,jpg,gif target.com
+
 ```
 
 * [wayback-machine-downloader](https://github.com/hartator/wayback-machine-downloader)
@@ -1524,6 +1525,11 @@ echo "target.com" | gau --blacklist jpg,jpeg,gif,css,tif,tiff,png,ttf,woff,woff2
 | httpx -er "(?:(https?|ftp|git|ssh|telnet|smtp|imap|pop3|ldap|sftp|smb|nfs|rtmp|rtsp|ws|wss|irc|news|gopher|rsync|data):\/\/|\/)[^\s\"'\*\(\){};\\\^\$\&<>/\\?#]+(?:\?[^\s\"'<>/\\?#]+)?(?:\/[^\s\"'<>/\\?#]+)*" \
 -json -mr "application/javascript|text/javascript" \
 | jq -r '.extracts[]' | tr -d '[],'
+```
+
+## Find hidden params in JavaScript files
+```bash
+assetfinder target.com | gau | egrep -v '(.css|.svg)' | while read -r url; do js=$(curl -s --fail "$url") || continue; vars=$(printf "%s" "$js" | grep -Po 'var\s+\K[A-Za-z0-9_]+' | sed 's/$/=xss/' | sort -u); [ -n "$vars" ] && printf '\e[1;33m%s\n\e[1;32m%s\n' "$url" "$vars"; done
 ```
 
 ## One-Liner to extracts all API endpoints from AngularJS and Angular JavaScript files
