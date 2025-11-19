@@ -69,7 +69,7 @@ You can also contribute.
 
 
 ## Top Tools & Extensions
-* [Nuclei](https://github.com/Mehdi0x90/Web_Hacking/blob/main/nuclei.md)
+* [Nuclei](https://github.com/Mehdi0x90/Web_Hacking/blob/main/nuclei.md) - Nuclei is a modern, high-performance vulnerability scanner that leverages simple YAML-based templates
 * [inql](https://github.com/doyensec/inql) - Burp extension for advanced GraphQL testing
 * [Logger++](https://github.com/Mehdi0x90/Web_Hacking/blob/main/LoggerPlusPlus.md) - Burp extension, a multithreaded logging extension for Burp Suit
 * [param-miner](https://github.com/PortSwigger/param-miner) - Burp extension, identifies hidden, unlinked parameters
