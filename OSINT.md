@@ -28,6 +28,7 @@ A curated list of awesome open source intelligence tools and resources. [Open-so
 * [Internet Archive](https://archive.org/)
 * [Intelligence X](https://intelx.io/)
 * [OCCRP Aleph](https://aleph.occrp.org/) - The global archive of research material for investigative reporting
+* [Horizons](https://horizons.c4ads.org/about) - [C4ADS's](https://c4ads.org) investigative data platform for searching billions of public-interest records and uncovering connections across people, companies, and networks.
 * [Shodan](https://www.shodan.io/) - search engine for the IOT(Internet of Things) that allows you to search variety of servers that are connected to the internet using various searching filters
 * [GrayhatWarfare](https://grayhatwarfare.com/)
 * [OpenBuckets](https://openbuckets.io/) - Find public/misconfigured buckets across every cloud provider(AWS, GCP, DO, IBM, Linode, Alibaba)
