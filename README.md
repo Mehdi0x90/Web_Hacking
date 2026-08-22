@@ -74,6 +74,7 @@ You can also contribute.
 * [Logger++](https://github.com/Mehdi0x90/Web_Hacking/blob/main/LoggerPlusPlus.md) - Burp extension, a multithreaded logging extension for Burp Suit
 * [param-miner](https://github.com/PortSwigger/param-miner) - Burp extension, identifies hidden, unlinked parameters
 * [Oralyzer](https://github.com/r0075h3ll/Oralyzer) - a simple python script that probes for Open Redirection vulnerability in a website
+* [Darkmoon](https://github.com/ASCIT31/Dark-Moon) - Open source (GPL-3.0) autonomous AI penetration testing platform covering web, API, Active Directory and Kubernetes, orchestrating 80+ offensive tools as an MCP host with proof of exploitation and a local privacy gateway (the LLM never sees real IPs or credentials).
 * [SQLiPy Sqlmap Integration](https://portswigger.net/bappstore/f154175126a04bfe8edc6056f340f52e) - SQLiPy is a Python plugin for Burp Suite that integrates SQLMap using the SQLMap API
 * [ParamSpider](https://github.com/0xKayala/ParamSpider) - Parameter miner for humans
 * [gf](https://github.com/tomnomnom/gf) - A wrapper around grep to avoid typing common patterns
