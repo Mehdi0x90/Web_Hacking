@@ -57,6 +57,7 @@ A curated list of awesome open source intelligence tools and resources. [Open-so
 * [Snov.io](https://snov.io/email-finder) - Find email addresses on any website
 * [minelead](https://minelead.io/)
 * [Hudson Rock](https://www.hudsonrock.com/threat-intelligence-cybercrime-tools) - Check if a specific email address was compromised in a global Infostealer malware attack
+* [Opsis](https://useopsis.com/) - Find the accounts linked to an email address, username or domain across 1000+ source modules (reverse email lookup)
 
 
 ## Domain and IP Research
