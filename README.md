@@ -71,7 +71,7 @@ You can also contribute.
 ## Top Tools & Extensions
 * [Nuclei](https://github.com/Mehdi0x90/Web_Hacking/blob/main/nuclei.md) - Nuclei is a modern, high-performance vulnerability scanner that leverages simple YAML-based templates
 * [inql](https://github.com/doyensec/inql) - Burp extension for advanced GraphQL testing
-* [Logger++](https://github.com/Mehdi0x90/Web_Hacking/blob/main/LoggerPlusPlus.md) - Burp extension, a multithreaded logging extension for Burp Suit
+* [Logger++](https://github.com/Mehdi0x90/Web_Hacking/blob/main/LoggerPlusPlus.md) - Burp extension, a multithreaded logging extension for Burp Suite
 * [param-miner](https://github.com/PortSwigger/param-miner) - Burp extension, identifies hidden, unlinked parameters
 * [Oralyzer](https://github.com/r0075h3ll/Oralyzer) - a simple python script that probes for Open Redirection vulnerability in a website
 * [Darkmoon](https://github.com/ASCIT31/Dark-Moon) - Open source (GPL-3.0) autonomous AI penetration testing platform covering web, API, Active Directory and Kubernetes, orchestrating 80+ offensive tools as an MCP host with proof of exploitation and a local privacy gateway (the LLM never sees real IPs or credentials).
